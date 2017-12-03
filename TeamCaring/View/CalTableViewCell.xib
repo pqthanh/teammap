@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="lato-bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
+        <array key="lato-regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CalTableViewCell" customModule="TeamCaring" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="12" translatesAutoresizingMaskIntoConstraints="NO" id="WWD-5R-lUa">
+                        <rect key="frame" x="10" y="13" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="f1X-XC-cTK"/>
+                            <constraint firstAttribute="width" secondItem="WWD-5R-lUa" secondAttribute="height" multiplier="1:1" id="wYX-yF-YyH"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đánh cầu lông" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfM-NR-nfx">
+                        <rect key="frame" x="50" y="5" width="195" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="3H8-Br-bKa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRn-M2-Swn">
+                        <rect key="frame" x="50" y="27" width="260" height="2"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="FyG-tJ-7fR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16:20 17/09/2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trW-Ez-h7P">
+                        <rect key="frame" x="50" y="31" width="195" height="19.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="bos-sZ-wf6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yêu cầu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAc-kv-B8w">
+                        <rect key="frame" x="250" y="15" width="60" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="5Hg-gu-GM7"/>
+                            <constraint firstAttribute="width" constant="60" id="qf9-tp-L2J"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="iAc-kv-B8w" secondAttribute="trailing" constant="10" id="0ug-mr-Ca9"/>
+                    <constraint firstAttribute="bottom" secondItem="trW-Ez-h7P" secondAttribute="bottom" constant="5" id="49N-nl-CjU"/>
+                    <constraint firstItem="iAc-kv-B8w" firstAttribute="leading" secondItem="trW-Ez-h7P" secondAttribute="trailing" constant="5" id="CJf-ao-vWe"/>
+                    <constraint firstItem="iAc-kv-B8w" firstAttribute="leading" secondItem="mfM-NR-nfx" secondAttribute="trailing" constant="5" id="CQ3-zc-Grl"/>
+                    <constraint firstItem="mfM-NR-nfx" firstAttribute="leading" secondItem="WWD-5R-lUa" secondAttribute="trailing" constant="10" id="KIL-Y0-IJ3"/>
+                    <constraint firstItem="MRn-M2-Swn" firstAttribute="centerY" secondItem="WWD-5R-lUa" secondAttribute="centerY" id="Kjj-Ky-ub6"/>
+                    <constraint firstItem="iAc-kv-B8w" firstAttribute="centerY" secondItem="WWD-5R-lUa" secondAttribute="centerY" id="Uny-eb-wJF"/>
+                    <constraint firstItem="trW-Ez-h7P" firstAttribute="leading" secondItem="WWD-5R-lUa" secondAttribute="trailing" constant="10" id="W6S-Vj-1C4"/>
+                    <constraint firstItem="MRn-M2-Swn" firstAttribute="top" secondItem="mfM-NR-nfx" secondAttribute="bottom" constant="2" id="Wnv-zK-1NZ"/>
+                    <constraint firstItem="trW-Ez-h7P" firstAttribute="top" secondItem="MRn-M2-Swn" secondAttribute="bottom" constant="2" id="Xdr-Dx-q8T"/>
+                    <constraint firstAttribute="trailing" secondItem="MRn-M2-Swn" secondAttribute="trailing" constant="10" id="cbS-go-gIF"/>
+                    <constraint firstItem="WWD-5R-lUa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dDm-7f-hqP"/>
+                    <constraint firstItem="MRn-M2-Swn" firstAttribute="leading" secondItem="WWD-5R-lUa" secondAttribute="trailing" constant="10" id="dlx-0o-nSD"/>
+                    <constraint firstItem="mfM-NR-nfx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="lej-jQ-NZB"/>
+                    <constraint firstItem="WWD-5R-lUa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="x5m-XT-z5Y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="52" y="111"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="12" width="40" height="40"/>
+    </resources>
+</document>
