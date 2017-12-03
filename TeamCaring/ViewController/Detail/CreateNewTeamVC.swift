@@ -11,7 +11,6 @@ import UIKit
 class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var heightKeyboard: NSLayoutConstraint!
     @IBOutlet weak var lbTxtholder: UILabel!
     @IBOutlet weak var txtMota: UITextView!
     @IBOutlet weak var lbTxtholder1: UILabel!
@@ -31,19 +30,23 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
         self.txtMota1.layer.borderWidth = 1.0
         self.txtMota1.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         
+        self.hideKeyboardWhenTappedAround()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) {
-            self.heightKeyboard.constant = keyboardSize.height
-        }
+    
+    func keyboardWillShow(notification:NSNotification){
+        let keyboardSize: CGFloat = 170.0
+        let keyboardFrame:CGRect = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: keyboardSize)
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        scrollView.contentInset = contentInset
     }
-    func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            self.heightKeyboard.constant = 0
-        }
+    
+    func keyboardWillHide(notification:NSNotification){
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
     
     @IBAction func backAction() {
@@ -70,16 +73,6 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
             self.lbTxtholder1.text = newText.count > 0 ? "" : "VD: Dành cho những người có sở thích, đam mê công nghệ"
         }
         return true
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        let scrollPoint : CGPoint = CGPoint.init(x:0, y:textView.frame.origin.y - 80)
-        self.scrollView.setContentOffset(scrollPoint, animated: true)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        let scrollPoint : CGPoint = CGPoint.init(x:0, y:textField.frame.origin.y - 80)
-        self.scrollView.setContentOffset(scrollPoint, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

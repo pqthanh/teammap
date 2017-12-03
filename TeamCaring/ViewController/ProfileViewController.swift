@@ -21,18 +21,19 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SVProgressHUD.setDefaultMaskType(.clear)
+        self.hideKeyboardWhenTappedAround()
         
         self.imgAvata.layer.cornerRadius = 50.0
         self.viewMota.layer.cornerRadius = 4.0
         self.viewMota.layer.borderWidth = 1.0
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         
-        let userInfo = Caring.userInfo
-        self.imgAvata.image = UIImage.image(fromURL: (userInfo?.avata)!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
-            self.imgAvata.image = nil
-            self.imgAvata.image = image
+        if let userInfo = Caring.userInfo {
+            self.imgAvata.image = UIImage.image(fromURL: (userInfo.avata)!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                self.imgAvata.image = nil
+                self.imgAvata.image = image
+            }
         }
-        
     }
 
     override func didReceiveMemoryWarning() {

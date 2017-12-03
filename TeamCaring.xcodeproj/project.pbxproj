@@ -309,6 +309,7 @@
 				TargetAttributes = {
 					D3865AB91FBF11E800AF18C5 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
