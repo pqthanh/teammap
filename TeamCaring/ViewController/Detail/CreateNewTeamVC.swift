@@ -37,8 +37,9 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
     }
     
     func keyboardWillShow(notification:NSNotification){
-        let keyboardSize: CGFloat = 170.0
-        let keyboardFrame:CGRect = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: keyboardSize)
+        let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        let keyboardHeight = keyboardSize.height - 48
+        let keyboardFrame:CGRect = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: keyboardHeight)
         var contentInset:UIEdgeInsets = self.scrollView.contentInset
         contentInset.bottom = keyboardFrame.size.height
         scrollView.contentInset = contentInset
