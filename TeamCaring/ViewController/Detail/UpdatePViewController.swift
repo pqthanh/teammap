@@ -16,7 +16,6 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgAvata: UIImageView!
     @IBOutlet weak var lbTxtholder: UILabel!
-    @IBOutlet weak var heightKeyboard: NSLayoutConstraint!
     
     @IBOutlet weak var tfFullname: UITextField!
     @IBOutlet weak var tfNickname: UITextField!
@@ -38,6 +37,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SVProgressHUD.setDefaultMaskType(.clear)
+        self.hideKeyboardWhenTappedAround()
         
         self.txtMota.layer.cornerRadius = 4.0
         self.txtMota.layer.borderWidth = 1.0
@@ -70,15 +70,18 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) {
-            self.heightKeyboard.constant = keyboardSize.height
-        }
+    func keyboardWillShow(notification:NSNotification){
+        let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        let keyboardHeight = keyboardSize.height - 48
+        let keyboardFrame:CGRect = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: keyboardHeight)
+        var contentInset:UIEdgeInsets = self.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        scrollView.contentInset = contentInset
     }
-    func keyboardWillHide(notification: NSNotification) {
-        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
-            self.heightKeyboard.constant = 0
-        }
+    
+    func keyboardWillHide(notification:NSNotification){
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInset
     }
     
     @IBAction func updateAction(_ sender: AnyObject) {
@@ -116,16 +119,6 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         self.lbTxtholder.text = newText.count > 0 ? "" : "VD: Dành cho những người có sở thích, đam mê công nghệ"
         return true
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        let scrollPoint : CGPoint = CGPoint.init(x:0, y:textView.frame.origin.y - 80)
-        self.scrollView.setContentOffset(scrollPoint, animated: true)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        let scrollPoint : CGPoint = CGPoint.init(x:0, y:textField.frame.origin.y - 80)
-        self.scrollView.setContentOffset(scrollPoint, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

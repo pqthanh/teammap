@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		25B4EF4C95C7E6B458EBB40C /* Pods_TeamCaring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07878C560ACFF7E8964C80DE /* Pods_TeamCaring.framework */; };
+		613EA81D1FD5249700334ADB /* MemberListCViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613EA81C1FD5249700334ADB /* MemberListCViewCell.swift */; };
 		614987A01FD118DB00EFE953 /* FBToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6149879F1FD118DB00EFE953 /* FBToken.swift */; };
 		619F1BDC1FD006680082C948 /* SearchLeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619F1BDB1FD006680082C948 /* SearchLeaderVC.swift */; };
 		619F1BDE1FD017FA0082C948 /* DetailTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619F1BDD1FD017FA0082C948 /* DetailTeamVC.swift */; };
 		61ABABD01FCFB00700D3AC23 /* CalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ABABCE1FCFB00700D3AC23 /* CalTableViewCell.swift */; };
 		61ABABD11FCFB00700D3AC23 /* CalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */; };
+		61B68E821FD5011F00957A92 /* TTThanhVienVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */; };
+		61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */; };
 		61C51D811FC6A41A00BCDCC2 /* lato-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D6F1FC6A40400BCDCC2 /* lato-bold.ttf */; };
 		61C51D821FC6A41A00BCDCC2 /* lato-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D701FC6A40600BCDCC2 /* lato-black.ttf */; };
 		61C51D831FC6A41A00BCDCC2 /* lato-heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D711FC6A40900BCDCC2 /* lato-heavy.ttf */; };
@@ -57,11 +60,14 @@
 
 /* Begin PBXFileReference section */
 		07878C560ACFF7E8964C80DE /* Pods_TeamCaring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamCaring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		613EA81C1FD5249700334ADB /* MemberListCViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListCViewCell.swift; sourceTree = "<group>"; };
 		6149879F1FD118DB00EFE953 /* FBToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBToken.swift; sourceTree = "<group>"; };
 		619F1BDB1FD006680082C948 /* SearchLeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLeaderVC.swift; sourceTree = "<group>"; };
 		619F1BDD1FD017FA0082C948 /* DetailTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTeamVC.swift; sourceTree = "<group>"; };
 		61ABABCE1FCFB00700D3AC23 /* CalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalTableViewCell.swift; sourceTree = "<group>"; };
 		61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalTableViewCell.xib; sourceTree = "<group>"; };
+		61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTThanhVienVC.swift; sourceTree = "<group>"; };
+		61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemberTreeVC.swift; sourceTree = "<group>"; };
 		61C51D6F1FC6A40400BCDCC2 /* lato-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-bold.ttf"; sourceTree = "<group>"; };
 		61C51D701FC6A40600BCDCC2 /* lato-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-black.ttf"; sourceTree = "<group>"; };
 		61C51D711FC6A40900BCDCC2 /* lato-heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-heavy.ttf"; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				D3442BDB1FD308BB00392463 /* InfoViewController.swift */,
+				61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */,
 			);
 			path = Popover;
 			sourceTree = "<group>";
@@ -201,6 +208,7 @@
 				61ABABCE1FCFB00700D3AC23 /* CalTableViewCell.swift */,
 				61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */,
 				61E6FC151FCFF9E500E6FA7F /* ListTableViewCell.swift */,
+				613EA81C1FD5249700334ADB /* MemberListCViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +261,7 @@
 				619F1BDB1FD006680082C948 /* SearchLeaderVC.swift */,
 				619F1BDD1FD017FA0082C948 /* DetailTeamVC.swift */,
 				D32F9EBE1FD3ECAC0048D747 /* TaoCuocHenVC.swift */,
+				61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -386,7 +395,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5F9D0182F8CE8C92EDA5CB48 /* [CP] Copy Pods Resources */ = {
@@ -469,6 +478,8 @@
 				D3E8DA1F1FCE278200ADB0E1 /* ChonIconViewController.swift in Sources */,
 				61ABABD01FCFB00700D3AC23 /* CalTableViewCell.swift in Sources */,
 				614987A01FD118DB00EFE953 /* FBToken.swift in Sources */,
+				613EA81D1FD5249700334ADB /* MemberListCViewCell.swift in Sources */,
+				61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */,
 				D37EE83A1FBF2E3F007A0008 /* RegisterViewController.swift in Sources */,
 				D3CF64961FD0582E00E410DE /* Router.swift in Sources */,
 				D3CF64951FD0582E00E410DE /* FService.swift in Sources */,
@@ -481,6 +492,7 @@
 				D32F9EBF1FD3ECAC0048D747 /* TaoCuocHenVC.swift in Sources */,
 				619F1BDC1FD006680082C948 /* SearchLeaderVC.swift in Sources */,
 				619F1BDE1FD017FA0082C948 /* DetailTeamVC.swift in Sources */,
+				61B68E821FD5011F00957A92 /* TTThanhVienVC.swift in Sources */,
 				61C51D941FC6B54B00BCDCC2 /* UpdatePViewController.swift in Sources */,
 				D367DEB41FCDD632008A33CB /* CreateNewTeamVC.swift in Sources */,
 				D384C8061FC08B950008EB60 /* Caring.swift in Sources */,

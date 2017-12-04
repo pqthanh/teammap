@@ -40,6 +40,18 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.present(popoverContent, animated: true, completion: nil)
     }
     
+    @IBAction func detailMemberAction(_ sender: AnyObject) {
+        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ListMemberTreeVCId") as! ListMemberTreeVC
+        popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
+        popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        let popover = popoverContent.popoverPresentationController
+        popoverContent.preferredContentSize = CGSize(width: self.view.frame.size.width, height: 95)
+        popover?.delegate = self
+        popover?.sourceView = sender as? UIView
+        popover?.sourceRect = sender.bounds
+        self.present(popoverContent, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }

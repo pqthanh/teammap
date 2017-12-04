@@ -1,41 +1,23 @@
 //
-//  ProfileViewController.swift
+//  TTThanhVienVC.swift
 //  TeamCaring
 //
-//  Created by PqThanh on 11/17/17.
+//  Created by Phan Quoc Thanh on 12/4/17.
 //  Copyright © 2017 PqThanh. All rights reserved.
 //
 
 import UIKit
-import FBSDKLoginKit
 import SVProgressHUD
-import AFImageHelper
 
-class ProfileViewController: UIViewController, UITextViewDelegate {
+class TTThanhVienVC: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var imgAvata: UIImageView!
-    @IBOutlet weak var lbName: UILabel!
-    @IBOutlet weak var viewMota: UIView!
-    @IBOutlet weak var lbTxtholder: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SVProgressHUD.setDefaultMaskType(.clear)
         self.hideKeyboardWhenTappedAround()
-        
-        self.imgAvata.layer.cornerRadius = 50.0
-        self.viewMota.layer.cornerRadius = 4.0
-        self.viewMota.layer.borderWidth = 1.0
-        self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
-        
-        if let userInfo = Caring.userInfo {
-            self.imgAvata.image = UIImage.image(fromURL: (userInfo.avata)!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
-                self.imgAvata.image = nil
-                self.imgAvata.image = image
-            }
-        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -53,12 +35,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
     func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        self.lbTxtholder.text = newText.count > 0 ? "" : "VD: Dành cho những người có sở thích, đam mê công nghệ"
-        return true
     }
     
     override func didReceiveMemoryWarning() {
