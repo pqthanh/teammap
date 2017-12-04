@@ -10,4 +10,5 @@ import UIKit
 
 class MemberListCViewCell: UICollectionViewCell {
     @IBOutlet weak var imgAvata: UIButton!
+    @IBOutlet weak var lbLevel: UILabel!
 }

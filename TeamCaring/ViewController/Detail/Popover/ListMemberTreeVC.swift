@@ -30,6 +30,8 @@ class ListMemberTreeVC: UIViewController, UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemberListCViewCellId", for: indexPath as IndexPath) as! MemberListCViewCell
         cell.layer.cornerRadius = 5.0
+        cell.lbLevel.layer.cornerRadius = 10.0
+        cell.lbLevel.layer.masksToBounds = true
 //        let urlImg = ""
 //        cell.imgAvata.setBackgroundImage(UIImage.image(fromURL: urlImg, placeholder: UIImage(named: "Avata")!, shouldCacheImage: true) { (image) in
 //            cell.imgAvata.setBackgroundImage(nil, for: .normal)

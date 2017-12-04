@@ -14,6 +14,11 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var avataLeader: UIButton!
     @IBOutlet weak var viewMota: UIView!
     
+    @IBOutlet weak var lbLevel0: UILabel!
+    @IBOutlet weak var lbLevel1: UILabel!
+    @IBOutlet weak var lbLevel2: UILabel!
+    @IBOutlet weak var lbLevel3: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,6 +28,15 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.viewMota.layer.cornerRadius = 4.0
         self.viewMota.layer.borderWidth = 1.0
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
+        
+        self.lbLevel0.layer.cornerRadius = 10.0
+        self.lbLevel0.layer.masksToBounds = true
+        self.lbLevel1.layer.cornerRadius = 10.0
+        self.lbLevel1.layer.masksToBounds = true
+        self.lbLevel2.layer.cornerRadius = 10.0
+        self.lbLevel2.layer.masksToBounds = true
+        self.lbLevel3.layer.cornerRadius = 10.0
+        self.lbLevel3.layer.masksToBounds = true
     }
 
     @IBAction func backAction() {
