@@ -39,7 +39,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
     
     func dataResizeImg(sourceImage: UIImage) -> Data {
         let oldWidth = CGFloat(sourceImage.size.width)
-        let scaleFactor: CGFloat = 40 / oldWidth
+        let scaleFactor: CGFloat = 50 / oldWidth
         let newHeight = CGFloat(sourceImage.size.height * scaleFactor)
         let newWidth: CGFloat = oldWidth * scaleFactor
         UIGraphicsBeginImageContext(CGSize(width: CGFloat(newWidth), height: CGFloat(newHeight)))
