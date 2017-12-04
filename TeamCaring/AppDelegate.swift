@@ -23,8 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if (Caring.userInfo == nil) {
+        
+        if (Caring.userToken != nil && Caring.isActived! ) {
             let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewControllerId")
+            self.window?.rootViewController = mainViewController
+        }
+        else if (Caring.userToken != nil && Caring.isActived == false ) {
+            let mainViewController = storyboard.instantiateViewController(withIdentifier: "UpdatePViewControllerId")
             self.window?.rootViewController = mainViewController
         }
         else {

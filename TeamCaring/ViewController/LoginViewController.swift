@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
                 FService.sharedInstance.loginFaceboook(token: token.authenticationToken, completion: { (fbInfo) in
                     if fbInfo != nil {
                         Caring.userToken = fbInfo?.token
+                        Caring.isActived = fbInfo?.isActived
                         if (fbInfo?.isActived)! {
                             let appDelegate = UIApplication.shared.delegate! as! AppDelegate
                             let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewControllerId")

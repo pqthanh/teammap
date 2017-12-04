@@ -56,11 +56,23 @@ struct Caring {
             ACUserDefault?[.userToken] = newValue
         }
     }
+    static var isActived : Bool? {
+        get {
+            if ACUserDefault?[.isActived] == nil {
+                ACUserDefault?[.isActived] = false
+            }
+            return ACUserDefault?[.isActived]
+        }
+        set {
+            ACUserDefault?[.isActived] = newValue
+        }
+    }
 }
 
 extension DefaultsKeys {
     static let userToken                    = DefaultsKey<String?>("userToken")
     static let deviceToken                  = DefaultsKey<String?>("deviceToken")
+    static let isActived                    = DefaultsKey<Bool?>("isActived")
     static let curentUserInfo               = DefaultsKey<User?>("curentUserInfo")
 }
 
