@@ -66,8 +66,14 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.present(popoverContent, animated: true, completion: nil)
     }
     
+    @IBAction func detailAction() {
+        self.performSegue(withIdentifier: "PushDetailMember", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "PushDetailMember" {
+            let _:TTThanhVienVC = segue.destination as! TTThanhVienVC
+        }
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {

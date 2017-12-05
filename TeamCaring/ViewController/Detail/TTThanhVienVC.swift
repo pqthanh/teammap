@@ -37,13 +37,27 @@ class TTThanhVienVC: UIViewController {
         scrollView.contentInset = contentInset
     }
     
+    @IBAction func backAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func cuochenAction() {
+        self.performSegue(withIdentifier: "PushNhungCuocHen", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PushNhungCuocHen" {
+            let _:DanhSachHensVC = segue.destination as! DanhSachHensVC
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
-    /*
+    /*PushNhungCuocHen
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

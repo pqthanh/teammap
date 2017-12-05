@@ -16,6 +16,7 @@
 		61ABABD11FCFB00700D3AC23 /* CalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */; };
 		61B68E821FD5011F00957A92 /* TTThanhVienVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */; };
 		61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */; };
+		61C2EE241FD69609007062E9 /* SelectTeamMemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2EE231FD69609007062E9 /* SelectTeamMemVC.swift */; };
 		61C51D811FC6A41A00BCDCC2 /* lato-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D6F1FC6A40400BCDCC2 /* lato-bold.ttf */; };
 		61C51D821FC6A41A00BCDCC2 /* lato-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D701FC6A40600BCDCC2 /* lato-black.ttf */; };
 		61C51D831FC6A41A00BCDCC2 /* lato-heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D711FC6A40900BCDCC2 /* lato-heavy.ttf */; };
@@ -35,7 +36,10 @@
 		61C51D911FC6A41A00BCDCC2 /* lato-semibolditalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D7F1FC6A41800BCDCC2 /* lato-semibolditalic.ttf */; };
 		61C51D921FC6A41A00BCDCC2 /* lato-italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D801FC6A41900BCDCC2 /* lato-italic.ttf */; };
 		61C51D941FC6B54B00BCDCC2 /* UpdatePViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C51D931FC6B54B00BCDCC2 /* UpdatePViewController.swift */; };
+		61E14A491FD6586400D3A6F7 /* DanhSachHensVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */; };
+		61E14A4B1FD6785E00D3A6F7 /* DateTimePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E14A4A1FD6785E00D3A6F7 /* DateTimePickerVC.swift */; };
 		61E6FC161FCFF9E500E6FA7F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E6FC151FCFF9E500E6FA7F /* ListTableViewCell.swift */; };
+		61FAE2441FD698FC0066E76B /* SelectTeamMemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FAE2431FD698FC0066E76B /* SelectTeamMemCell.swift */; };
 		D32F9EBF1FD3ECAC0048D747 /* TaoCuocHenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32F9EBE1FD3ECAC0048D747 /* TaoCuocHenVC.swift */; };
 		D3442BDC1FD308BB00392463 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3442BDB1FD308BB00392463 /* InfoViewController.swift */; };
 		D367DEB21FCDCAC5008A33CB /* SelectTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D367DEB11FCDCAC5008A33CB /* SelectTeamVC.swift */; };
@@ -68,6 +72,7 @@
 		61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalTableViewCell.xib; sourceTree = "<group>"; };
 		61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTThanhVienVC.swift; sourceTree = "<group>"; };
 		61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemberTreeVC.swift; sourceTree = "<group>"; };
+		61C2EE231FD69609007062E9 /* SelectTeamMemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTeamMemVC.swift; sourceTree = "<group>"; };
 		61C51D6F1FC6A40400BCDCC2 /* lato-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-bold.ttf"; sourceTree = "<group>"; };
 		61C51D701FC6A40600BCDCC2 /* lato-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-black.ttf"; sourceTree = "<group>"; };
 		61C51D711FC6A40900BCDCC2 /* lato-heavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-heavy.ttf"; sourceTree = "<group>"; };
@@ -87,7 +92,10 @@
 		61C51D7F1FC6A41800BCDCC2 /* lato-semibolditalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-semibolditalic.ttf"; sourceTree = "<group>"; };
 		61C51D801FC6A41900BCDCC2 /* lato-italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-italic.ttf"; sourceTree = "<group>"; };
 		61C51D931FC6B54B00BCDCC2 /* UpdatePViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePViewController.swift; sourceTree = "<group>"; };
+		61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanhSachHensVC.swift; sourceTree = "<group>"; };
+		61E14A4A1FD6785E00D3A6F7 /* DateTimePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerVC.swift; sourceTree = "<group>"; };
 		61E6FC151FCFF9E500E6FA7F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		61FAE2431FD698FC0066E76B /* SelectTeamMemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTeamMemCell.swift; sourceTree = "<group>"; };
 		6481FFE21F53CFA0663B4099 /* Pods-TeamCaring.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamCaring.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamCaring/Pods-TeamCaring.debug.xcconfig"; sourceTree = "<group>"; };
 		D32F9EBE1FD3ECAC0048D747 /* TaoCuocHenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaoCuocHenVC.swift; sourceTree = "<group>"; };
 		D33FF4561FD0669700693832 /* TeamCaring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamCaring.entitlements; sourceTree = "<group>"; };
@@ -166,6 +174,8 @@
 			children = (
 				D3442BDB1FD308BB00392463 /* InfoViewController.swift */,
 				61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */,
+				61E14A4A1FD6785E00D3A6F7 /* DateTimePickerVC.swift */,
+				61C2EE231FD69609007062E9 /* SelectTeamMemVC.swift */,
 			);
 			path = Popover;
 			sourceTree = "<group>";
@@ -209,6 +219,7 @@
 				61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */,
 				61E6FC151FCFF9E500E6FA7F /* ListTableViewCell.swift */,
 				613EA81C1FD5249700334ADB /* MemberListCViewCell.swift */,
+				61FAE2431FD698FC0066E76B /* SelectTeamMemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -262,6 +273,7 @@
 				619F1BDD1FD017FA0082C948 /* DetailTeamVC.swift */,
 				D32F9EBE1FD3ECAC0048D747 /* TaoCuocHenVC.swift */,
 				61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */,
+				61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -479,11 +491,13 @@
 				61ABABD01FCFB00700D3AC23 /* CalTableViewCell.swift in Sources */,
 				614987A01FD118DB00EFE953 /* FBToken.swift in Sources */,
 				613EA81D1FD5249700334ADB /* MemberListCViewCell.swift in Sources */,
+				61C2EE241FD69609007062E9 /* SelectTeamMemVC.swift in Sources */,
 				61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */,
 				D37EE83A1FBF2E3F007A0008 /* RegisterViewController.swift in Sources */,
 				D3CF64961FD0582E00E410DE /* Router.swift in Sources */,
 				D3CF64951FD0582E00E410DE /* FService.swift in Sources */,
 				D3BE5BB01FC3254700D54964 /* AlertViewController.swift in Sources */,
+				61FAE2441FD698FC0066E76B /* SelectTeamMemCell.swift in Sources */,
 				D3442BDC1FD308BB00392463 /* InfoViewController.swift in Sources */,
 				D384C8081FC08C8F0008EB60 /* User.swift in Sources */,
 				D37EE8381FBF2E33007A0008 /* LoginViewController.swift in Sources */,
@@ -493,9 +507,11 @@
 				619F1BDC1FD006680082C948 /* SearchLeaderVC.swift in Sources */,
 				619F1BDE1FD017FA0082C948 /* DetailTeamVC.swift in Sources */,
 				61B68E821FD5011F00957A92 /* TTThanhVienVC.swift in Sources */,
+				61E14A4B1FD6785E00D3A6F7 /* DateTimePickerVC.swift in Sources */,
 				61C51D941FC6B54B00BCDCC2 /* UpdatePViewController.swift in Sources */,
 				D367DEB41FCDD632008A33CB /* CreateNewTeamVC.swift in Sources */,
 				D384C8061FC08B950008EB60 /* Caring.swift in Sources */,
+				61E14A491FD6586400D3A6F7 /* DanhSachHensVC.swift in Sources */,
 				61E6FC161FCFF9E500E6FA7F /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
