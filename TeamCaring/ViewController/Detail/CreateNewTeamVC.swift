@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
@@ -17,10 +18,18 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
     @IBOutlet weak var txtMota1: UITextView!
     @IBOutlet weak var imgVTeamIcon: UIImageView!
     
+    @IBOutlet weak var tfname: UITextField!
+    @IBOutlet weak var tflevel: UITextField!
+    @IBOutlet weak var tfextraGroupName: UITextField!
+    @IBOutlet weak var tfextraGroupTotalMember: UITextField!
+    
+    var currentIdAvata = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.imgVTeamIcon.layer.cornerRadius = 50.0
+        SVProgressHUD.setDefaultMaskType(.clear)
         
         self.txtMota.layer.cornerRadius = 4.0
         self.txtMota.layer.borderWidth = 1.0
@@ -60,9 +69,16 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
     }
     
     @IBAction func createNewTeam() {
-        let appDelegate = UIApplication.shared.delegate! as! AppDelegate
-        let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewControllerId")
-        appDelegate.window?.rootViewController = mainViewController
+        SVProgressHUD.show()
+        FService.sharedInstance.createTeam(description: txtMota.text!, extraGroupDescription: txtMota1.text!, extraGroupName: tfextraGroupName.text!, extraGroupTotalMember: Int(tfextraGroupTotalMember.text!)!, iconId: currentIdAvata, name: tfname.text!, totalMember: Int(tflevel.text!)!) { (code) in
+
+            if code == 201 {
+                let appDelegate = UIApplication.shared.delegate! as! AppDelegate
+                let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewControllerId")
+                appDelegate.window?.rootViewController = mainViewController
+            }
+            SVProgressHUD.dismiss()
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -85,6 +101,7 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
         if segue.identifier == "PushChonIcon" {
             let selectIcon: ChonIconViewController = segue.destination as! ChonIconViewController
             selectIcon.completionBlock =  { (index) -> Void in
+                self.currentIdAvata = index
                 self.imgVTeamIcon.image = UIImage(named: "\(index)")
             }
         }

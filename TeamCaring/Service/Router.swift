@@ -19,6 +19,8 @@ public enum Router: URLConvertible {
     
     case login
     case updateProfile
+    case creatTeam
+    case searchNewTeam
     
     //MARK: request method
     /*
@@ -46,6 +48,10 @@ public enum Router: URLConvertible {
             return "/authenticate/facebook"
         case .updateProfile:
             return "/update-profile"
+        case .creatTeam:
+            return "/create-team"
+        case .searchNewTeam:
+            return "/_search/new-team"
         }
     }
     

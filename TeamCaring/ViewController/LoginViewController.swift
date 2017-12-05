@@ -37,6 +37,7 @@ class LoginViewController: UIViewController {
                     if fbInfo != nil {
                         Caring.userToken = fbInfo?.token
                         Caring.isActived = fbInfo?.isActived
+
                         if (fbInfo?.isActived)! {
                             let appDelegate = UIApplication.shared.delegate! as! AppDelegate
                             let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewControllerId")

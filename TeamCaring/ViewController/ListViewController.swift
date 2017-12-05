@@ -56,6 +56,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.lbSearchKq.text = "  Danh sách nhóm chung đang tham gia"
         }
         print("searchText \(searchBar.text ?? "")")
+        if isViewDetail != false {
+            FService.sharedInstance.searchNewTeam(query: searchBar.text!, page: 0, completion: { (listResults) in
+                print("-----> \(listResults)")
+            })
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -86,15 +86,19 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
     
     @IBAction func updateAction(_ sender: AnyObject) {
         self.view.endEditing(true)
-        
+        SVProgressHUD.show()
         FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0) { (success) in
             print(success ?? 0)
+            
+            if success == 200 {
+                let userInfo = User(userId: "", email: self.tfEmail.text!, token: "", nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
+                Caring.userInfo = userInfo
+                Caring.isActived = true
+                self.performSegue(withIdentifier: "PushKhoiDau", sender: nil)
+            }
+            
+            SVProgressHUD.dismiss()
         }
-        
-//        let userInfo = User(userId: "", email: tfEmail.text!, token: "", nickname: tfNickname.text!, fullname: tfFullname.text!, tenNhom: tfTenNhom.text!, mota: txtMota.text!, soluong: Int(tfSoluong.text!), avata: self.avataUrl)
-//        Caring.userInfo = userInfo
-//
-//        self.performSegue(withIdentifier: "PushKhoiDau", sender: nil)
     }
     
     @IBAction func btnAvataClicked() {

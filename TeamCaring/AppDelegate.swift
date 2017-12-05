@@ -28,10 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewControllerId")
             self.window?.rootViewController = mainViewController
         }
-        else if (Caring.userToken != nil && Caring.isActived == false ) {
-            let mainViewController = storyboard.instantiateViewController(withIdentifier: "UpdatePViewControllerId")
-            self.window?.rootViewController = mainViewController
-        }
         else {
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewControllerId")
             self.window?.rootViewController = initialViewController

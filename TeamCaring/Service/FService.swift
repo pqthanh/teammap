@@ -89,17 +89,47 @@ class FService: NSObject {
                 completion(nil)
             }
         }
-        
     }
     
     func updateProfile(fullName : String, nickName: String, nameGroup: String, description: String, totalMember: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
         
-        let params = (nameGroup == "" && description == "") ? ["profile" : ["fullName" : fullName, "nickname" : nickName]] : ["profile" : ["fullName" : fullName, "nickname" : nickName], "anonymousGroup" : [["name" : nameGroup, "description" : description, "totalMember" : totalMember] ]]
-        print(params)
+        let params = (nameGroup != "" && description != "") ? ["fullName" : fullName, "nickname" : nickName, "extraGroupName" : nameGroup, "extraGroupDescription" : description, "extraGroupTotalMember" : totalMember, "pushToken" : Caring.deviceToken!] : ["fullName" : fullName, "nickname" : nickName, "pushToken" : Caring.deviceToken!] as [String : Any]
         
-        requestHttpCode(url: Router.updateProfile, method: .post, params: params, completion: { (result, error) in
+        requestHttpCode(url: Router.updateProfile, method: .put, params: params, completion: { (result, error) in
             completion(result)
         })
+    }
+    
+    func createTeam (description : String, extraGroupDescription: String, extraGroupName: String, extraGroupTotalMember: Int, iconId: Int, name: String, totalMember: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
         
+        let params = ["description": description,
+        "extraGroupDescription": extraGroupDescription,
+        "extraGroupName": extraGroupName,
+        "extraGroupTotalMember": extraGroupTotalMember,
+        "iconId": iconId,
+        "name": name,
+        "level": totalMember] as [String : Any]
+        
+        print(params)
+        
+        requestHttpCode(url: Router.creatTeam, method: .post, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
+    
+    func searchNewTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.searchNewTeam.path.appending("query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Team>().mapArray(JSONObject: result)
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
     }
 }
