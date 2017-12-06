@@ -138,6 +138,14 @@ class FService: NSObject {
         })
     }
     
+    func joinTeam (teamId: Int, leaderId: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
+        
+        let params = ["teamId": teamId, "leaderId": leaderId] as [String : Any]
+        requestHttpCode(url: Router.joinTeam, method: .post, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
+    
     func searchTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.searchTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
@@ -178,6 +186,22 @@ class FService: NSObject {
         requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [String: Any] {
                 let listItems = Mapper<Team>().mapArray(JSONObject: result["result"])
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
+    
+    func searchLeader (teamId: Int, query : String, page: Int, completion: @escaping (_ result: [Leader]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.searchLeader.path.appending("\(teamId)?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Leader>().mapArray(JSONObject: result["result"])
                 completion(listItems)
             }
             else {

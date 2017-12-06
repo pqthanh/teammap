@@ -75,14 +75,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="l2G-9q-Hbp">
-                                                    <rect key="frame" x="10" y="20" width="30" height="30"/>
+                                                    <rect key="frame" x="10" y="15" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="7bi-9L-07P"/>
+                                                        <constraint firstAttribute="width" constant="40" id="7bi-9L-07P"/>
                                                         <constraint firstAttribute="width" secondItem="l2G-9q-Hbp" secondAttribute="height" multiplier="1:1" id="A5l-MK-ile"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lập trình iOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ks9-xl-ufe">
-                                                    <rect key="frame" x="50" y="25.5" width="235" height="19"/>
+                                                    <rect key="frame" x="60" y="25.5" width="225" height="19"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -230,14 +230,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="DcP-I9-uxZ">
-                                                    <rect key="frame" x="10" y="20" width="30" height="30"/>
+                                                    <rect key="frame" x="10" y="15" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="DcP-I9-uxZ" secondAttribute="height" multiplier="1:1" id="sEM-Wx-49p"/>
-                                                        <constraint firstAttribute="width" constant="30" id="yPP-R2-Xgv"/>
+                                                        <constraint firstAttribute="width" constant="40" id="yPP-R2-Xgv"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jerry Daniels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-1s-r1x">
-                                                    <rect key="frame" x="50" y="25.5" width="230" height="19"/>
+                                                    <rect key="frame" x="60" y="25.5" width="220" height="19"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -272,6 +272,11 @@
                                                 <constraint firstItem="kYD-BM-siN" firstAttribute="leading" secondItem="HyV-SY-I7U" secondAttribute="trailing" constant="10" id="noH-36-KfT"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgAvata" destination="DcP-I9-uxZ" id="hZR-dg-Y1f"/>
+                                            <outlet property="level" destination="HyV-SY-I7U" id="Jyf-Yy-jAl"/>
+                                            <outlet property="name" destination="Sab-1s-r1x" id="Hgl-7w-pxV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1330,7 +1335,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hg2-Ee-bYc">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="E2m-cg-Mwe">
                                         <rect key="frame" x="137" y="40" width="100" height="100"/>
@@ -1670,7 +1675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6z1-SY-CX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2103" y="520"/>
+            <point key="canvasLocation" x="-2154" y="520"/>
         </scene>
         <!--Chọn Icon-->
         <scene sceneID="iBY-tM-oTD">
@@ -1681,7 +1686,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamMap là sản phẩm của Trí Tuệ Toàn Hảo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgJ-aa-943">
-                                <rect key="frame" x="5" y="627" width="365" height="20"/>
+                                <rect key="frame" x="5" y="578" width="365" height="20"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -2144,7 +2149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfw-dy-Kgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2103" y="1305"/>
+            <point key="canvasLocation" x="-2154" y="1305"/>
         </scene>
         <!--Lập trình iOS-->
         <scene sceneID="dA3-gg-OJM">
@@ -3337,14 +3342,14 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="ST9-9d-zBe">
-                                                            <rect key="frame" x="10" y="20" width="30" height="30"/>
+                                                            <rect key="frame" x="10" y="15" width="40" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="30" id="PFd-ir-KCA"/>
+                                                                <constraint firstAttribute="width" constant="40" id="PFd-ir-KCA"/>
                                                                 <constraint firstAttribute="width" secondItem="ST9-9d-zBe" secondAttribute="height" multiplier="1:1" id="c5v-nk-FP3"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jerry Daniels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5q-yc-y6a">
-                                                            <rect key="frame" x="50" y="25.5" width="92.5" height="19"/>
+                                                            <rect key="frame" x="60" y="25.5" width="92.5" height="19"/>
                                                             <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -3479,14 +3484,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="Ml7-rU-klO">
-                                                    <rect key="frame" x="10" y="20" width="30" height="30"/>
+                                                    <rect key="frame" x="10" y="15" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Ml7-rU-klO" secondAttribute="height" multiplier="1:1" id="Arz-9X-vNG"/>
-                                                        <constraint firstAttribute="width" constant="30" id="Fd3-cE-EJ6"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Fd3-cE-EJ6"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jerry Daniels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4t-JV-WAP">
-                                                    <rect key="frame" x="50" y="25.5" width="230" height="19"/>
+                                                    <rect key="frame" x="60" y="25.5" width="220" height="19"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3565,7 +3570,6 @@
         <!--Nhóm-->
         <scene sceneID="fVo-9U-1Iu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zxk-sd-WHx" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="NewTeamListVCId" id="f4T-Yf-cxh" customClass="NewTeamListVC" customModule="TeamCaring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KIU-pt-BDH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -3598,13 +3602,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:fW0-VV-oyg:image" translatesAutoresizingMaskIntoConstraints="NO" id="fW0-VV-oyg">
-                                                    <rect key="frame" x="10" y="30" width="30" height="30"/>
+                                                    <rect key="frame" x="10" y="25" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="h8r-Sq-h4f"/>
+                                                        <constraint firstAttribute="width" constant="40" id="h8r-Sq-h4f"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lập trình iOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnM-lK-p9K">
-                                                    <rect key="frame" x="50" y="35" width="205" height="19"/>
+                                                    <rect key="frame" x="60" y="35" width="195" height="19"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -3700,6 +3704,7 @@
                         <segue destination="Yjs-0Y-b9C" kind="presentation" identifier="PushSearchLead" modalPresentationStyle="fullScreen" id="qQ0-qj-dXU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zxk-sd-WHx" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2972" y="-296.40179910044981"/>
         </scene>
@@ -4761,6 +4766,6 @@ AABZAAAAAAAAAAAAAAAAAAAldQ
         <image name="teammap" width="137" height="160"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G5F-IK-HVc"/>
+        <segue reference="Fr9-U1-jhO"/>
     </inferredMetricsTieBreakers>
 </document>

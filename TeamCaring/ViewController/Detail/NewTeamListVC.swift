@@ -110,7 +110,8 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "PushSearchLead", sender: nil)
+        let teamInfo: Team = self.listNewTeams[indexPath.row] as Team
+        self.performSegue(withIdentifier: "PushSearchLead", sender: teamInfo.id)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -120,7 +121,9 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PushSearchLead" {
-            let _:SearchLeaderVC = segue.destination as! SearchLeaderVC
+            let teamId = sender as! Int
+            let searchLeader: SearchLeaderVC = segue.destination as! SearchLeaderVC
+            searchLeader.teamId = teamId
         }
         else if segue.identifier == "PushDetailTeam" {
             let _:DetailTeamVC = segue.destination as! DetailTeamVC

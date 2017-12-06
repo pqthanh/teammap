@@ -25,6 +25,8 @@ public enum Router: URLConvertible {
     case searchNewTeam
     case myTeam
     case getMyProfile
+    case searchLeader
+    case joinTeam
     
     //MARK: request method
     /*
@@ -64,6 +66,10 @@ public enum Router: URLConvertible {
             return "/_search/my-team"
         case .getMyProfile:
             return "/get-profile"
+        case .searchLeader:
+            return "/_search/leaders/"
+        case .joinTeam:
+            return "/join-team"
         }
     }
     
