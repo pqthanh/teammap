@@ -68,6 +68,28 @@ class FService: NSObject {
                 return
             }
             
+            guard let value = response.result.value as? [[String: Any]] else {
+                completion(nil, nil)
+                return
+            }
+            
+            completion(value, nil)
+        }
+    }
+    
+    func requestAuthorized (url: URLConvertible, method: HTTPMethod, params: [String: Any]?, completion: @escaping (_ result: Any?, _ error: Error?) -> Void) {
+        
+        let authHeader    = [ "content-type" : "application/json", "authorization" : "Bearer  \(Caring.userToken ?? "")" ]
+        Alamofire.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: authHeader).responseJSON { response in
+            
+            let statusCode = (response.response?.statusCode)!
+            print(statusCode)
+            
+            guard response.result.isSuccess else {
+                completion(nil, response.result.error)
+                return
+            }
+            
             guard let value = response.result.value as? [String: Any] else {
                 completion(nil, nil)
                 return
@@ -76,6 +98,7 @@ class FService: NSObject {
             completion(value, nil)
         }
     }
+    
     
     func loginFaceboook(token : String, completion: @escaping (_ userInfo: FBToken?) -> ()) -> () {
         
@@ -110,25 +133,72 @@ class FService: NSObject {
         "name": name,
         "level": totalMember] as [String : Any]
         
-        print(params)
-        
         requestHttpCode(url: Router.creatTeam, method: .post, params: params, completion: { (result, error) in
             completion(result)
         })
     }
     
-    func searchNewTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
+    func searchTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
         
-        let path = Router.baseURLString.appending(Router.searchNewTeam.path.appending("query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let path = Router.baseURLString.appending(Router.searchTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
         let url = URL(string: path)
         
         requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
-            if let result = result as? [String: Any] {
+            if let result = result as? [[String: Any]] {
                 let listItems = Mapper<Team>().mapArray(JSONObject: result)
                 completion(listItems)
             }
             else {
                 completion(nil)
+            }
+        })
+    }
+    
+    func searchMyTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.searchMyTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [[String: Any]] {
+                let listItems = Mapper<Team>().mapArray(JSONObject: result)
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
+    
+    func searchNewTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.searchNewTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [[String: Any]] {
+                let listItems = Mapper<Team>().mapArray(JSONObject: result)
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
+    
+    func getMyTeams (page: Int, completion: @escaping (_ result: [Team]?, _ totalPage: Int?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.myTeam.path.appending("?page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Team>().mapArray(JSONObject: result["result"])
+                let totalPage = result["totalPages"]
+                completion(listItems, totalPage as? Int)
+            }
+            else {
+                completion(nil, nil)
             }
         })
     }

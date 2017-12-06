@@ -1,8 +1,8 @@
 //
-//  FirstViewController.swift
+//  NewTeamListVC.swift
 //  TeamCaring
 //
-//  Created by PqThanh on 11/17/17.
+//  Created by Phan Quoc Thanh on 12/6/17.
 //  Copyright © 2017 PqThanh. All rights reserved.
 //
 
@@ -10,15 +10,15 @@ import UIKit
 import SVProgressHUD
 import UIScrollView_InfiniteScroll
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class NewTeamListVC: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var lbSearchKq: UILabel!
     
     let cellReuseIdentifier = "CellListId"
     var isViewDetail = true
-    var listMyTeams = [Team]()
+    var listNewTeams = [Team]()
     var currentIndex = 0
     var loadMore = false
     
@@ -30,7 +30,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableFooterView = UIView()
         
-        self.getListMyTeams()
+        self.getlistNewTeams()
         
         self.tableView.addInfiniteScroll { (tableView) -> Void in
             tableView.finishInfiniteScroll()
@@ -46,12 +46,12 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                             self.loadMore = false
                         }
                         var indexPaths = [Any]()
-                        let currentCount: Int = self.listMyTeams.count
+                        let currentCount: Int = self.listNewTeams.count
                         for i in 0..<(listTeams?.count)! {
                             indexPaths.append(IndexPath(row: currentCount + i, section: 0))
                         }
                         // do the insertion
-                        self.listMyTeams += listTeams!
+                        self.listNewTeams += listTeams!
                         // tell the table view to update (at all of the inserted index paths)
                         self.tableView.beginUpdates()
                         self.tableView.insertRows(at: indexPaths as? [IndexPath] ?? [IndexPath](), with: .top)
@@ -63,8 +63,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         tableView.beginInfiniteScroll(true)
     }
-
-    func getListMyTeams() {
+    
+    func getlistNewTeams() {
         SVProgressHUD.show()
         FService.sharedInstance.getMyTeams(page: 0) { (listTeams, totalPage) in
             if listTeams != nil {
@@ -75,12 +75,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 else {
                     self.loadMore = false
                 }
-                self.listMyTeams.removeAll()
-                self.listMyTeams = listTeams!
+                self.listNewTeams.removeAll()
+                self.listNewTeams = listTeams!
                 self.tableView.reloadData()
             }
             SVProgressHUD.dismiss()
         }
+    }
+    
+    @IBAction func backAction() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -99,10 +103,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         if searchBar.text != "" {
             self.lbSearchKq.text = "  Kết quả tìm kiếm"
             SVProgressHUD.show()
-            FService.sharedInstance.searchMyTeam(query: searchBar.text!, page: 0, completion: { (listResults) in
+            FService.sharedInstance.searchNewTeam(query: searchBar.text!, page: 0, completion: { (listResults) in
                 if listResults != nil {
-                    self.listMyTeams.removeAll()
-                    self.listMyTeams = listResults!
+                    self.listNewTeams.removeAll()
+                    self.listNewTeams = listResults!
                     self.tableView.reloadData()
                 }
                 SVProgressHUD.dismiss()
@@ -110,18 +114,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         else {
             self.lbSearchKq.text = "  Danh sách nhóm chung đang tham gia"
-            self.getListMyTeams()
+            self.getlistNewTeams()
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listMyTeams.count
+        return self.listNewTeams.count
     }
     
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:ListTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ListTableViewCell!
-        let teamInfo: Team = self.listMyTeams[indexPath.row] as Team
+        let teamInfo: Team = self.listNewTeams[indexPath.row] as Team
         cell.imgAvata.image = UIImage(named: "\(teamInfo.iconId ?? 1)")
         cell.name.text = teamInfo.name
         cell.level.text = "\(teamInfo.level ?? 1) Cấp"
@@ -129,7 +133,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "PushDetailTeam", sender: nil)
+        self.performSegue(withIdentifier: "PushSearchLead", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -150,7 +154,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
-

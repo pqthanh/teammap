@@ -16,6 +16,7 @@
 		61ABABD11FCFB00700D3AC23 /* CalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */; };
 		61B68E821FD5011F00957A92 /* TTThanhVienVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */; };
 		61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */; };
+		61C2B91E1FD8046F0090A32D /* NewTeamListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2B91D1FD8046F0090A32D /* NewTeamListVC.swift */; };
 		61C2EE241FD69609007062E9 /* SelectTeamMemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C2EE231FD69609007062E9 /* SelectTeamMemVC.swift */; };
 		61C51D811FC6A41A00BCDCC2 /* lato-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D6F1FC6A40400BCDCC2 /* lato-bold.ttf */; };
 		61C51D821FC6A41A00BCDCC2 /* lato-black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D701FC6A40600BCDCC2 /* lato-black.ttf */; };
@@ -73,6 +74,7 @@
 		61ABABCF1FCFB00700D3AC23 /* CalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalTableViewCell.xib; sourceTree = "<group>"; };
 		61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTThanhVienVC.swift; sourceTree = "<group>"; };
 		61B68E831FD50ADE00957A92 /* ListMemberTreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMemberTreeVC.swift; sourceTree = "<group>"; };
+		61C2B91D1FD8046F0090A32D /* NewTeamListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTeamListVC.swift; sourceTree = "<group>"; };
 		61C2EE231FD69609007062E9 /* SelectTeamMemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTeamMemVC.swift; sourceTree = "<group>"; };
 		61C51D6F1FC6A40400BCDCC2 /* lato-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-bold.ttf"; sourceTree = "<group>"; };
 		61C51D701FC6A40600BCDCC2 /* lato-black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-black.ttf"; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				61C51D931FC6B54B00BCDCC2 /* UpdatePViewController.swift */,
 				D367DEB11FCDCAC5008A33CB /* SelectTeamVC.swift */,
 				D367DEB31FCDD632008A33CB /* CreateNewTeamVC.swift */,
+				61C2B91D1FD8046F0090A32D /* NewTeamListVC.swift */,
 				D3E8DA1E1FCE278200ADB0E1 /* ChonIconViewController.swift */,
 				619F1BDB1FD006680082C948 /* SearchLeaderVC.swift */,
 				619F1BDD1FD017FA0082C948 /* DetailTeamVC.swift */,
@@ -490,6 +493,7 @@
 				D3865AC21FBF11E800AF18C5 /* CalViewController.swift in Sources */,
 				D3865ABE1FBF11E800AF18C5 /* AppDelegate.swift in Sources */,
 				D37EE8361FBF2E24007A0008 /* ProfileViewController.swift in Sources */,
+				61C2B91E1FD8046F0090A32D /* NewTeamListVC.swift in Sources */,
 				D3E8DA1F1FCE278200ADB0E1 /* ChonIconViewController.swift in Sources */,
 				61ABABD01FCFB00700D3AC23 /* CalTableViewCell.swift in Sources */,
 				614987A01FD118DB00EFE953 /* FBToken.swift in Sources */,

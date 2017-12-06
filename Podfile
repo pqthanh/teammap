@@ -19,4 +19,5 @@ target 'TeamCaring' do
     pod 'FacebookLogin'
     pod 'Firebase/Core'
     pod 'Firebase/Messaging'
+    pod 'UIScrollView-InfiniteScroll'
 end

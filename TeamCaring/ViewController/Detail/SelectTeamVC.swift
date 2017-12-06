@@ -39,7 +39,7 @@ class SelectTeamVC: UIViewController {
             let _: CreateNewTeamVC = segue.destination as! CreateNewTeamVC
         }
         else if segue.identifier == "PushListTeam" {
-            let listTeam: ListViewController = segue.destination as! ListViewController
+            let listTeam: NewTeamListVC = segue.destination as! NewTeamListVC
             listTeam.isViewDetail = false
         }
     }
