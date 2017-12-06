@@ -25,7 +25,7 @@ class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBAction func backAction() {
         self.view.endEditing(true)
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

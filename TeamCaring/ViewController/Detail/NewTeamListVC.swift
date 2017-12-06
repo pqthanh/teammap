@@ -10,13 +10,12 @@ import UIKit
 import SVProgressHUD
 import UIScrollView_InfiniteScroll
 
-class NewTeamListVC: UIViewController {
+class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var lbSearchKq: UILabel!
     
-    let cellReuseIdentifier = "CellListId"
     var isViewDetail = true
     var listNewTeams = [Team]()
     var currentIndex = 0
@@ -29,8 +28,6 @@ class NewTeamListVC: UIViewController {
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableFooterView = UIView()
-        
-        self.getlistNewTeams()
         
         self.tableView.addInfiniteScroll { (tableView) -> Void in
             tableView.finishInfiniteScroll()
@@ -64,25 +61,6 @@ class NewTeamListVC: UIViewController {
         tableView.beginInfiniteScroll(true)
     }
     
-    func getlistNewTeams() {
-        SVProgressHUD.show()
-        FService.sharedInstance.getMyTeams(page: 0) { (listTeams, totalPage) in
-            if listTeams != nil {
-                if totalPage == 10 {
-                    self.loadMore = true
-                    self.currentIndex += 1
-                }
-                else {
-                    self.loadMore = false
-                }
-                self.listNewTeams.removeAll()
-                self.listNewTeams = listTeams!
-                self.tableView.reloadData()
-            }
-            SVProgressHUD.dismiss()
-        }
-    }
-    
     @IBAction func backAction() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -114,7 +92,6 @@ class NewTeamListVC: UIViewController {
         }
         else {
             self.lbSearchKq.text = "  Danh sách nhóm chung đang tham gia"
-            self.getlistNewTeams()
         }
     }
     
@@ -124,7 +101,7 @@ class NewTeamListVC: UIViewController {
     
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:ListTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! ListTableViewCell!
+        let cell:ListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CellNewTeamId") as! ListTableViewCell!
         let teamInfo: Team = self.listNewTeams[indexPath.row] as Team
         cell.imgAvata.image = UIImage(named: "\(teamInfo.iconId ?? 1)")
         cell.name.text = teamInfo.name

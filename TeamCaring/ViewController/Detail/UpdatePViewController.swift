@@ -48,7 +48,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
             if (error == nil){
                 let fbDetails = result as! NSDictionary
                 //print(fbDetails)
-                self.email = fbDetails.object(forKey: "email") as! String
+                self.email = (fbDetails.object(forKey: "email") ?? "") as! String
                 self.fullname = fbDetails.object(forKey: "name") as! String
                 
                 self.tfEmail.text = self.email

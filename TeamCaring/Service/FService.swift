@@ -175,9 +175,9 @@ class FService: NSObject {
         let path = Router.baseURLString.appending(Router.searchNewTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
         let url = URL(string: path)
         
-        requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
-            if let result = result as? [[String: Any]] {
-                let listItems = Mapper<Team>().mapArray(JSONObject: result)
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Team>().mapArray(JSONObject: result["result"])
                 completion(listItems)
             }
             else {
