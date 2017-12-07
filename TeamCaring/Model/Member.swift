@@ -20,9 +20,9 @@ class Member: NSObject, Mappable {
     var level: Int?
     var name: String?
     var totalMember: Int?
-    var members: [Member]?
+    var members: [Leader]?
     
-    init(tdescription : String, extraGroupDescription : String, extraGroupName : String, extraGroupTotalMember : Int, iconId : Int, id : Int, level : Int, name : String, totalMember : Int, members : [Member])
+    init(tdescription : String, extraGroupDescription : String, extraGroupName : String, extraGroupTotalMember : Int, iconId : Int, id : Int, level : Int, name : String, totalMember : Int, members : [Leader])
     {
         self.tdescription               = tdescription
         self.extraGroupDescription      = extraGroupDescription

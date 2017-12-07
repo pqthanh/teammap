@@ -17,7 +17,7 @@ class SelectTeamMemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        avata.layer.cornerRadius = 20
+        avata.layer.cornerRadius = 15
         avata.layer.masksToBounds = true
     }
 

@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         self.view.endEditing(true)
     
         let loginManager = LoginManager()
-        //loginManager.loginBehavior = .web
+        loginManager.loginBehavior = .web
         loginManager.logIn(readPermissions: [.email], viewController: self, completion: { loginResult in
             switch loginResult {
             case .failed( _), .cancelled:

@@ -15,10 +15,18 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var avataLeader: UIButton!
     @IBOutlet weak var viewMota: UIView!
     
+    @IBOutlet weak var imgLevel1: UIButton!
+    @IBOutlet weak var imgLevel2: UIButton!
+    @IBOutlet weak var imgLevel3: UIButton!
+    
     @IBOutlet weak var lbLevel0: UILabel!
     @IBOutlet weak var lbLevel1: UILabel!
     @IBOutlet weak var lbLevel2: UILabel!
     @IBOutlet weak var lbLevel3: UILabel!
+    
+    @IBOutlet weak var imgNodeArrow0: UIImageView!
+    @IBOutlet weak var imgNodeArrow1: UIImageView!
+    @IBOutlet weak var imgNodeArrow2: UIImageView!
     
     @IBOutlet weak var lbTxtholder: UILabel!
     @IBOutlet weak var tfTenNhom: UITextField!
@@ -34,6 +42,13 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         
         self.iconTeam.layer.cornerRadius = 20
         self.avataLeader.layer.cornerRadius = 30
+        self.avataLeader.layer.masksToBounds = true
+        self.imgLevel1.layer.cornerRadius = 30
+        self.imgLevel1.layer.masksToBounds = true
+        self.imgLevel2.layer.cornerRadius = 30
+        self.imgLevel2.layer.masksToBounds = true
+        self.imgLevel3.layer.cornerRadius = 30
+        self.imgLevel3.layer.masksToBounds = true
         
         self.viewMota.layer.cornerRadius = 4.0
         self.viewMota.layer.borderWidth = 1.0
@@ -56,8 +71,46 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 self.tfSoluong.text = "\(info.extraGroupTotalMember ?? 0)"
                 if (info.extraGroupDescription != nil) && info.extraGroupDescription != "" {
                     self.lbTxtholder.isHidden = true
+                    self.viewMota.backgroundColor = UIColor.clear
                 }
                 self.txtMota.text = info.extraGroupDescription
+                
+                self.lbLevel0.text = "\(info.level ?? 0)"
+                self.iconTeam.setBackgroundImage(UIImage(named: "\(info.iconId ?? 1)"), for: .normal)
+                self.avataLeader.setBackgroundImage(UIImage.image(fromURL: (Caring.userInfo?.avata!)!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                    self.avataLeader.setBackgroundImage(nil, for: .normal)
+                    self.avataLeader.setBackgroundImage(image, for: .normal)
+                }, for: .normal)
+                
+                if (info.members?.count)! > 0 {
+                    if (info.members?.count)! == 1 {
+                        self.imgNodeArrow2.isHidden = true
+                        self.imgLevel2.isHidden = true
+                        self.imgLevel3.isHidden = true
+                        
+                        let node0 = info.members![0]
+                        self.imgLevel1.setBackgroundImage(UIImage.image(fromURL: node0.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                            self.imgLevel1.setBackgroundImage(nil, for: .normal)
+                            self.imgLevel1.setBackgroundImage(image, for: .normal)
+                        }, for: .normal)
+                    }
+                    else if (info.members?.count)! == 2 {
+                        self.imgNodeArrow1.isHidden = true
+                        self.imgLevel1.isHidden = true
+                        
+                        let node0 = info.members![0]
+                        self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: node0.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                            self.imgLevel2.setBackgroundImage(nil, for: .normal)
+                            self.imgLevel2.setBackgroundImage(image, for: .normal)
+                        }, for: .normal)
+                        
+                        let node1 = info.members![1]
+                        self.imgLevel3.setBackgroundImage(UIImage.image(fromURL: node1.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                            self.imgLevel3.setBackgroundImage(nil, for: .normal)
+                            self.imgLevel3.setBackgroundImage(image, for: .normal)
+                        }, for: .normal)
+                    }
+                }
             }
             SVProgressHUD.dismiss()
         }
