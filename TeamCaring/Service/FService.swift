@@ -114,6 +114,18 @@ class FService: NSObject {
         }
     }
     
+    func getCurrentProfile(completion: @escaping (_ result: Leader?) -> ()) -> () {
+        requestAuthorized(url: Router.getMyProfile, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let profile = Mapper<Leader>().map(JSON: result)
+                completion(profile)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
+    
     func updateProfile(fullName : String, nickName: String, nameGroup: String, description: String, totalMember: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
         
         let params = (nameGroup != "" && description != "") ? ["fullName" : fullName, "nickname" : nickName, "extraGroupName" : nameGroup, "extraGroupDescription" : description, "extraGroupTotalMember" : totalMember, "pushToken" : Caring.deviceToken!] : ["fullName" : fullName, "nickname" : nickName, "pushToken" : Caring.deviceToken!] as [String : Any]
@@ -167,9 +179,9 @@ class FService: NSObject {
         let path = Router.baseURLString.appending(Router.searchMyTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
         let url = URL(string: path)
         
-        requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
-            if let result = result as? [[String: Any]] {
-                let listItems = Mapper<Team>().mapArray(JSONObject: result)
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Team>().mapArray(JSONObject: result["result"])
                 completion(listItems)
             }
             else {
@@ -223,6 +235,22 @@ class FService: NSObject {
             }
             else {
                 completion(nil, nil)
+            }
+        })
+    }
+    
+    func getDetailTeam (idTeam: Int, completion: @escaping (_ result: Member?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.detailTeam.path.appending("\(idTeam)")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Member>().map(JSON: result)
+                completion(listItems)
+            }
+            else {
+                completion(nil)
             }
         })
     }

@@ -93,7 +93,9 @@ class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
-                    self.dismiss(animated: true, completion: nil)
+                    let appDelegate = UIApplication.shared.delegate! as! AppDelegate
+                    let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewControllerId")
+                    appDelegate.window?.rootViewController = mainViewController
                 }))
                 self.present(alert, animated: true, completion: nil)
             })

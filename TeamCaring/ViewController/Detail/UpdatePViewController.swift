@@ -42,29 +42,53 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
         self.txtMota.layer.cornerRadius = 4.0
         self.txtMota.layer.borderWidth = 1.0
         self.txtMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
-        
         imgAvata.layer.cornerRadius = 50.0
-        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, email, name, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
-            if (error == nil){
-                let fbDetails = result as! NSDictionary
-                //print(fbDetails)
-                self.email = (fbDetails.object(forKey: "email") ?? "") as! String
-                self.fullname = fbDetails.object(forKey: "name") as! String
-                
-                self.tfEmail.text = self.email
-                self.tfFullname.text = self.fullname
-                
-                let pictureData = fbDetails["picture"] as! NSDictionary
-                if let data:NSDictionary = pictureData["data"] as? NSDictionary
-                {
-                    self.avataUrl = data.object(forKey: "url") as! String
-                    self.imgAvata.image = UIImage.image(fromURL: self.avataUrl, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+        
+        let fbAccessToken = FBSDKAccessToken.current()?.tokenString
+        if fbAccessToken != nil {
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, email, name, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    let fbDetails = result as! NSDictionary
+                    //print(fbDetails)
+                    self.email = (fbDetails.object(forKey: "email") ?? "") as! String
+                    self.fullname = fbDetails.object(forKey: "name") as! String
+                    
+                    self.tfEmail.text = self.email
+                    self.tfFullname.text = self.fullname
+                    
+                    let pictureData = fbDetails["picture"] as! NSDictionary
+                    if let data:NSDictionary = pictureData["data"] as? NSDictionary
+                    {
+                        self.avataUrl = data.object(forKey: "url") as! String
+                        self.imgAvata.image = UIImage.image(fromURL: self.avataUrl, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                            self.imgAvata.image = nil
+                            self.imgAvata.image = image
+                        }
+                    }
+                }
+            })
+        }
+        else {
+            FService.sharedInstance.getCurrentProfile(completion: { (profile) in
+                if profile != nil {
+                    let info: Leader = profile!
+                    self.avataUrl = info.imageUrl!
+                    self.imgAvata.image = UIImage.image(fromURL: info.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
                         self.imgAvata.image = nil
                         self.imgAvata.image = image
                     }
+                    self.tfFullname.text = info.fullName
+                    self.tfNickname.text = info.nickname
+                    
+                    self.txtMota.text = info.extraGroupDescription
+                    if (info.extraGroupDescription != nil) && info.extraGroupDescription != "" {
+                        self.lbTxtholder.isHidden = true
+                    }
+                    self.tfTenNhom.text = info.extraGroupName
+                    self.tfSoluong.text = "\(info.numberAppointments ?? 1)"
                 }
-            }
-        })
+            })
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -88,15 +112,12 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
         self.view.endEditing(true)
         SVProgressHUD.show()
         FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0) { (success) in
-            print(success ?? 0)
-            
             if success == 200 {
-                let userInfo = User(userId: "", email: self.tfEmail.text!, token: "", nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
+                let userInfo = User(userId: "", email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
                 Caring.userInfo = userInfo
                 Caring.isActived = true
                 self.performSegue(withIdentifier: "PushKhoiDau", sender: nil)
             }
-            
             SVProgressHUD.dismiss()
         }
     }

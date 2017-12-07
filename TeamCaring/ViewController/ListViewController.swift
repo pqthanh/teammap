@@ -66,21 +66,29 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func getListMyTeams() {
         SVProgressHUD.show()
-        FService.sharedInstance.getMyTeams(page: 0) { (listTeams, totalPage) in
-            if listTeams != nil {
-                if totalPage == 10 {
-                    self.loadMore = true
-                    self.currentIndex += 1
-                }
-                else {
-                    self.loadMore = false
-                }
+        FService.sharedInstance.searchMyTeam(query: "*", page: 0, completion: { (listResults) in
+            if listResults != nil {
                 self.listMyTeams.removeAll()
-                self.listMyTeams = listTeams!
+                self.listMyTeams = listResults!
                 self.tableView.reloadData()
             }
             SVProgressHUD.dismiss()
-        }
+        })
+//        FService.sharedInstance.getMyTeams(page: 0) { (listTeams, totalPage) in
+//            if listTeams != nil {
+//                if totalPage == 10 {
+//                    self.loadMore = true
+//                    self.currentIndex += 1
+//                }
+//                else {
+//                    self.loadMore = false
+//                }
+//                self.listMyTeams.removeAll()
+//                self.listMyTeams = listTeams!
+//                self.tableView.reloadData()
+//            }
+//            SVProgressHUD.dismiss()
+//        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -129,7 +137,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "PushDetailTeam", sender: nil)
+        let teamInfo: Team = self.listMyTeams[indexPath.row] as Team
+        self.performSegue(withIdentifier: "PushDetailTeam", sender: teamInfo.id)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -142,7 +151,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             let _:SearchLeaderVC = segue.destination as! SearchLeaderVC
         }
         else if segue.identifier == "PushDetailTeam" {
-            let _:DetailTeamVC = segue.destination as! DetailTeamVC
+            let detail: DetailTeamVC = segue.destination as! DetailTeamVC
+            detail.teamId = sender as! Int
         }
     }
     

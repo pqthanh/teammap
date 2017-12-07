@@ -17,7 +17,7 @@ class ListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        imgAvata.layer.cornerRadius = 20
+        imgAvata.layer.cornerRadius = 15
         imgAvata.layer.masksToBounds = true
     }
 

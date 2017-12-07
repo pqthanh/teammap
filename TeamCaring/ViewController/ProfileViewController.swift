@@ -19,6 +19,13 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var viewMota: UIView!
     @IBOutlet weak var lbTxtholder: UILabel!
     
+    @IBOutlet weak var tfFullname: UITextField!
+    @IBOutlet weak var tfNickname: UITextField!
+    @IBOutlet weak var tfEmail: UITextField!
+    @IBOutlet weak var tfTenNhom: UITextField!
+    @IBOutlet weak var txtMota: UITextView!
+    @IBOutlet weak var tfSoluong: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,8 +42,36 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
                 self.imgAvata.image = nil
                 self.imgAvata.image = image
             }
+            self.tfFullname.text = userInfo.fullname
+            self.tfNickname.text = userInfo.nickname
+            
+            self.txtMota.text = userInfo.mota
+            if (userInfo.mota != nil) && userInfo.mota != "" {
+                self.lbTxtholder.isHidden = true
+            }
+            self.tfTenNhom.text = userInfo.tenNhom
+            self.tfSoluong.text = "\(userInfo.soluong ?? 1)"
         }
-        
+        else {
+            FService.sharedInstance.getCurrentProfile(completion: { (profile) in
+                if profile != nil {
+                    let info: Leader = profile!
+                    self.imgAvata.image = UIImage.image(fromURL: info.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+                        self.imgAvata.image = nil
+                        self.imgAvata.image = image
+                    }
+                    self.tfFullname.text = info.fullName
+                    self.tfNickname.text = info.nickname
+                    
+                    self.txtMota.text = info.extraGroupDescription
+                    if (info.extraGroupDescription != nil) && info.extraGroupDescription != "" {
+                        self.lbTxtholder.isHidden = true
+                    }
+                    self.tfTenNhom.text = info.extraGroupName
+                    self.tfSoluong.text = "\(info.numberAppointments ?? 1)"
+                }
+            })
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
 
@@ -19,9 +20,18 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var lbLevel2: UILabel!
     @IBOutlet weak var lbLevel3: UILabel!
     
+    @IBOutlet weak var lbTxtholder: UILabel!
+    @IBOutlet weak var tfTenNhom: UITextField!
+    @IBOutlet weak var txtMota: UITextView!
+    @IBOutlet weak var tfSoluong: UITextField!
+    
+    var teamId = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
+        
         self.iconTeam.layer.cornerRadius = 20
         self.avataLeader.layer.cornerRadius = 30
         
@@ -37,6 +47,20 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.lbLevel2.layer.masksToBounds = true
         self.lbLevel3.layer.cornerRadius = 10.0
         self.lbLevel3.layer.masksToBounds = true
+        
+        SVProgressHUD.show()
+        FService.sharedInstance.getDetailTeam(idTeam: teamId) { (result) in
+            if result != nil {
+                let info: Member = result!
+                self.tfTenNhom.text = info.extraGroupName
+                self.tfSoluong.text = "\(info.extraGroupTotalMember ?? 0)"
+                if (info.extraGroupDescription != nil) && info.extraGroupDescription != "" {
+                    self.lbTxtholder.isHidden = true
+                }
+                self.txtMota.text = info.extraGroupDescription
+            }
+            SVProgressHUD.dismiss()
+        }
     }
 
     @IBAction func backAction() {
