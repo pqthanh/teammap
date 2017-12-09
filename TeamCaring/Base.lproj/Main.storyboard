@@ -57,7 +57,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="49d-i3-M5O">
                                 <rect key="frame" x="0.0" y="108" width="375" height="510"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Danh sách nhóm chung đang tham gia" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nnS-HG-Qxs">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,7 +137,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="button-plus"/>
                                 <connections>
-                                    <segue destination="EVl-XC-BsF" kind="show" id="Fr9-U1-jhO"/>
+                                    <segue destination="Tmr-Nw-eLW" kind="show" id="lxd-5u-5Sa"/>
                                 </connections>
                             </button>
                             <searchBar clipsSubviews="YES" contentMode="redraw" placeholder="Tìm theo tên nhóm" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdf-xg-4lv">
@@ -179,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2972" y="520"/>
+            <point key="canvasLocation" x="-2911" y="520"/>
         </scene>
         <!--Search LeaderVC-->
         <scene sceneID="UNS-Bp-mWo">
@@ -213,7 +213,7 @@
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zRN-u2-LDm">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Kết quả tìm kiếm" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="549-cK-OqP">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -309,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWt-U4-iDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2154" y="-296"/>
+            <point key="canvasLocation" x="-2154" y="-754"/>
         </scene>
         <!--Thông Báo-->
         <scene sceneID="dHi-4Z-wjx">
@@ -321,7 +321,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-0R-ZTx">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Danh sách thông báo mới nhất từ hệ thống" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3FT-Nm-7iX">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -482,7 +482,7 @@
         <scene sceneID="kgx-VU-hvG">
             <objects>
                 <navigationController storyboardIdentifier="AlertViewControllerId" id="5rG-qo-966" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Thông Báo" image="ic_alarm" badgeValue="12" id="zJ1-lF-5cu"/>
+                    <tabBarItem key="tabBarItem" title="Thông Báo" image="ic_alarm" id="zJ1-lF-5cu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2r4-y7-eSs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -694,6 +694,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="signOutAction" destination="xPi-XT-vet" eventType="touchUpInside" id="bfb-4s-gCT"/>
                                                     <action selector="updateAction:" destination="Yxg-rJ-4j9" eventType="touchUpInside" id="iKz-te-uUb"/>
                                                 </connections>
                                             </button>
@@ -817,7 +818,18 @@
                         <viewLayoutGuide key="safeArea" id="orz-WU-cu1"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tài Khoản" image="ic_profile" selectedImage="ic_profile" id="Jl6-50-8dy"/>
-                    <navigationItem key="navigationItem" title="Tài Khoản" id="ctp-hb-nv9"/>
+                    <navigationItem key="navigationItem" title="Tài Khoản" id="ctp-hb-nv9">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="H0b-fP-SPh">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dCp-dh-myB">
+                                <rect key="frame" x="281" y="11" width="78" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Icon-done"/>
+                                <connections>
+                                    <action selector="updateAction" destination="xPi-XT-vet" eventType="touchUpInside" id="So5-HC-IDb"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imgAvata" destination="RAk-bA-vwl" id="YJX-ie-sdc"/>
                         <outlet property="lbTxtholder" destination="7bw-4e-VAa" id="pc3-hN-97L"/>
@@ -1175,7 +1187,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TeamMap là sản phẩm của Trí Tuệ Toàn Hảo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHI-wd-dlT">
-                                <rect key="frame" x="5" y="627" width="365" height="20"/>
+                                <rect key="frame" x="5" y="578" width="365" height="20"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1683,7 +1695,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6z1-SY-CX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2154" y="520"/>
+            <point key="canvasLocation" x="-2154" y="-52"/>
         </scene>
         <!--Chọn Icon-->
         <scene sceneID="iBY-tM-oTD">
@@ -2157,7 +2169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfw-dy-Kgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2154" y="1305"/>
+            <point key="canvasLocation" x="-2154" y="683"/>
         </scene>
         <!--Lập trình iOS-->
         <scene sceneID="dA3-gg-OJM">
@@ -2571,6 +2583,9 @@
                         <outlet property="imgNodeArrow0" destination="LA6-uC-LQa" id="2dm-ot-riP"/>
                         <outlet property="imgNodeArrow1" destination="O0X-PC-7KQ" id="PEC-2y-dGl"/>
                         <outlet property="imgNodeArrow2" destination="ukG-l4-kFE" id="ZTv-s1-A6z"/>
+                        <outlet property="imgStart1" destination="dqz-En-8PQ" id="O7w-cb-eao"/>
+                        <outlet property="imgStart2" destination="3i7-ia-MiB" id="5hH-hx-HWK"/>
+                        <outlet property="imgStart3" destination="igB-Fx-Vys" id="q5C-iT-7cf"/>
                         <outlet property="lbLevel0" destination="aHx-7s-qNm" id="ybh-Lg-POy"/>
                         <outlet property="lbLevel1" destination="Q7h-P6-phR" id="jCA-Cm-T29"/>
                         <outlet property="lbLevel2" destination="YJ2-uF-euB" id="15g-fX-2G9"/>
@@ -3485,7 +3500,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ncN-fr-Tbu">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Số lần đã hẹn với từng thành viên" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hbv-5T-Xm2">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3603,8 +3618,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2T-ne-KZ7">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Danh sách nhóm chung đang tham gia" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bs5-RJ-8H1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3727,7 +3742,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zxk-sd-WHx" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2972" y="-296.40179910044981"/>
+            <point key="canvasLocation" x="-2972" y="-754"/>
         </scene>
     </scenes>
     <resources>
@@ -3759,6 +3774,7 @@
         <image name="Avatar" width="96" height="96"/>
         <image name="Background" width="375" height="667"/>
         <image name="Editable" width="47" height="47"/>
+        <image name="Icon-done" width="24" height="19"/>
         <image name="Icon-eye" width="22" height="16"/>
         <image name="Icon-unchecked" width="18" height="18"/>
         <image name="Next Arrow" width="8" height="14"/>
@@ -4650,6 +4666,6 @@ AABZAAAAAAAAAAAAAAAAAAAldQ
         <image name="teammap" width="137" height="160"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fr9-U1-jhO"/>
+        <segue reference="lxd-5u-5Sa"/>
     </inferredMetricsTieBreakers>
 </document>

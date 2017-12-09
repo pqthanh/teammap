@@ -26,6 +26,8 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var txtMota: UITextView!
     @IBOutlet weak var tfSoluong: UITextField!
     
+    var avataUrl = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -38,10 +40,12 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         
         if let userInfo = Caring.userInfo {
+            self.avataUrl = (userInfo.avata)!
             self.imgAvata.image = UIImage.image(fromURL: (userInfo.avata)!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
                 self.imgAvata.image = nil
                 self.imgAvata.image = image
             }
+            self.tfEmail.text = userInfo.currentEmail
             self.tfFullname.text = userInfo.fullname
             self.tfNickname.text = userInfo.nickname
             
@@ -52,26 +56,14 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
             self.tfTenNhom.text = userInfo.tenNhom
             self.tfSoluong.text = "\(userInfo.soluong ?? 1)"
         }
-        else {
-            FService.sharedInstance.getCurrentProfile(completion: { (profile) in
-                if profile != nil {
-                    let info: Leader = profile!
-                    self.imgAvata.image = UIImage.image(fromURL: info.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
-                        self.imgAvata.image = nil
-                        self.imgAvata.image = image
-                    }
-                    self.tfFullname.text = info.fullName
-                    self.tfNickname.text = info.nickname
-                    
-                    self.txtMota.text = info.extraGroupDescription
-                    if (info.extraGroupDescription != nil) && info.extraGroupDescription != "" {
-                        self.lbTxtholder.isHidden = true
-                    }
-                    self.tfTenNhom.text = info.extraGroupName
-                    self.tfSoluong.text = "\(info.numberAppointments ?? 1)"
-                }
-            })
+        
+        if self.tfEmail.text == "" {
+            self.tfEmail.isEnabled = true
         }
+        else {
+            self.tfEmail.isEnabled = false
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -88,6 +80,32 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
     func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
+    }
+    
+    @IBAction func updateAction() {
+        self.view.endEditing(true)
+        SVProgressHUD.show()
+        FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0, email: self.tfEmail.text!) { (success) in
+            if success == 200 {
+                let userInfo = User(userId: "", email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
+                Caring.userInfo = userInfo
+ 
+                let alert = UIAlertController(title: "Cập nhật thông tin thành công!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            SVProgressHUD.dismiss()
+        }
+    }
+    
+    @IBAction func signOutAction() {
+        self.view.endEditing(true)
+        Caring.userToken = nil
+        Caring.isActived = false
+        Caring.userInfo = nil
+        let appDelegate = UIApplication.shared.delegate! as! AppDelegate
+        let mainViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewControllerId")
+        appDelegate.window?.rootViewController = mainViewController
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

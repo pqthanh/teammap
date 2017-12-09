@@ -7,16 +7,29 @@
 //
 
 import UIKit
+import SVProgressHUD
+import UIScrollView_InfiniteScroll
 
 class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tblAlert: UITableView!
-    var items = ["Yêu cầu gia nhập 1", "Yêu cầu gia nhập 2", "Yêu cầu gia nhập 3"]
+    var items = [Notification]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         self.tblAlert.tableFooterView = UIView()
+        
+        SVProgressHUD.show()
+        FService.sharedInstance.getNotification(page: 0) { (result) in
+            if result != nil {
+                self.items.removeAll()
+                self.items = result!
+                self.tblAlert.reloadData()
+            }
+            SVProgressHUD.dismiss()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,10 +62,12 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if !(cell != nil) {
             cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         }
-        cell!.textLabel?.text = self.items[indexPath.row]
+        
+        let dataInfo: Notification = self.items[indexPath.row]
+        cell!.textLabel?.text = dataInfo.title
         cell?.textLabel?.font = UIFont(name: "lato-bold", size: 16)
         
-        cell?.detailTextLabel?.text = "Aaron Hotchner muốn tham gia nhóm"
+        cell?.detailTextLabel?.text = dataInfo.message
         cell?.detailTextLabel?.font = UIFont(name: "lato-regular", size: 16)
         cell?.detailTextLabel?.textColor = UIColor.lightGray
         

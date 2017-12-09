@@ -106,6 +106,8 @@ class FService: NSObject {
             
             if let result = result as? [String: Any] {
                 let fbInfo = Mapper<FBToken>().map(JSON: result)
+                let userInfo = Mapper<Leader>().map(JSON: result["profile"] as! [String : Any])
+                Caring.userInfo = User(userId: "\(userInfo?.id ?? 0)", email: (userInfo?.email ?? ""), token: token, nickname: (userInfo?.nickname ?? ""), fullname: (userInfo?.fullName ?? ""), tenNhom: (userInfo?.extraGroupName ?? ""), mota: (userInfo?.extraGroupDescription ?? ""), soluong: userInfo?.extraGroupTotalMember, avata: (userInfo?.imageUrl ?? ""))
                 completion(fbInfo)
             }
             else {
@@ -126,9 +128,9 @@ class FService: NSObject {
         })
     }
     
-    func updateProfile(fullName : String, nickName: String, nameGroup: String, description: String, totalMember: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
+    func updateProfile(fullName : String, nickName: String, nameGroup: String, description: String, totalMember: Int, email: String, completion: @escaping (_ code: Int?) -> ()) -> () {
         
-        let params = (nameGroup != "" && description != "") ? ["fullName" : fullName, "nickname" : nickName, "extraGroupName" : nameGroup, "extraGroupDescription" : description, "extraGroupTotalMember" : totalMember, "pushToken" : Caring.deviceToken!] : ["fullName" : fullName, "nickname" : nickName, "pushToken" : Caring.deviceToken!] as [String : Any]
+        let params = (nameGroup != "" && description != "") ? ["fullName" : fullName, "nickname" : nickName, "extraGroupName" : nameGroup, "extraGroupDescription" : description, "extraGroupTotalMember" : totalMember, "pushToken" : Caring.deviceToken!, "email": email] : ["fullName" : fullName, "nickname" : nickName, "pushToken" : Caring.deviceToken!, "email": email] as [String : Any]
         
         requestHttpCode(url: Router.updateProfile, method: .put, params: params, completion: { (result, error) in
             completion(result)
@@ -137,13 +139,22 @@ class FService: NSObject {
     
     func createTeam (description : String, extraGroupDescription: String, extraGroupName: String, extraGroupTotalMember: Int, iconId: Int, name: String, totalMember: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
         
-        let params = ["description": description,
-        "extraGroupDescription": extraGroupDescription,
-        "extraGroupName": extraGroupName,
-        "extraGroupTotalMember": extraGroupTotalMember,
-        "iconId": iconId,
-        "name": name,
-        "level": totalMember] as [String : Any]
+        var params = [String: Any]()
+        if extraGroupName == "" {
+            params = ["description": description,
+                      "iconId": iconId,
+                      "name": name,
+                      "level": totalMember] as [String : Any]
+        }
+        else {
+            params = ["description": description,
+                      "extraGroupDescription": extraGroupDescription,
+                      "extraGroupName": extraGroupName,
+                      "extraGroupTotalMember": extraGroupTotalMember,
+                      "iconId": iconId,
+                      "name": name,
+                      "level": totalMember] as [String : Any]
+        }
         
         requestHttpCode(url: Router.creatTeam, method: .post, params: params, completion: { (result, error) in
             completion(result)
@@ -247,6 +258,22 @@ class FService: NSObject {
         requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [String: Any] {
                 let listItems = Mapper<Member>().map(JSON: result)
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
+    
+    func getNotification (page: Int, completion: @escaping (_ result: [Notification]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.listNotification.path.appending("?page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Notification>().mapArray(JSONObject: result["result"])
                 completion(listItems)
             }
             else {

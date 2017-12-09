@@ -56,6 +56,7 @@
 		D3865AC51FBF11E800AF18C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3865AC31FBF11E800AF18C5 /* Main.storyboard */; };
 		D3865AC71FBF11E800AF18C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3865AC61FBF11E800AF18C5 /* Assets.xcassets */; };
 		D38CEA251FD7047200F8C367 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38CEA241FD7047200F8C367 /* Team.swift */; };
+		D399C4B61FDA439C007E1E28 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399C4B51FDA439C007E1E28 /* Notification.swift */; };
 		D3ADF8251FD858C5000FEE64 /* Leader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADF8241FD858C5000FEE64 /* Leader.swift */; };
 		D3ADF8271FD8593C000FEE64 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADF8261FD8593C000FEE64 /* Member.swift */; };
 		D3BE5BB01FC3254700D54964 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE5BAF1FC3254700D54964 /* AlertViewController.swift */; };
@@ -121,6 +122,7 @@
 		D3865AC91FBF11E800AF18C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D3865ACB1FBF11E900AF18C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D38CEA241FD7047200F8C367 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		D399C4B51FDA439C007E1E28 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		D3ADF8241FD858C5000FEE64 /* Leader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leader.swift; sourceTree = "<group>"; };
 		D3ADF8261FD8593C000FEE64 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		D3BE5BAF1FC3254700D54964 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				D38CEA241FD7047200F8C367 /* Team.swift */,
 				D3ADF8241FD858C5000FEE64 /* Leader.swift */,
 				D3ADF8261FD8593C000FEE64 /* Member.swift */,
+				D399C4B51FDA439C007E1E28 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				D3CF64951FD0582E00E410DE /* FService.swift in Sources */,
 				D3BE5BB01FC3254700D54964 /* AlertViewController.swift in Sources */,
 				61FAE2441FD698FC0066E76B /* SelectTeamMemCell.swift in Sources */,
+				D399C4B61FDA439C007E1E28 /* Notification.swift in Sources */,
 				D3442BDC1FD308BB00392463 /* InfoViewController.swift in Sources */,
 				D384C8081FC08C8F0008EB60 /* User.swift in Sources */,
 				D37EE8381FBF2E33007A0008 /* LoginViewController.swift in Sources */,

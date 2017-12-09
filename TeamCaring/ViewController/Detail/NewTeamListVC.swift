@@ -33,9 +33,9 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             tableView.finishInfiniteScroll()
             if self.loadMore {
                 SVProgressHUD.show()
-                FService.sharedInstance.getMyTeams(page: self.currentIndex) { (listTeams, totalPage) in
+                FService.sharedInstance.searchNewTeam(query: self.searchBar.text!, page: self.currentIndex, completion: { (listTeams) in
                     if listTeams != nil {
-                        if totalPage == 10 {
+                        if listTeams?.count == 10 {
                             self.loadMore = true
                             self.currentIndex += 1
                         }
@@ -55,7 +55,7 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         self.tableView.endUpdates()
                     }
                     SVProgressHUD.dismiss()
-                }
+                })
             }
         }
         tableView.beginInfiniteScroll(true)
@@ -83,6 +83,13 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             SVProgressHUD.show()
             FService.sharedInstance.searchNewTeam(query: searchBar.text!, page: 0, completion: { (listResults) in
                 if listResults != nil {
+                    if listResults?.count == 10 {
+                        self.loadMore = true
+                        self.currentIndex += 1
+                    }
+                    else {
+                        self.loadMore = false
+                    }
                     self.listNewTeams.removeAll()
                     self.listNewTeams = listResults!
                     self.tableView.reloadData()

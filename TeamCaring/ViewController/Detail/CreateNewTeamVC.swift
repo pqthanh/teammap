@@ -23,7 +23,7 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
     @IBOutlet weak var tfextraGroupName: UITextField!
     @IBOutlet weak var tfextraGroupTotalMember: UITextField!
     
-    var currentIdAvata = 1
+    var currentIdAvata = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,28 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
     }
     
     @IBAction func createNewTeam() {
+        
+        var message = ""
+        if currentIdAvata == 0 {
+            message = "Vui lòng chọn ảnh đại diện cho nhóm!"
+        }
+        else if tfname.text! == "" {
+            message = "Vui lòng nhập tên nhóm!"
+        }
+        else if txtMota.text! == "" {
+            message = "Vui lòng nhập mô tả nhóm!"
+        }
+        else if tflevel.text! == "" {
+            message = "Vui lòng nhập số cấp độ cho nhóm!"
+        }
+        
+        if message != "" {
+            let alert = UIAlertController(title: message, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         SVProgressHUD.show()
         FService.sharedInstance.createTeam(description: txtMota.text!, extraGroupDescription: txtMota1.text!, extraGroupName: tfextraGroupName.text!, extraGroupTotalMember: Int(tfextraGroupTotalMember.text!)!, iconId: currentIdAvata, name: tfname.text!, totalMember: Int(tflevel.text!)!) { (code) in
 

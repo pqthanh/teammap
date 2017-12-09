@@ -77,6 +77,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
                         self.imgAvata.image = nil
                         self.imgAvata.image = image
                     }
+                    self.tfEmail.text = info.email
                     self.tfFullname.text = info.fullName
                     self.tfNickname.text = info.nickname
                     
@@ -111,7 +112,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
     @IBAction func updateAction(_ sender: AnyObject) {
         self.view.endEditing(true)
         SVProgressHUD.show()
-        FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0) { (success) in
+        FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0, email: tfEmail.text!) { (success) in
             if success == 200 {
                 let userInfo = User(userId: "", email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
                 Caring.userInfo = userInfo
