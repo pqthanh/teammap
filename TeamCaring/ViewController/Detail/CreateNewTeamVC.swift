@@ -92,7 +92,16 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
         }
         
         SVProgressHUD.show()
-        FService.sharedInstance.createTeam(description: txtMota.text!, extraGroupDescription: txtMota1.text!, extraGroupName: tfextraGroupName.text!, extraGroupTotalMember: Int(tfextraGroupTotalMember.text!)!, iconId: currentIdAvata, name: tfname.text!, totalMember: Int(tflevel.text!)!) { (code) in
+        let strNumMemsAnys = self.tfextraGroupTotalMember.text!
+        let numMemsAnys = Int(strNumMemsAnys == "" ? "0" : strNumMemsAnys)!
+        FService.sharedInstance.createTeam(description: self.txtMota.text!,
+                                           extraGroupDescription: self.txtMota1.text!,
+                                           extraGroupName: self.tfextraGroupName.text!,
+                                           extraGroupTotalMember: numMemsAnys,
+                                           iconId: self.currentIdAvata,
+                                           name: self.tfname.text!,
+                                           totalMember: Int(self.tflevel.text!)!)
+        { (code) in
 
             if code == 201 {
                 let appDelegate = UIApplication.shared.delegate! as! AppDelegate

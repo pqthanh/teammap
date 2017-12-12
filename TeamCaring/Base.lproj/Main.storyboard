@@ -48,13 +48,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="First View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <rect key="frame" x="112.5" y="312" width="150" height="43"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="49d-i3-M5O">
                                 <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -154,7 +147,6 @@
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="VQB-aO-sOQ" secondAttribute="bottom" constant="20" id="5Fb-Kp-A3Q"/>
-                            <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
                             <constraint firstItem="49d-i3-M5O" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="8vC-ch-gUl"/>
                             <constraint firstItem="49d-i3-M5O" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="DTp-BI-8jG"/>
                             <constraint firstItem="rdf-xg-4lv" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="Ih0-ej-XAv"/>
@@ -162,7 +154,6 @@
                             <constraint firstItem="rdf-xg-4lv" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="Rkm-bV-V0F"/>
                             <constraint firstItem="rdf-xg-4lv" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="WPs-cB-hg8"/>
                             <constraint firstItem="49d-i3-M5O" firstAttribute="top" secondItem="rdf-xg-4lv" secondAttribute="bottom" id="YmH-lZ-x2i"/>
-                            <constraint firstAttribute="centerY" secondItem="KQZ-1w-vlD" secondAttribute="centerY" id="exm-UA-ej4"/>
                             <constraint firstItem="49d-i3-M5O" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="qRy-cZ-8Mg"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="VQB-aO-sOQ" secondAttribute="trailing" constant="20" id="wiN-LC-Tbw"/>
                         </constraints>
@@ -1439,7 +1430,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="EVl-XC-BsF" id="car-nb-Foi"/>
                                         </connections>
@@ -2248,7 +2239,7 @@
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6N-8x-9L0">
                                         <rect key="frame" x="20" y="467" width="335" height="80"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VD: Dành cho những người có sở thích, đam mê công nghệ" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7H-aC-G7w">
                                         <rect key="frame" x="25" y="472" width="325" height="40"/>

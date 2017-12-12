@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import UIScrollView_InfiniteScroll
 
 class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -17,6 +18,8 @@ class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let cellReuseIdentifier = "CellSearchLeaderId"
     var teamId = 0
     var listLeader = [Leader]()
+    var currentIndex = 0
+    var loadMore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,37 @@ class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableFooterView = UIView()
+        
+        self.tableView.addInfiniteScroll { (tableView) -> Void in
+            tableView.finishInfiniteScroll()
+            if self.loadMore {
+                SVProgressHUD.show()
+                FService.sharedInstance.searchLeader(teamId: self.teamId, query: self.searchBar.text!, page: self.currentIndex) { (listResults) in
+                    if listResults != nil {
+                        if listResults?.count == 10 {
+                            self.loadMore = true
+                            self.currentIndex += 1
+                        }
+                        else {
+                            self.loadMore = false
+                        }
+                        var indexPaths = [Any]()
+                        let currentCount: Int = self.listLeader.count
+                        for i in 0..<(listResults?.count)! {
+                            indexPaths.append(IndexPath(row: currentCount + i, section: 0))
+                        }
+                        // do the insertion
+                        self.listLeader += listResults!
+                        // tell the table view to update (at all of the inserted index paths)
+                        self.tableView.beginUpdates()
+                        self.tableView.insertRows(at: indexPaths as? [IndexPath] ?? [IndexPath](), with: .top)
+                        self.tableView.endUpdates()
+                    }
+                    SVProgressHUD.dismiss()
+                }
+            }
+        }
+        tableView.beginInfiniteScroll(true)
     }
 
     @IBAction func backAction() {
@@ -41,10 +75,17 @@ class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
 
-        FService.sharedInstance.searchLeader(teamId: teamId, query: searchBar.text!, page: 0) { (listData) in
-            if listData != nil {
+        FService.sharedInstance.searchLeader(teamId: teamId, query: searchBar.text!, page: 0) { (listResults) in
+            if listResults != nil {
+                if listResults?.count == 10 {
+                    self.loadMore = true
+                    self.currentIndex += 1
+                }
+                else {
+                    self.loadMore = false
+                }
                 self.listLeader.removeAll()
-                self.listLeader = listData!
+                self.listLeader = listResults!
                 self.tableView.reloadData()
             }
         }

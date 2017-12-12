@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import UIScrollView_InfiniteScroll
+import ESPullToRefresh
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -32,38 +33,60 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.getListMyTeams()
         
+        self.tableView.es.addPullToRefresh {
+            [unowned self] in
+            self.tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: true)
+            self.getListMyTeams()
+        }
+        
         self.tableView.addInfiniteScroll { (tableView) -> Void in
             tableView.finishInfiniteScroll()
-            if self.loadMore {
-                SVProgressHUD.show()
-                FService.sharedInstance.getMyTeams(page: self.currentIndex) { (listTeams, totalPage) in
-                    if listTeams != nil {
-                        if totalPage == 10 {
-                            self.loadMore = true
-                            self.currentIndex += 1
-                        }
-                        else {
-                            self.loadMore = false
-                        }
-                        var indexPaths = [Any]()
-                        let currentCount: Int = self.listMyTeams.count
-                        for i in 0..<(listTeams?.count)! {
-                            indexPaths.append(IndexPath(row: currentCount + i, section: 0))
-                        }
-                        // do the insertion
-                        self.listMyTeams += listTeams!
-                        // tell the table view to update (at all of the inserted index paths)
-                        self.tableView.beginUpdates()
-                        self.tableView.insertRows(at: indexPaths as? [IndexPath] ?? [IndexPath](), with: .top)
-                        self.tableView.endUpdates()
+            
+            if self.searchBar.text != "" {
+                if self.loadMore {
+                    SVProgressHUD.show()
+                    FService.sharedInstance.searchMyTeam(query: self.searchBar.text!, page: self.currentIndex, completion: { (listResults) in
+                        self.loadMore(listItems: listResults)
+                        SVProgressHUD.dismiss()
+                    })
+                }
+            }
+            else {
+                if self.loadMore {
+                    SVProgressHUD.show()
+                    FService.sharedInstance.getMyTeams(page: self.currentIndex) { (listTeams, totalPage) in
+                        self.loadMore(listItems: listTeams)
+                        SVProgressHUD.dismiss()
                     }
-                    SVProgressHUD.dismiss()
                 }
             }
         }
         tableView.beginInfiniteScroll(true)
     }
 
+    func loadMore(listItems: [Team]?) {
+        if listItems != nil {
+            if listItems?.count == 10 {
+                self.loadMore = true
+                self.currentIndex += 1
+            }
+            else {
+                self.loadMore = false
+            }
+            var indexPaths = [Any]()
+            let currentCount: Int = self.listMyTeams.count
+            for i in 0..<(listItems?.count)! {
+                indexPaths.append(IndexPath(row: currentCount + i, section: 0))
+            }
+            // do the insertion
+            self.listMyTeams += listItems!
+            // tell the table view to update (at all of the inserted index paths)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: indexPaths as? [IndexPath] ?? [IndexPath](), with: .top)
+            self.tableView.endUpdates()
+        }
+    }
+    
     func getListMyTeams() {
         SVProgressHUD.show()
         FService.sharedInstance.searchMyTeam(query: "*", page: 0, completion: { (listResults) in
@@ -72,6 +95,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.listMyTeams = listResults!
                 self.tableView.reloadData()
             }
+            self.currentIndex = 0
             SVProgressHUD.dismiss()
         })
 //        FService.sharedInstance.getMyTeams(page: 0) { (listTeams, totalPage) in
@@ -109,8 +133,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             SVProgressHUD.show()
             FService.sharedInstance.searchMyTeam(query: searchBar.text!, page: 0, completion: { (listResults) in
                 if listResults != nil {
+                    if listResults?.count == 10 {
+                        self.loadMore = true
+                        self.currentIndex += 1
+                    }
+                    else {
+                        self.loadMore = false
+                    }
                     self.listMyTeams.removeAll()
                     self.listMyTeams = listResults!
+                    self.tableView.reloadData()
+                }
+                else {
+                    self.listMyTeams.removeAll()
                     self.tableView.reloadData()
                 }
                 SVProgressHUD.dismiss()

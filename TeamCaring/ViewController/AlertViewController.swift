@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import UIScrollView_InfiniteScroll
+import ESPullToRefresh
 
 class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -21,6 +22,16 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         SVProgressHUD.setDefaultMaskType(.clear)
         self.tblAlert.tableFooterView = UIView()
         
+        self.loadAlert()
+        
+        self.tblAlert.es.addPullToRefresh {
+            [unowned self] in
+            self.tblAlert.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: true)
+            self.loadAlert()
+        }
+    }
+    
+    func loadAlert() {
         SVProgressHUD.show()
         FService.sharedInstance.getNotification(page: 0) { (result) in
             if result != nil {
@@ -37,19 +48,37 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let dataInfo: Notification = self.items[editActionsForRowAt.row]
         let accept = UITableViewRowAction(style: .normal, title: "") { action, index in
-            print("Đồng ý")
+            SVProgressHUD.show()
+            FService.sharedInstance.acceptJoinTeam(requestId: dataInfo.targetId!, response: "accept", completion: { (code) in
+                if code == 200 {
+                    self.items.remove(at: editActionsForRowAt.row)
+                    tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+                }
+                SVProgressHUD.dismiss()
+            })
         }
         accept.backgroundColor = UIColor(patternImage: UIImage(named: "icon-yes")!)
         
         let delete = UITableViewRowAction(style: .normal, title: "") { action, index in
-            print("Huỷ bỏ")
-            self.items.remove(at: editActionsForRowAt.row)
-            tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+            SVProgressHUD.show()
+            FService.sharedInstance.acceptJoinTeam(requestId: dataInfo.targetId!, response: "reject", completion: { (code) in
+                if code == 200 {
+                    self.items.remove(at: editActionsForRowAt.row)
+                    tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+                }
+                SVProgressHUD.dismiss()
+            })
         }
         delete.backgroundColor = UIColor(patternImage: UIImage(named: "icon-no")!)
         
-        return [delete, accept]
+        if dataInfo.type == 1 {
+            return [delete, accept]
+        }
+        else {
+            return [delete]
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -74,6 +103,10 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell?.imageView?.image = UIImage(named: "Icon-mail")
         
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     override func didReceiveMemoryWarning() {

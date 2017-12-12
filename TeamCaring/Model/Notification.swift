@@ -14,20 +14,18 @@ class Notification: NSObject, Mappable {
     
     var customUserId: Int?
     var id: Int?
-    var isRead: Bool?
     var message: String?
-    var metaData: String?
+    var targetId: Int?
     var read: Bool?
     var title: String?
     var type: Int?
     
-    init(customUserId : Int, id : Int, isRead : Bool, message : String, metaData : String, read : Bool, title : String, type : Int)
+    init(customUserId : Int, id : Int, message : String, targetId : Int, read : Bool, title : String, type : Int)
     {
         self.customUserId   = customUserId
         self.id             = id
-        self.isRead         = isRead
         self.message        = message
-        self.metaData       = metaData
+        self.targetId       = targetId
         self.read           = read
         self.title          = title
         self.type           = type
@@ -37,9 +35,8 @@ class Notification: NSObject, Mappable {
         super.init()
         customUserId <- map["customUserId"]
         id <- map["id"]
-        isRead <- map["isRead"]
         message <- map["message"]
-        metaData <- map["mapmetaData"]
+        targetId <- map["targetId"]
         read <- map["read"]
         title <- map["title"]
         type <- map["type"]
@@ -48,9 +45,8 @@ class Notification: NSObject, Mappable {
     func mapping(map: Map) {
         customUserId <- map["customUserId"]
         id <- map["id"]
-        isRead <- map["isRead"]
         message <- map["message"]
-        metaData <- map["mapmetaData"]
+        targetId <- map["targetId"]
         read <- map["read"]
         title <- map["title"]
         type <- map["type"]
