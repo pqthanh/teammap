@@ -11,55 +11,80 @@ import Foundation
 import ObjectMapper
 
 class Member: NSObject, Mappable {
-    var tdescription: String?
+
+    var email: String?
     var extraGroupDescription: String?
     var extraGroupName: String?
     var extraGroupTotalMember: Int?
-    var iconId: Int?
+    var fullName: String?
     var id: Int?
-    var level: Int?
-    var name: String?
-    var totalMember: Int?
-    var members: [Leader]?
+    var imageUrl: String?
+    var nickname: String?
+    var numberAppointments: Int?
+    var pushToken: String?
+    var level: JoinedTeam?
+    var userId: Int?
+    var members: [Member]?
     
-    init(tdescription : String, extraGroupDescription : String, extraGroupName : String, extraGroupTotalMember : Int, iconId : Int, id : Int, level : Int, name : String, totalMember : Int, members : [Leader])
+    init(email : String,
+         extraGroupDescription : String,
+         extraGroupName : String,
+         extraGroupTotalMember : Int,
+         fullName : String,
+         id : Int,
+         imageUrl : String,
+         nickname : String,
+         numberAppointments : Int,
+         pushToken : String,
+         level: JoinedTeam,
+         userId : Int,
+         members : [Member])
     {
-        self.tdescription               = tdescription
+        self.email                      = email
         self.extraGroupDescription      = extraGroupDescription
         self.extraGroupName             = extraGroupName
         self.extraGroupTotalMember      = extraGroupTotalMember
-        self.iconId                     = iconId
+        self.fullName                   = fullName
         self.id                         = id
+        self.imageUrl                   = imageUrl
+        self.nickname                   = nickname
+        self.numberAppointments         = numberAppointments
+        self.pushToken                  = pushToken
         self.level                      = level
-        self.name                       = name
-        self.totalMember                = totalMember
+        self.userId                     = userId
         self.members                    = members
     }
     
     required init?(map: Map){
         super.init()
-        tdescription <- map["description"]
+        email <- map["email"]
         extraGroupDescription <- map["extraGroupDescription"]
         extraGroupName <- map["extraGroupName"]
         extraGroupTotalMember <- map["extraGroupTotalMember"]
-        iconId <- map["iconId"]
+        fullName <- map["fullName"]
         id <- map["id"]
-        level <- map["level"]
-        name <- map["name"]
-        totalMember <- map["totalMember"]
+        imageUrl <- map["imageUrl"]
+        nickname <- map["nickname"]
+        numberAppointments <- map["numberAppointments"]
+        pushToken <- map["pushToken"]
+        level <- map["joinedTeam"]
+        userId <- map["userId"]
         members <- map["members"]
     }
     
     func mapping(map: Map) {
-        tdescription <- map["description"]
+        email <- map["email"]
         extraGroupDescription <- map["extraGroupDescription"]
         extraGroupName <- map["extraGroupName"]
         extraGroupTotalMember <- map["extraGroupTotalMember"]
-        iconId <- map["iconId"]
+        fullName <- map["fullName"]
         id <- map["id"]
-        level <- map["level"]
-        name <- map["name"]
-        totalMember <- map["totalMember"]
+        imageUrl <- map["imageUrl"]
+        nickname <- map["nickname"]
+        numberAppointments <- map["numberAppointments"]
+        pushToken <- map["pushToken"]
+        level <- map["joinedTeam"]
+        userId <- map["userId"]
         members <- map["members"]
     }
     

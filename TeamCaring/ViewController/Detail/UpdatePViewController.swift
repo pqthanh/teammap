@@ -52,7 +52,9 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
                     //print(fbDetails)
                     self.email = (fbDetails.object(forKey: "email") ?? "") as! String
                     self.fullname = fbDetails.object(forKey: "name") as! String
-                    
+                    if self.email == "" {
+                        self.tfEmail.isEnabled = true
+                    }
                     self.tfEmail.text = self.email
                     self.tfFullname.text = self.fullname
                     

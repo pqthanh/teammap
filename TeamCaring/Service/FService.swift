@@ -258,18 +258,19 @@ class FService: NSObject {
         })
     }
     
-    func getDetailTeam (idTeam: Int, completion: @escaping (_ result: Member?) -> ()) -> () {
+    func getDetailTeam (idTeam: Int, completion: @escaping (_ team: Team?, _ members: [Member]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.detailTeam.path.appending("\(idTeam)")).replacingOccurrences(of: " ", with: "%20")
         let url = URL(string: path)
         
         requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [String: Any] {
-                let listItems = Mapper<Member>().map(JSON: result)
-                completion(listItems)
+                let team = Mapper<Team>().map(JSON: result)
+                let listMembers = Mapper<Member>().mapArray(JSONObject: result["members"])
+                completion(team, listMembers)
             }
             else {
-                completion(nil)
+                completion(nil, nil)
             }
         })
     }
