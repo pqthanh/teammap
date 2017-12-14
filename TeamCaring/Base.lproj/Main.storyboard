@@ -29,7 +29,7 @@
                 <navigationController storyboardIdentifier="ListViewControllerId" id="Z3a-sB-cGX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Nhóm" image="ic_list" selectedImage="ic_list" id="tZH-0G-CDD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vTc-Ln-iq6">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -311,7 +311,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ze7-0R-ZTx">
-                                <rect key="frame" x="0.0" y="68" width="375" height="550"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <label key="tableHeaderView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Danh sách thông báo mới nhất từ hệ thống" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3FT-Nm-7iX">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
@@ -351,7 +351,7 @@
                 <navigationController storyboardIdentifier="CalViewControllerId" id="JQr-TQ-yNQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Lịch Hẹn" image="ic_cal" selectedImage="ic_cal" id="jtb-je-Ve8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lXE-hw-fkc">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -475,7 +475,7 @@
                 <navigationController storyboardIdentifier="AlertViewControllerId" id="5rG-qo-966" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Thông Báo" image="ic_alarm" id="zJ1-lF-5cu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2r4-y7-eSs">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -492,7 +492,7 @@
                 <navigationController storyboardIdentifier="ProfileViewControllerId" id="ZFu-IH-MRW" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tài Khoản" image="ic_profile" selectedImage="ic_profile" id="vGE-hD-Jhp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X0E-eq-lXv">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -812,7 +812,7 @@
                     <navigationItem key="navigationItem" title="Tài Khoản" id="ctp-hb-nv9">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="H0b-fP-SPh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dCp-dh-myB">
-                                <rect key="frame" x="281" y="13" width="78" height="22"/>
+                                <rect key="frame" x="281" y="11" width="78" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Icon-done"/>
                                 <connections>
@@ -843,7 +843,7 @@
             <objects>
                 <navigationController storyboardIdentifier="UpdatePViewControllerId" id="ylF-HM-lA7" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XYt-i0-aaT">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="19"/>
@@ -1291,7 +1291,7 @@
                     <navigationItem key="navigationItem" title="Khởi Đầu" id="gH8-mk-5wo">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="jER-7Q-nDP">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jH2-SK-I7W">
-                                <rect key="frame" x="16" y="14" width="65" height="20"/>
+                                <rect key="frame" x="16" y="12" width="65" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
@@ -1657,7 +1657,7 @@
                     <navigationItem key="navigationItem" title="Tạo Nhóm Mới" id="wNu-As-xWk">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="p5x-Of-PGG">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bXp-98-56A">
-                                <rect key="frame" x="16" y="9" width="77" height="30"/>
+                                <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2144,7 +2144,7 @@
                     <navigationItem key="navigationItem" title="Chọn Icon" id="JKU-h4-NO5">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="2zR-gi-qhv">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8qB-0c-zXN">
-                                <rect key="frame" x="16" y="9" width="77" height="30"/>
+                                <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2301,31 +2301,42 @@
                                             <action selector="backMemberAction:" destination="hrk-NX-3dA" eventType="touchUpInside" id="wk9-vE-MPu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIr-ZW-Ozu">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIr-ZW-Ozu">
                                         <rect key="frame" x="157.5" y="110" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="QFJ-kr-yjh"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="8"/>
+                                        <connections>
+                                            <action selector="currentLeadAction" destination="hrk-NX-3dA" eventType="touchUpInside" id="ZHS-9b-yTj"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80H-Y1-moT">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80H-Y1-moT">
                                         <rect key="frame" x="295" y="220" width="60" height="60"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="80H-Y1-moT" secondAttribute="height" id="1kg-94-3Yd"/>
                                             <constraint firstAttribute="width" constant="60" id="B5l-DM-9XQ"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="4"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="25"/>
+                                        <state key="normal" backgroundImage="4">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="detailMemberAction:" destination="hrk-NX-3dA" eventType="touchUpInside" id="obr-7u-0Ay"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gE-hu-6bR">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gE-hu-6bR">
                                         <rect key="frame" x="157.5" y="220" width="60" height="60"/>
+                                        <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5gE-hu-6bR" secondAttribute="height" id="IA4-bs-FBe"/>
                                             <constraint firstAttribute="width" constant="60" id="mo8-K6-42b"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="3"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="25"/>
+                                        <state key="normal" backgroundImage="3">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="detailMemberAction:" destination="hrk-NX-3dA" eventType="touchUpInside" id="LS7-iN-yOT"/>
                                         </connections>
@@ -2360,12 +2371,16 @@
                                             <constraint firstItem="Q7h-P6-phR" firstAttribute="top" secondItem="dqz-En-8PQ" secondAttribute="bottom" constant="-5" id="rd1-9D-Mlt"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yh4-KA-o3T">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yh4-KA-o3T">
                                         <rect key="frame" x="20" y="220" width="60" height="60"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="RmW-Gx-kOR"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="2"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="25"/>
+                                        <state key="normal" backgroundImage="2">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="detailMemberAction:" destination="hrk-NX-3dA" eventType="touchUpInside" id="1Kr-8m-pIL"/>
                                         </connections>
@@ -2548,7 +2563,7 @@
                     <navigationItem key="navigationItem" title="Lập trình iOS" id="eVV-uK-zWc">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="ySv-lw-vsZ">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MXe-A8-b48">
-                                <rect key="frame" x="16" y="9" width="77" height="30"/>
+                                <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2562,7 +2577,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Hf5-mh-ZAX">
                             <button key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Dsb-AC-bgM">
-                                <rect key="frame" x="331" y="10" width="28" height="28"/>
+                                <rect key="frame" x="331" y="8" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="icon-info"/>
                                 <connections>
@@ -2963,7 +2978,7 @@
                     <navigationItem key="navigationItem" title="Thành Viên" id="3Lr-9F-ZAu">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="JUp-ch-NaU">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="frd-d6-T6C">
-                                <rect key="frame" x="16" y="9" width="77" height="30"/>
+                                <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -2977,7 +2992,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imgAvata" destination="uKx-CF-WxE" id="EcF-RJ-3Jn"/>
                         <outlet property="scrollView" destination="m76-3U-EkA" id="YZ8-uO-3Dj"/>
+                        <outlet property="tfCapDo" destination="Lt1-3I-wCM" id="H6E-tZ-Fxi"/>
+                        <outlet property="tfCuocHen" destination="4Zw-4M-0Uh" id="Nza-B5-00G"/>
+                        <outlet property="tfEmail" destination="fS8-Fb-OlF" id="gOs-rj-OTA"/>
+                        <outlet property="tfHoTen" destination="vA0-Kg-3tB" id="KXa-ok-GSD"/>
+                        <outlet property="tfNickname" destination="mt5-DH-5Bs" id="YyW-k5-jDe"/>
                         <segue destination="3r0-Xg-nzf" kind="show" identifier="PushNhungCuocHen" id="jfs-Gg-ZhU"/>
                     </connections>
                 </viewController>
@@ -3282,7 +3303,7 @@
                     <navigationItem key="navigationItem" title="Tạo Lịch Hẹn" id="7a2-RC-5lb">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="gGP-eF-DTE">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="z0J-PS-ONy">
-                                <rect key="frame" x="16" y="9" width="77" height="30"/>
+                                <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -3579,7 +3600,7 @@
                     <navigationItem key="navigationItem" title="Những cuộc hẹn" id="Hiu-5G-vJW">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="2pU-dK-Tae">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G06-7C-LjP">
-                                <rect key="frame" x="16" y="9" width="77" height="30"/>
+                                <rect key="frame" x="16" y="7" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -3709,7 +3730,7 @@
                     <navigationItem key="navigationItem" title="Nhóm" id="qyQ-oU-m2P">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="oul-nz-EYz">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dcj-cc-mZK">
-                                <rect key="frame" x="16" y="13" width="58" height="22"/>
+                                <rect key="frame" x="16" y="11" width="58" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="-5" maxY="0.0"/>

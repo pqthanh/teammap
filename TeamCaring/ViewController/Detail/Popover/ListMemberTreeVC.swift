@@ -12,6 +12,9 @@ class ListMemberTreeVC: UIViewController, UICollectionViewDelegate, UICollection
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var listMems = [Member]()
+    var selectedBlock: ((Member) -> Void)? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,7 +22,7 @@ class ListMemberTreeVC: UIViewController, UICollectionViewDelegate, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return listMems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -29,15 +32,28 @@ class ListMemberTreeVC: UIViewController, UICollectionViewDelegate, UICollection
     // make a cell for each cell index path
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemberListCViewCellId", for: indexPath as IndexPath) as! MemberListCViewCell
+        let info = self.listMems[indexPath.row]
         cell.layer.cornerRadius = 5.0
         cell.lbLevel.layer.cornerRadius = 10.0
         cell.lbLevel.layer.masksToBounds = true
-//        let urlImg = ""
-//        cell.imgAvata.setBackgroundImage(UIImage.image(fromURL: urlImg, placeholder: UIImage(named: "Avata")!, shouldCacheImage: true) { (image) in
-//            cell.imgAvata.setBackgroundImage(nil, for: .normal)
-//            cell.imgAvata.setBackgroundImage(image, for: .normal)
-//        }, for: .normal)
+        cell.imgAvata.layer.cornerRadius = 55/2
+        cell.imgAvata.layer.masksToBounds = true
+        let urlImg = info.imageUrl ?? ""
+        cell.imgAvata.setBackgroundImage(UIImage.image(fromURL: urlImg, placeholder: UIImage(), shouldCacheImage: true) { (image) in
+            cell.imgAvata.setBackgroundImage(nil, for: .normal)
+            cell.imgAvata.setBackgroundImage(image, for: .normal)
+        }, for: .normal)
+        cell.imgAvata.tag = indexPath.row
+        cell.imgAvata.addTarget(self, action:#selector(self.selectedItem), for: .touchUpInside)
+        cell.lbLevel.text = "\(info.level?.level ?? 0)"
         return cell
+    }
+    
+    func selectedItem(sender: UIButton!) {
+        let index = sender.tag
+        if let selectedBlock = self.selectedBlock {
+            selectedBlock(self.listMems[index])
+        }
     }
     
     override func didReceiveMemoryWarning() {

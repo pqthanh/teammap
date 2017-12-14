@@ -19,8 +19,9 @@ class Notification: NSObject, Mappable {
     var read: Bool?
     var title: String?
     var type: Int?
+    var time: String?
     
-    init(customUserId : Int, id : Int, message : String, targetId : Int, read : Bool, title : String, type : Int)
+    init(customUserId : Int, id : Int, message : String, targetId : Int, read : Bool, title : String, type : Int, time: String)
     {
         self.customUserId   = customUserId
         self.id             = id
@@ -29,6 +30,7 @@ class Notification: NSObject, Mappable {
         self.read           = read
         self.title          = title
         self.type           = type
+        self.time           = time
     }
     
     required init?(map: Map){
@@ -40,6 +42,7 @@ class Notification: NSObject, Mappable {
         read <- map["read"]
         title <- map["title"]
         type <- map["type"]
+        time <- map["time"]
     }
     
     func mapping(map: Map) {
@@ -50,6 +53,7 @@ class Notification: NSObject, Mappable {
         read <- map["read"]
         title <- map["title"]
         type <- map["type"]
+        time <- map["time"]
     }
     
 }

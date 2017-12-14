@@ -12,12 +12,31 @@ import SVProgressHUD
 class TTThanhVienVC: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imgAvata: UIImageView!
+    @IBOutlet weak var tfCapDo: UITextField!
+    @IBOutlet weak var tfCuocHen: UITextField!
+    @IBOutlet weak var tfHoTen: UITextField!
+    @IBOutlet weak var tfNickname: UITextField!
+    @IBOutlet weak var tfEmail: UITextField!
+    
+    var detailInfo: Member?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SVProgressHUD.setDefaultMaskType(.clear)
         self.hideKeyboardWhenTappedAround()
+        
+        self.imgAvata.layer.cornerRadius = 50.0
+        self.imgAvata.image = UIImage.image(fromURL: (detailInfo?.imageUrl ?? "")!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+            self.imgAvata.image = nil
+            self.imgAvata.image = image
+        }
+        self.tfCapDo.text = "\(detailInfo?.level?.level ?? 0)"
+        self.tfCuocHen.text = "0"
+        self.tfHoTen.text = detailInfo?.fullName
+        self.tfNickname.text = detailInfo?.nickname
+        self.tfEmail.text = detailInfo?.email
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

@@ -42,6 +42,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     var teamId = 0
     var memberList = [Member]()
     var currentList = [Member]()
+    var currentListNode4_5 = [Member]()
     var currentLeader: Member?
     
     override func viewDidLoad() {
@@ -130,6 +131,15 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 let node2 = members[2]
                 self.setDate3Node(data1: node0, data2: node1, data3: node2)
             }
+            else if (members.count) == 4 {
+                self.showItemWhen1Node()
+                self.showItemWhen2Node()
+                let node0 = members[0]
+                let node1 = members[1]
+                let node2 = members[2]
+                let node3 = members[3]
+                self.setDate4_5Node(data1: node0, data2: node1, data3: [node2, node3])
+            }
         }
         else {
             self.topTeamNd.constant = -80
@@ -138,6 +148,11 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }
         self.currentList.removeAll()
         self.currentList = members
+    }
+    
+    func setGroupData3() {
+        self.imgLevel3.setBackgroundImage(nil, for: .normal)
+        self.imgLevel3.setTitle("2", for: .normal)
     }
     
     func setDate1Node(data: Member) {
@@ -182,6 +197,30 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.imgLevel3.tag = 2
     }
     
+    func setDate4_5Node(data1: Member, data2: Member, data3: [Member]) {
+        self.imgLevel1.setBackgroundImage(UIImage.image(fromURL: data1.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+            self.imgLevel1.setBackgroundImage(nil, for: .normal)
+            self.imgLevel1.setBackgroundImage(image, for: .normal)
+        }, for: .normal)
+        self.imgLevel1.tag = 0
+        
+        self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+            self.imgLevel2.setBackgroundImage(nil, for: .normal)
+            self.imgLevel2.setBackgroundImage(image, for: .normal)
+        }, for: .normal)
+        self.imgLevel2.tag = 1
+        
+        self.imgLevel3.setBackgroundImage(nil, for: .normal)
+        self.imgLevel3.setTitle("\(data3.count)", for: .normal)
+        
+        self.imgStart3.isHidden = true
+        self.lbLevel3.isHidden = true
+        
+        self.imgLevel3.tag = data3.count + 1
+        self.currentListNode4_5.removeAll()
+        self.currentListNode4_5 = data3
+    }
+    
     func hideItemWhen1Node() {
         self.imgNodeArrow2.isHidden = true
         self.imgLevel2.isHidden = true
@@ -209,11 +248,11 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     func showItemWhen2Node() {
         self.imgNodeArrow2.isHidden = false
         self.imgLevel2.isHidden = false
-        self.imgLevel3.isHidden = false
         self.lbLevel2.isHidden = false
-        self.lbLevel3.isHidden = false
         self.imgStart2.isHidden = false
         self.imgStart3.isHidden = false
+        self.imgLevel3.isHidden = false
+        self.lbLevel3.isHidden = false
     }
     
     @IBAction func backAction() {
@@ -234,48 +273,71 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBAction func backMemberAction(_ sender: AnyObject) {
         if self.currentLeader != nil {
             for element in self.memberList {
-                let lead = self.search(element)
-                if lead == self.currentLeader {
-                    print(lead)
-                    print(element)
+                if element == self.currentLeader {
+                    self.currentLeader = nil
+                    self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId ?? "0")!, teamLevel: element.level?.level ?? 0)
+                    self.showTreeMapWithData(members: self.memberList)
                     break
+                }
+                else {
+                    let lead = self.search(element)
+                    if lead != nil {
+                        break
+                    }
                 }
             }
         }
     }
     
     func search(_ value: Member) -> Member? {
-        if value == self.currentLeader {
-            return value
-        }
-        else {
-            for _ in value.members! {
-                if let found = self.search(value) {
-                    return found
-                }
+        for element in value.members! {
+            if element == self.currentLeader {
+                self.currentLeader = value
+                self.setLeaderTree(avata: value.imageUrl!, id: value.userId!, teamLevel: value.level?.level ?? 0)
+                self.showTreeMapWithData(members: value.members!)
+                return value
             }
-            return nil
+            else {
+                return self.search(element)
+            }
         }
+        return nil
     }
     
     @IBAction func detailMemberAction(_ sender: AnyObject) {
-        let selectedInfo: Member = self.currentList[sender.tag]
-        if selectedInfo.members!.count > 0 {
-            self.currentLeader = selectedInfo
-            self.setLeaderTree(avata: (selectedInfo.imageUrl ?? "")!, id: selectedInfo.userId!, teamLevel: selectedInfo.level?.level ?? 0)
-            self.showTreeMapWithData(members: selectedInfo.members!)
+        if sender.tag > 2 {
+            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ListMemberTreeVCId") as! ListMemberTreeVC
+            popoverContent.listMems = self.currentListNode4_5
+            popoverContent.selectedBlock =  { (memberInfo) -> Void in
+                popoverContent.dismiss(animated: true, completion: nil)
+                if memberInfo.members!.count > 0 {
+                    self.currentLeader = memberInfo
+                    self.setLeaderTree(avata: (memberInfo.imageUrl ?? "")!, id: memberInfo.userId!, teamLevel: memberInfo.level?.level ?? 0)
+                    self.showTreeMapWithData(members: memberInfo.members!)
+                }
+                else {
+                    self.performSegue(withIdentifier: "PushDetailMember", sender: memberInfo)
+                }
+            }
+            popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
+            popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+            let popover = popoverContent.popoverPresentationController
+            popoverContent.preferredContentSize = CGSize(width: 95 * (sender.tag - 1), height: 95)
+            popover?.delegate = self
+            popover?.sourceView = sender as? UIView
+            popover?.sourceRect = sender.bounds
+            self.present(popoverContent, animated: true, completion: nil)
         }
         else {
-            self.performSegue(withIdentifier: "PushDetailMember", sender: nil)
-//            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ListMemberTreeVCId") as! ListMemberTreeVC
-//            popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
-//            popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
-//            let popover = popoverContent.popoverPresentationController
-//            popoverContent.preferredContentSize = CGSize(width: self.view.frame.size.width, height: 95)
-//            popover?.delegate = self
-//            popover?.sourceView = sender as? UIView
-//            popover?.sourceRect = sender.bounds
-//            self.present(popoverContent, animated: true, completion: nil)
+            let selectedInfo: Member = self.currentList[sender.tag]
+            if selectedInfo.members!.count > 0 {
+                self.currentLeader = selectedInfo
+                self.setLeaderTree(avata: (selectedInfo.imageUrl ?? "")!, id: selectedInfo.userId!, teamLevel: selectedInfo.level?.level ?? 0)
+                self.showTreeMapWithData(members: selectedInfo.members!)
+            }
+            else {
+                self.performSegue(withIdentifier: "PushDetailMember", sender: selectedInfo)
+            }
         }
     }
     
@@ -283,9 +345,17 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.performSegue(withIdentifier: "PushDetailMember", sender: nil)
     }
     
+    @IBAction func currentLeadAction() {
+        if self.currentLeader != nil {
+            self.performSegue(withIdentifier: "PushDetailMember", sender: self.currentLeader)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PushDetailMember" {
-            let _:TTThanhVienVC = segue.destination as! TTThanhVienVC
+            let userInfo: Member = sender as! Member
+            let detail: TTThanhVienVC = segue.destination as! TTThanhVienVC
+            detail.detailInfo = userInfo
         }
     }
     

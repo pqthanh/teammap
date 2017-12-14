@@ -20,6 +20,8 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         SVProgressHUD.setDefaultMaskType(.clear)
+        self.tblAlert.estimatedRowHeight = 44
+        self.tblAlert.rowHeight = UITableViewAutomaticDimension
         self.tblAlert.tableFooterView = UIView()
         
         self.loadAlert()
@@ -41,6 +43,15 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             SVProgressHUD.dismiss()
         }
+    }
+    
+    func formatDate(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "HH:mm:ss dd/MM/yyyy"
+        let output = dateFormatter.string(from: date!)
+        return output
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,9 +107,10 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell!.textLabel?.text = dataInfo.title
         cell?.textLabel?.font = UIFont(name: "lato-bold", size: 16)
         
-        cell?.detailTextLabel?.text = dataInfo.message
+        cell?.detailTextLabel?.text = "\(dataInfo.message ?? "") \n\(self.formatDate(dateString: dataInfo.time ?? ""))"
         cell?.detailTextLabel?.font = UIFont(name: "lato-regular", size: 16)
         cell?.detailTextLabel?.textColor = UIColor.lightGray
+        cell?.detailTextLabel?.numberOfLines = 0
         
         cell?.imageView?.image = UIImage(named: "Icon-mail")
         

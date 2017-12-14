@@ -21,7 +21,7 @@ class DateTimePickerVC: UIViewController {
 
     @IBAction func datePickerAction(sender: AnyObject) {
         if let selectedBlock = self.selectedBlock {
-            selectedBlock(datePicker.date);
+            selectedBlock(datePicker.date)
         }
     }
     
