@@ -31,6 +31,8 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.tblAlert.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: true)
             self.loadAlert()
         }
+        
+        self.navigationController?.tabBarItem.badgeValue = nil
     }
     
     func loadAlert() {
@@ -49,7 +51,7 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = dateFormatter.date(from: dateString)
-        dateFormatter.dateFormat = "HH:mm:ss dd/MM/yyyy"
+        dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
         let output = dateFormatter.string(from: date!)
         return output
     }
@@ -82,13 +84,19 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 SVProgressHUD.dismiss()
             })
         }
-        delete.backgroundColor = UIColor(patternImage: UIImage(named: "icon-no")!)
+        
+        let currentCell = tableView.cellForRow(at: editActionsForRowAt)
+        UIGraphicsBeginImageContext(CGSize(width: (currentCell?.frame.size.height)! - 10, height: (currentCell?.frame.size.height)!))
+        UIImage(named: "icon-no")?.draw(in: CGRect(x: 0, y: 0, width: (currentCell?.frame.size.height)! - 10, height: (currentCell?.frame.size.height)!))
+        let imageDelete = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        delete.backgroundColor = UIColor(patternImage: imageDelete!)
         
         if dataInfo.type == 1 {
             return [delete, accept]
         }
         else {
-            return [delete]
+            return []
         }
     }
     
@@ -98,23 +106,13 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        if !(cell != nil) {
-            cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
-        }
+        let cell:AlertTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AlertTableViewCellId") as! AlertTableViewCell!
         
         let dataInfo: Notification = self.items[indexPath.row]
-        cell!.textLabel?.text = dataInfo.title
-        cell?.textLabel?.font = UIFont(name: "lato-bold", size: 16)
-        
-        cell?.detailTextLabel?.text = "\(dataInfo.message ?? "") \n\(self.formatDate(dateString: dataInfo.time ?? ""))"
-        cell?.detailTextLabel?.font = UIFont(name: "lato-regular", size: 16)
-        cell?.detailTextLabel?.textColor = UIColor.lightGray
-        cell?.detailTextLabel?.numberOfLines = 0
-        
-        cell?.imageView?.image = UIImage(named: "Icon-mail")
-        
-        return cell!
+        cell.title.text = dataInfo.title
+        cell.time.text = self.formatDate(dateString: dataInfo.time ?? "")
+        cell.message.text = dataInfo.message ?? ""
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

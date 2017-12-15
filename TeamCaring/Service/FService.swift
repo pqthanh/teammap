@@ -137,6 +137,15 @@ class FService: NSObject {
         })
     }
     
+    func updateLevelMem(id : Int, level: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
+        
+        let params = ["id" : id, "level" : level] as [String : Any]
+        
+        requestHttpCode(url: Router.updateLevelMem, method: .put, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
+    
     func createTeam (description : String, extraGroupDescription: String, extraGroupName: String, extraGroupTotalMember: Int, iconId: Int, name: String, totalMember: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
         
         var params = [String: Any]()

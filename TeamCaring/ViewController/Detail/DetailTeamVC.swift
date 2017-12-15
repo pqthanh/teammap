@@ -40,6 +40,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBOutlet weak var topTeamNd: NSLayoutConstraint!
     
     var teamId = 0
+    var teamInfo: Team?
     var memberList = [Member]()
     var currentList = [Member]()
     var currentListNode4_5  = [Member]()
@@ -81,11 +82,11 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
             if team != nil && members != nil {
                 self.memberList = members!
                 self.currentList = members!
-                let teamInfo: Team = team!
-                self.setInfoTeam(teamInfo: teamInfo)
-                self.iconTeam.setBackgroundImage(UIImage(named: "\(teamInfo.iconId ?? 1)"), for: .normal)
+                self.teamInfo = team!
+                self.setInfoTeam(teamInfo: self.teamInfo!)
+                self.iconTeam.setBackgroundImage(UIImage(named: "\(self.teamInfo?.iconId ?? 1)"), for: .normal)
                 self.currentLeader = nil
-                self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId ?? "0")!, teamLevel: teamInfo.memberLevel ?? 0)
+                self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId == "" ? "0" : (Caring.userInfo?.currentUserId)!)!, teamLevel: self.teamInfo?.memberLevel ?? 0)
                 self.showTreeMapWithData(members: members!)
             }
             SVProgressHUD.dismiss()
@@ -228,6 +229,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel1.setTitle("", for: .normal)
         self.imgLevel1.tag = 0
+        self.lbLevel1.text = "\(data.level?.level ?? 0)"
     }
     
     func setData2Node(data1: Member, data2: Member) {
@@ -237,6 +239,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 0
+        self.lbLevel2.text = "\(data1.level?.level ?? 0)"
         
         self.imgLevel3.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel3.setBackgroundImage(nil, for: .normal)
@@ -244,6 +247,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel3.setTitle("", for: .normal)
         self.imgLevel3.tag = 1
+        self.lbLevel3.text = "\(data2.level?.level ?? 0)"
     }
     
     func setData3Node(data1: Member, data2: Member, data3: Member) {
@@ -253,6 +257,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel1.setTitle("", for: .normal)
         self.imgLevel1.tag = 0
+        self.lbLevel1.text = "\(data1.level?.level ?? 0)"
         
         self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel2.setBackgroundImage(nil, for: .normal)
@@ -260,6 +265,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 1
+        self.lbLevel2.text = "\(data2.level?.level ?? 0)"
         
         self.imgLevel3.setBackgroundImage(UIImage.image(fromURL: data3.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel3.setBackgroundImage(nil, for: .normal)
@@ -267,6 +273,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel3.setTitle("", for: .normal)
         self.imgLevel3.tag = 2
+        self.lbLevel3.text = "\(data3.level?.level ?? 0)"
     }
     
     func setData4_5Node(data1: Member, data2: Member, data3: [Member]) {
@@ -276,6 +283,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel1.setTitle("", for: .normal)
         self.imgLevel1.tag = 0
+        self.lbLevel1.text = "\(data1.level?.level ?? 0)"
         
         self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel2.setBackgroundImage(nil, for: .normal)
@@ -283,6 +291,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 1
+        self.lbLevel2.text = "\(data2.level?.level ?? 0)"
         
         self.imgLevel3.setBackgroundImage(nil, for: .normal)
         self.imgLevel3.setTitle("\(data3.count)", for: .normal)
@@ -308,6 +317,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }, for: .normal)
         self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 0
+        self.lbLevel2.text = "\(data1.level?.level ?? 0)"
         
         self.imgLevel3.setBackgroundImage(nil, for: .normal)
         self.imgLevel3.setTitle("\(data3.count)", for: .normal)
@@ -357,7 +367,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.imgLevel1.setTitle("\(data.count)", for: .normal)
         self.imgStart1.isHidden = true
         self.lbLevel1.isHidden = true
-        self.imgLevel1.tag = data.count + 3
+        self.imgLevel1.tag = data.count + 4
         
         self.currentListNodeMax.removeAll()
         self.currentListNodeMax = data
@@ -404,6 +414,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBAction func infoAction(_ sender: AnyObject) {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "InfoViewControllerId") as! InfoViewController
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
+        popoverContent.teamInfo = self.teamInfo
         let popover = popoverContent.popoverPresentationController
         popoverContent.preferredContentSize = CGSize(width: 240, height: 200)
         popover?.delegate = self
@@ -417,7 +428,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
             for element in self.memberList {
                 if element == self.currentLeader {
                     self.currentLeader = nil
-                    self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId ?? "0")!, teamLevel: element.level?.level ?? 0)
+                    self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId == "" ? "0" : (Caring.userInfo?.currentUserId)!)!, teamLevel: element.level?.level ?? 0)
                     self.showTreeMapWithData(members: self.memberList)
                     break
                 }
@@ -449,13 +460,13 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBAction func detailMemberAction(_ sender: AnyObject) {
         if sender.tag > 2 {
             let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ListMemberTreeVCId") as! ListMemberTreeVC
-            if sender.tag < 4 {
+            if sender.tag < 5 {
                 popoverContent.listMems = self.currentListNode4_5
             }
-            else if sender.tag < 8 {
+            else if sender.tag < 9 {
                 popoverContent.listMems = self.currentListNode6_7
             }
-            else if sender.tag < 13 {
+            else if sender.tag < 14 {
                 popoverContent.listMems = self.currentListNode8_9
             }
             else {
@@ -508,6 +519,12 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         if segue.identifier == "PushDetailMember" {
             let userInfo: Member = sender as! Member
             let detail: TTThanhVienVC = segue.destination as! TTThanhVienVC
+            if self.memberList.contains(userInfo) {
+                detail.isEditLevel = true
+            }
+            else {
+                detail.isEditLevel = false
+            }
             detail.detailInfo = userInfo
         }
     }

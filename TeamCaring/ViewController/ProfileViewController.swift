@@ -27,6 +27,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tfSoluong: UITextField!
     
     var avataUrl = ""
+    var currentId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         
         if let userInfo = Caring.userInfo {
+            self.currentId = userInfo.currentUserId!
             self.avataUrl = (userInfo.avata)!
             self.imgAvata.image = UIImage.image(fromURL: (userInfo.avata)!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
                 self.imgAvata.image = nil
@@ -87,7 +89,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
         SVProgressHUD.show()
         FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0, email: self.tfEmail.text!) { (success) in
             if success == 200 {
-                let userInfo = User(userId: "", email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
+                let userInfo = User(userId: self.currentId, email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
                 Caring.userInfo = userInfo
  
                 let alert = UIAlertController(title: "Cập nhật thông tin thành công!", message: nil, preferredStyle: UIAlertControllerStyle.alert)

@@ -21,4 +21,5 @@ target 'TeamCaring' do
     pod 'Firebase/Messaging'
     pod 'UIScrollView-InfiniteScroll'
     pod 'ESPullToRefresh'
+    pod 'TWMessageBarManager'
 end

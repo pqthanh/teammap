@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
 import UserNotifications
+import TWMessageBarManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -50,21 +51,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             application.registerUserNotificationSettings(settings)
         }
         application.registerForRemoteNotifications()
-        
         return true
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        Caring.deviceToken = fcmToken
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let tokenParts = deviceToken.map { data -> String in
-            return String(format: "%02.2hhx", data)
-        }
-        let token = tokenParts.joined()
-        Caring.deviceToken = token
-        Messaging.messaging().apnsToken = deviceToken
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
@@ -75,18 +70,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message UIBackgroundFetchResult ID: \(messageID)")
+        guard
+            let aps = userInfo[AnyHashable(gcmMessageTitleKey)] as? NSDictionary,
+            let title = aps["alert"] as? String,
+            let message = userInfo[AnyHashable(gcmMessageDetailKey)] as? String
+        else {
+            return
         }
-        //let msgDetail = userInfo[gcmMessageDetailKey] as! String
-        let msgTitle = userInfo[gcmMessageTitleKey]
-        print("--------------")
-        //print(msgDetail)
-        print(msgTitle as Any)
-        print("--------------")
+        
+        if let tabBarVC: MainTabViewController = self.window?.rootViewController as? MainTabViewController {
+            let alertItem: UITabBarItem = tabBarVC.tabBar.items![2]
+            alertItem.badgeValue = "1"
+        }
+        
+        TWMessageBarManager.sharedInstance().showMessage(withTitle: title, description: message, type: TWMessageBarMessageType.info)
         completionHandler(UIBackgroundFetchResult.newData)
     }
-    
+
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
     }

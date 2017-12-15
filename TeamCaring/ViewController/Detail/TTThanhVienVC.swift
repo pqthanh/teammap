@@ -18,8 +18,10 @@ class TTThanhVienVC: UIViewController {
     @IBOutlet weak var tfHoTen: UITextField!
     @IBOutlet weak var tfNickname: UITextField!
     @IBOutlet weak var tfEmail: UITextField!
+    @IBOutlet weak var heightButton: NSLayoutConstraint!
     
     var detailInfo: Member?
+    var isEditLevel: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,15 @@ class TTThanhVienVC: UIViewController {
         self.tfHoTen.text = detailInfo?.fullName
         self.tfNickname.text = detailInfo?.nickname
         self.tfEmail.text = detailInfo?.email
+        
+        if self.isEditLevel == true {
+            self.tfCapDo.isEnabled = true
+            heightButton.constant = 70
+        }
+        else {
+            self.tfCapDo.isEnabled = false
+            heightButton.constant = 0
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -62,6 +73,18 @@ class TTThanhVienVC: UIViewController {
     
     @IBAction func cuochenAction() {
         self.performSegue(withIdentifier: "PushNhungCuocHen", sender: nil)
+    }
+    
+    @IBAction func updateAction() {
+        SVProgressHUD.show()
+        FService.sharedInstance.updateLevelMem(id: (detailInfo?.level?.id)!, level: Int(tfCapDo.text!)!) { (code) in
+            if code == 200 {
+                let alert = UIAlertController(title: "Cập nhật thông tin thành công!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            SVProgressHUD.dismiss()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -32,6 +32,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
     var tenNhom = ""
     var mota = ""
     var soluong = 0
+    var currentId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +75,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
             FService.sharedInstance.getCurrentProfile(completion: { (profile) in
                 if profile != nil {
                     let info: Leader = profile!
+                    self.currentId = "\(info.userId ?? 0)"
                     self.avataUrl = info.imageUrl!
                     self.imgAvata.image = UIImage.image(fromURL: info.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
                         self.imgAvata.image = nil
@@ -88,7 +90,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
                         self.lbTxtholder.isHidden = true
                     }
                     self.tfTenNhom.text = info.extraGroupName
-                    self.tfSoluong.text = "\(info.numberAppointments ?? 1)"
+                    self.tfSoluong.text = "\(info.numberAppointments ?? 0)"
                 }
             })
         }
@@ -116,7 +118,7 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
         SVProgressHUD.show()
         FService.sharedInstance.updateProfile(fullName: tfFullname.text!, nickName: tfNickname.text!, nameGroup: tfTenNhom.text!, description: txtMota.text!, totalMember: Int(tfSoluong.text!) ?? 0, email: tfEmail.text!) { (success) in
             if success == 200 {
-                let userInfo = User(userId: "", email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
+                let userInfo = User(userId: self.currentId, email: self.tfEmail.text!, token: Caring.deviceToken!, nickname: self.tfNickname.text!, fullname: self.tfFullname.text!, tenNhom: self.tfTenNhom.text!, mota: self.txtMota.text!, soluong: Int(self.tfSoluong.text!), avata: self.avataUrl)
                 Caring.userInfo = userInfo
                 Caring.isActived = true
                 self.performSegue(withIdentifier: "PushKhoiDau", sender: nil)

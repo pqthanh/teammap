@@ -1,31 +1,23 @@
 //
-//  InfoViewController.swift
+//  MainTabViewController.swift
 //  TeamCaring
 //
-//  Created by fwThanh on 12/2/17.
+//  Created by Phan Quoc Thanh on 12/15/17.
 //  Copyright © 2017 PqThanh. All rights reserved.
 //
 
 import UIKit
 
-class InfoViewController: UIViewController {
+class MainTabViewController: UITabBarController {
 
-    @IBOutlet weak var lbTitle: UILabel!
-    @IBOutlet weak var lbContent: UITextView!
-    var teamInfo: Team?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        lbTitle.text = self.teamInfo?.name
-        lbContent.text = self.teamInfo?.tdescription
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
