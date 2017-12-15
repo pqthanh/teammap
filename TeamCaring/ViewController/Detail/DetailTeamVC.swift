@@ -42,7 +42,10 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     var teamId = 0
     var memberList = [Member]()
     var currentList = [Member]()
-    var currentListNode4_5 = [Member]()
+    var currentListNode4_5  = [Member]()
+    var currentListNode6_7  = [Member]()
+    var currentListNode8_9  = [Member]()
+    var currentListNodeMax   = [Member]()
     var currentLeader: Member?
     
     override func viewDidLoad() {
@@ -114,14 +117,14 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 self.hideItemWhen1Node()
                 self.showItemWhen1Node()
                 let node0 = members[0]
-                self.setDate1Node(data: node0)
+                self.setData1Node(data: node0)
             }
             else if (members.count) == 2 {
                 self.hideItemWhen2Node()
                 self.showItemWhen2Node()
                 let node0 = members[0]
                 let node1 = members[1]
-                self.setDate2Node(data1: node0, data2: node1)
+                self.setData2Node(data1: node0, data2: node1)
             }
             else if (members.count) == 3 {
                 self.showItemWhen1Node()
@@ -129,7 +132,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 let node0 = members[0]
                 let node1 = members[1]
                 let node2 = members[2]
-                self.setDate3Node(data1: node0, data2: node1, data3: node2)
+                self.setData3Node(data1: node0, data2: node1, data3: node2)
             }
             else if (members.count) == 4 {
                 self.showItemWhen1Node()
@@ -138,7 +141,70 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 let node1 = members[1]
                 let node2 = members[2]
                 let node3 = members[3]
-                self.setDate4_5Node(data1: node0, data2: node1, data3: [node2, node3])
+                self.setData4_5Node(data1: node0, data2: node1, data3: [node2, node3])
+            }
+            else if (members.count) == 5 {
+                self.showItemWhen1Node()
+                self.showItemWhen2Node()
+                let node0 = members[0]
+                let node1 = members[1]
+                let node2 = members[2]
+                let node3 = members[3]
+                let node4 = members[4]
+                self.setData4_5Node(data1: node0, data2: node1, data3: [node2, node3, node4])
+            }
+            else if (members.count) == 6 {
+                self.showItemWhen1Node()
+                self.showItemWhen2Node()
+                let node0 = members[0]
+                let node1 = members[1]
+                let node2 = members[2]
+                let node3 = members[3]
+                let node4 = members[4]
+                let node5 = members[5]
+                self.setData6_7Node(data1: node0, data2: [node1, node2], data3: [node3, node4, node5])
+            }
+            else if (members.count) == 7 {
+                self.showItemWhen1Node()
+                self.showItemWhen2Node()
+                let node0 = members[0]
+                let node1 = members[1]
+                let node2 = members[2]
+                let node3 = members[3]
+                let node4 = members[4]
+                let node5 = members[5]
+                let node6 = members[6]
+                self.setData6_7Node(data1: node0, data2: [node1, node2, node3], data3: [node4, node5, node6])
+            }
+            else if (members.count) == 8 {
+                self.showItemWhen1Node()
+                self.showItemWhen2Node()
+                let node0 = members[0]
+                let node1 = members[1]
+                let node2 = members[2]
+                let node3 = members[3]
+                let node4 = members[4]
+                let node5 = members[5]
+                let node6 = members[6]
+                let node7 = members[7]
+                self.setData8_9Node(data1: [node0, node1], data2: [node2, node3, node4], data3: [node5, node6, node7])
+            }
+            else if (members.count) == 9 {
+                self.showItemWhen1Node()
+                self.showItemWhen2Node()
+                let node0 = members[0]
+                let node1 = members[1]
+                let node2 = members[2]
+                let node3 = members[3]
+                let node4 = members[4]
+                let node5 = members[5]
+                let node6 = members[6]
+                let node7 = members[7]
+                let node8 = members[8]
+                self.setData8_9Node(data1: [node0, node1, node2], data2: [node3, node4, node5], data3: [node6, node7, node8])
+            }
+            else if (members.count) >= 10 {
+                self.setDataMax(data: members)
             }
         }
         else {
@@ -155,59 +221,67 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.imgLevel3.setTitle("2", for: .normal)
     }
     
-    func setDate1Node(data: Member) {
+    func setData1Node(data: Member) {
         self.imgLevel1.setBackgroundImage(UIImage.image(fromURL: data.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel1.setBackgroundImage(nil, for: .normal)
             self.imgLevel1.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel1.setTitle("", for: .normal)
         self.imgLevel1.tag = 0
     }
     
-    func setDate2Node(data1: Member, data2: Member) {
+    func setData2Node(data1: Member, data2: Member) {
         self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data1.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel2.setBackgroundImage(nil, for: .normal)
             self.imgLevel2.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 0
         
         self.imgLevel3.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel3.setBackgroundImage(nil, for: .normal)
             self.imgLevel3.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel3.setTitle("", for: .normal)
         self.imgLevel3.tag = 1
     }
     
-    func setDate3Node(data1: Member, data2: Member, data3: Member) {
+    func setData3Node(data1: Member, data2: Member, data3: Member) {
         self.imgLevel1.setBackgroundImage(UIImage.image(fromURL: data1.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel1.setBackgroundImage(nil, for: .normal)
             self.imgLevel1.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel1.setTitle("", for: .normal)
         self.imgLevel1.tag = 0
         
         self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel2.setBackgroundImage(nil, for: .normal)
             self.imgLevel2.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 1
         
         self.imgLevel3.setBackgroundImage(UIImage.image(fromURL: data3.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel3.setBackgroundImage(nil, for: .normal)
             self.imgLevel3.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel3.setTitle("", for: .normal)
         self.imgLevel3.tag = 2
     }
     
-    func setDate4_5Node(data1: Member, data2: Member, data3: [Member]) {
+    func setData4_5Node(data1: Member, data2: Member, data3: [Member]) {
         self.imgLevel1.setBackgroundImage(UIImage.image(fromURL: data1.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel1.setBackgroundImage(nil, for: .normal)
             self.imgLevel1.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel1.setTitle("", for: .normal)
         self.imgLevel1.tag = 0
         
         self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data2.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
             self.imgLevel2.setBackgroundImage(nil, for: .normal)
             self.imgLevel2.setBackgroundImage(image, for: .normal)
         }, for: .normal)
+        self.imgLevel2.setTitle("", for: .normal)
         self.imgLevel2.tag = 1
         
         self.imgLevel3.setBackgroundImage(nil, for: .normal)
@@ -219,6 +293,74 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         self.imgLevel3.tag = data3.count + 1
         self.currentListNode4_5.removeAll()
         self.currentListNode4_5 = data3
+    }
+    
+    func setData6_7Node(data1: Member, data2: [Member], data3: [Member]) {
+        self.imgLevel1.setBackgroundImage(nil, for: .normal)
+        self.imgLevel1.setTitle("\(data2.count)", for: .normal)
+        self.imgStart1.isHidden = true
+        self.lbLevel1.isHidden = true
+        self.imgLevel1.tag = data2.count + 1
+        
+        self.imgLevel2.setBackgroundImage(UIImage.image(fromURL: data1.imageUrl!, placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+            self.imgLevel2.setBackgroundImage(nil, for: .normal)
+            self.imgLevel2.setBackgroundImage(image, for: .normal)
+        }, for: .normal)
+        self.imgLevel2.setTitle("", for: .normal)
+        self.imgLevel2.tag = 0
+        
+        self.imgLevel3.setBackgroundImage(nil, for: .normal)
+        self.imgLevel3.setTitle("\(data3.count)", for: .normal)
+        self.imgStart3.isHidden = true
+        self.lbLevel3.isHidden = true
+        self.imgLevel3.tag = data2.count + 1 + data3.count + 1
+        
+        self.currentListNode4_5.removeAll()
+        self.currentListNode4_5 = data2
+        
+        self.currentListNode6_7.removeAll()
+        self.currentListNode6_7 = data3
+    }
+    
+    func setData8_9Node(data1: [Member], data2: [Member], data3: [Member]) {
+        self.imgLevel2.setBackgroundImage(nil, for: .normal)
+        self.imgLevel2.setTitle("\(data1.count)", for: .normal)
+        self.imgStart2.isHidden = true
+        self.lbLevel2.isHidden = true
+        self.imgLevel2.tag = data1.count + 1
+        
+        self.imgLevel1.setBackgroundImage(nil, for: .normal)
+        self.imgLevel1.setTitle("\(data2.count)", for: .normal)
+        self.imgStart1.isHidden = true
+        self.lbLevel1.isHidden = true
+        self.imgLevel1.tag = data1.count + 1 + data2.count + 1
+        
+        self.imgLevel3.setBackgroundImage(nil, for: .normal)
+        self.imgLevel3.setTitle("\(data3.count)", for: .normal)
+        self.imgStart3.isHidden = true
+        self.lbLevel3.isHidden = true
+        self.imgLevel3.tag = data1.count + 1 + data2.count + 1 + data3.count + 1
+        
+        self.currentListNode4_5.removeAll()
+        self.currentListNode4_5 = data1
+        
+        self.currentListNode6_7.removeAll()
+        self.currentListNode6_7 = data2
+        
+        self.currentListNode8_9.removeAll()
+        self.currentListNode8_9 = data3
+    }
+    
+    func setDataMax(data: [Member]) {
+        self.hideItemWhen1Node()
+        self.imgLevel1.setBackgroundImage(nil, for: .normal)
+        self.imgLevel1.setTitle("\(data.count)", for: .normal)
+        self.imgStart1.isHidden = true
+        self.lbLevel1.isHidden = true
+        self.imgLevel1.tag = data.count + 3
+        
+        self.currentListNodeMax.removeAll()
+        self.currentListNodeMax = data
     }
     
     func hideItemWhen1Node() {
@@ -307,7 +449,18 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     @IBAction func detailMemberAction(_ sender: AnyObject) {
         if sender.tag > 2 {
             let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "ListMemberTreeVCId") as! ListMemberTreeVC
-            popoverContent.listMems = self.currentListNode4_5
+            if sender.tag < 4 {
+                popoverContent.listMems = self.currentListNode4_5
+            }
+            else if sender.tag < 8 {
+                popoverContent.listMems = self.currentListNode6_7
+            }
+            else if sender.tag < 13 {
+                popoverContent.listMems = self.currentListNode8_9
+            }
+            else {
+                popoverContent.listMems = self.currentListNodeMax
+            }
             popoverContent.selectedBlock =  { (memberInfo) -> Void in
                 popoverContent.dismiss(animated: true, completion: nil)
                 if memberInfo.members!.count > 0 {
@@ -322,7 +475,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
             popoverContent.modalPresentationStyle = UIModalPresentationStyle.popover
             popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
             let popover = popoverContent.popoverPresentationController
-            popoverContent.preferredContentSize = CGSize(width: 95 * (sender.tag - 1), height: 95)
+            popoverContent.preferredContentSize = CGSize(width: (popoverContent.listMems.count >= 10 ? self.view.frame.size.width - 20 : CGFloat(95 * popoverContent.listMems.count)), height: 95)
             popover?.delegate = self
             popover?.sourceView = sender as? UIView
             popover?.sourceRect = sender.bounds
