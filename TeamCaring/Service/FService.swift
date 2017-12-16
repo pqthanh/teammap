@@ -189,7 +189,8 @@ class FService: NSObject {
     func searchTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.searchTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
-        let url = URL(string: path)
+        let urlStr : NSString = path.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
+        let url = URL(string: urlStr as String)
         
         requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [[String: Any]] {
@@ -205,7 +206,8 @@ class FService: NSObject {
     func searchMyTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.searchMyTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
-        let url = URL(string: path)
+        let urlStr : NSString = path.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
+        let url = URL(string: urlStr as String)
         
         requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [String: Any] {
@@ -221,7 +223,8 @@ class FService: NSObject {
     func searchNewTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.searchNewTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
-        let url = URL(string: path)
+        let urlStr : NSString = path.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
+        let url = URL(string: urlStr as String)
         
         requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [String: Any] {
@@ -237,7 +240,8 @@ class FService: NSObject {
     func searchLeader (teamId: Int, query : String, page: Int, completion: @escaping (_ result: [Leader]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.searchLeader.path.appending("\(teamId)?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
-        let url = URL(string: path)
+        let urlStr : NSString = path.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
+        let url = URL(string: urlStr as String)
         
         requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
             if let result = result as? [String: Any] {

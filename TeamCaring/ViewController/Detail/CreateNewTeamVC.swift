@@ -112,6 +112,25 @@ class CreateNewTeamVC: UIViewController, UITextViewDelegate, UITextFieldDelegate
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool  {
+        if textField == self.tflevel {
+            let currentCharacterCount = textField.text?.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 10
+        }
+        else {
+            let currentCharacterCount = textField.text?.count ?? 0
+            if (range.length + range.location > currentCharacterCount){
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 30
+        }
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         if textView == self.txtMota {

@@ -36,29 +36,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.es.addPullToRefresh {
             [unowned self] in
             self.tableView.es.stopPullToRefresh(ignoreDate: true, ignoreFooter: true)
+            self.currentIndex = 0
             self.getListMyTeams()
         }
         
         self.tableView.addInfiniteScroll { (tableView) -> Void in
             tableView.finishInfiniteScroll()
-            
-            if self.searchBar.text != "" {
-                if self.loadMore {
-                    SVProgressHUD.show()
-                    FService.sharedInstance.searchMyTeam(query: self.searchBar.text!, page: self.currentIndex, completion: { (listResults) in
-                        self.loadMore(listItems: listResults)
-                        SVProgressHUD.dismiss()
-                    })
-                }
-            }
-            else {
-                if self.loadMore {
-                    SVProgressHUD.show()
-                    FService.sharedInstance.getMyTeams(page: self.currentIndex) { (listTeams, totalPage) in
-                        self.loadMore(listItems: listTeams)
-                        SVProgressHUD.dismiss()
-                    }
-                }
+            let query = self.searchBar.text != "" ? self.searchBar.text : "*"
+            if self.loadMore {
+                SVProgressHUD.show()
+                FService.sharedInstance.searchMyTeam(query: query!, page: self.currentIndex, completion: { (listResults) in
+                    self.loadMore(listItems: listResults)
+                    SVProgressHUD.dismiss()
+                })
             }
         }
         tableView.beginInfiniteScroll(true)
@@ -91,11 +81,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         SVProgressHUD.show()
         FService.sharedInstance.searchMyTeam(query: "*", page: 0, completion: { (listResults) in
             if listResults != nil {
+                if listResults?.count == 10 {
+                    self.loadMore = true
+                    self.currentIndex += 1
+                }
+                else {
+                    self.loadMore = false
+                }
                 self.listMyTeams.removeAll()
                 self.listMyTeams = listResults!
                 self.tableView.reloadData()
             }
-            self.currentIndex = 0
             SVProgressHUD.dismiss()
         })
 //        FService.sharedInstance.getMyTeams(page: 0) { (listTeams, totalPage) in
@@ -152,6 +148,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             })
         }
         else {
+            self.currentIndex = 0
             self.lbSearchKq.text = "  Danh sách nhóm chung đang tham gia"
             self.getListMyTeams()
         }

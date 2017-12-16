@@ -70,7 +70,7 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.lbSearchKq.text = "  Kết quả tìm kiếm"
         }
         else {
-            self.lbSearchKq.text = "  Danh sách nhóm chung đang tham gia"
+            self.lbSearchKq.text = ""
         }
         //searchAutocompleteEntriesWithSubstring(substring: searchText)
     }
@@ -98,7 +98,7 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             })
         }
         else {
-            self.lbSearchKq.text = "  Danh sách nhóm chung đang tham gia"
+            self.lbSearchKq.text = ""
         }
     }
     
