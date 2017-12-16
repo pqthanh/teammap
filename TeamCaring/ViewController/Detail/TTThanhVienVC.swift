@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-class TTThanhVienVC: UIViewController {
+class TTThanhVienVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgAvata: UIImageView!
@@ -19,9 +19,12 @@ class TTThanhVienVC: UIViewController {
     @IBOutlet weak var tfNickname: UITextField!
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var heightButton: NSLayoutConstraint!
+    @IBOutlet weak var btnUpdate: UIButton!
     
     var detailInfo: Member?
     var isEditLevel: Bool?
+    
+    var selectedBlock: ((Int) -> Void)? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +51,30 @@ class TTThanhVienVC: UIViewController {
             self.tfCapDo.isEnabled = false
             heightButton.constant = 0
         }
+        btnUpdate.isEnabled = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text as NSString? {
+            let txtAfterUpdate = text.replacingCharacters(in: range, with: string)
+            let result = txtAfterUpdate == "" ? "0" : txtAfterUpdate
+            
+            if Int(result)! <= (detailInfo?.level?.level ?? 0)! {
+                btnUpdate.isEnabled = false
+            }
+            else if Int(result)! >= (Caring.userInfo?.soluong ?? SData.shared.levelMember)! {
+                btnUpdate.isEnabled = false
+            }
+            else {
+                btnUpdate.isEnabled = true
+            }
+        }
+        return true
+    }
+    
     func keyboardWillShow(notification:NSNotification){
         let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
         let keyboardHeight = keyboardSize.height - 48
@@ -76,9 +98,17 @@ class TTThanhVienVC: UIViewController {
     }
     
     @IBAction func updateAction() {
+        
+        if tfCapDo.text != "" && Int(tfCapDo.text!)! < (detailInfo?.level?.level)! {
+            
+        }
+        
         SVProgressHUD.show()
         FService.sharedInstance.updateLevelMem(id: (detailInfo?.level?.id)!, level: Int(tfCapDo.text!)!) { (code) in
             if code == 200 {
+                if let selectedBlock = self.selectedBlock {
+                    selectedBlock(Int(self.tfCapDo.text!)!)
+                }
                 let alert = UIAlertController(title: "Cập nhật thông tin thành công!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
                 self.present(alert, animated: true, completion: nil)

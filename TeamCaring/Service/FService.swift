@@ -153,7 +153,7 @@ class FService: NSObject {
             params = ["description": description,
                       "iconId": iconId,
                       "name": name,
-                      "level": totalMember] as [String : Any]
+                      "teamLevel": totalMember] as [String : Any]
         }
         else {
             params = ["description": description,
@@ -162,7 +162,7 @@ class FService: NSObject {
                       "extraGroupTotalMember": extraGroupTotalMember,
                       "iconId": iconId,
                       "name": name,
-                      "level": totalMember] as [String : Any]
+                      "teamLevel": totalMember] as [String : Any]
         }
         
         requestHttpCode(url: Router.creatTeam, method: .post, params: params, completion: { (result, error) in

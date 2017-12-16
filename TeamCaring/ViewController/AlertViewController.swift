@@ -14,7 +14,10 @@ import ESPullToRefresh
 class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tblAlert: UITableView!
+    
     var items = [Notification]()
+    var currentIndex = 0
+    var loadMore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,37 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.loadAlert()
         }
         
+        self.tblAlert.addInfiniteScroll { (tableView) -> Void in
+            tableView.finishInfiniteScroll()
+            if self.loadMore {
+                SVProgressHUD.show()
+                FService.sharedInstance.getNotification(page: self.currentIndex) { (result) in
+                    if result != nil {
+                        if result?.count == 10 {
+                            self.loadMore = true
+                            self.currentIndex += 1
+                        }
+                        else {
+                            self.loadMore = false
+                        }
+                        var indexPaths = [Any]()
+                        let currentCount: Int = self.items.count
+                        for i in 0..<(result?.count)! {
+                            indexPaths.append(IndexPath(row: currentCount + i, section: 0))
+                        }
+                        // do the insertion
+                        self.items += result!
+                        // tell the table view to update (at all of the inserted index paths)
+                        self.tblAlert.beginUpdates()
+                        self.tblAlert.insertRows(at: indexPaths as? [IndexPath] ?? [IndexPath](), with: .top)
+                        self.tblAlert.endUpdates()
+                    }
+                    SVProgressHUD.dismiss()
+                }
+            }
+        }
+        tblAlert.beginInfiniteScroll(true)
+        
         self.navigationController?.tabBarItem.badgeValue = nil
     }
     
@@ -39,6 +73,13 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         SVProgressHUD.show()
         FService.sharedInstance.getNotification(page: 0) { (result) in
             if result != nil {
+                if result?.count == 10 {
+                    self.loadMore = true
+                    self.currentIndex += 1
+                }
+                else {
+                    self.loadMore = false
+                }
                 self.items.removeAll()
                 self.items = result!
                 self.tblAlert.reloadData()

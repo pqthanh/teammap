@@ -80,6 +80,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         SVProgressHUD.show()
         FService.sharedInstance.getDetailTeam(idTeam: teamId) { (team, members) in
             if team != nil && members != nil {
+                SData.shared.levelMember = team?.memberLevel
                 self.memberList = members!
                 self.currentList = members!
                 self.teamInfo = team!
@@ -215,6 +216,13 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
         }
         self.currentList.removeAll()
         self.currentList = members
+    }
+    
+    func reloadTreeWithCurrentValue() {
+        if self.currentLeader != nil {
+            self.setLeaderTree(avata: (self.currentLeader?.imageUrl!)!, id: (self.currentLeader?.userId!)!, teamLevel: self.currentLeader?.level?.level ?? 0)
+        }
+        self.showTreeMapWithData(members: self.currentList)
     }
     
     func setGroupData3() {
@@ -428,7 +436,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
             for element in self.memberList {
                 if element == self.currentLeader {
                     self.currentLeader = nil
-                    self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId == "" ? "0" : (Caring.userInfo?.currentUserId)!)!, teamLevel: element.level?.level ?? 0)
+                    self.setLeaderTree(avata: (Caring.userInfo?.avata ?? "")!, id: Int(Caring.userInfo?.currentUserId == "" ? "0" : (Caring.userInfo?.currentUserId)!)!, teamLevel: self.teamInfo?.memberLevel ?? 0)
                     self.showTreeMapWithData(members: self.memberList)
                     break
                 }
@@ -526,6 +534,17 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
                 detail.isEditLevel = false
             }
             detail.detailInfo = userInfo
+            detail.selectedBlock =  { (level) -> Void in
+                if self.currentLeader == userInfo {
+                    self.currentLeader?.level?.level = level
+                }
+                else {
+                    if let object: Member = self.currentList.first(where: {$0 == userInfo}) {
+                        object.level?.level = level
+                    }
+                }
+                self.reloadTreeWithCurrentValue()
+            }
         }
     }
     
