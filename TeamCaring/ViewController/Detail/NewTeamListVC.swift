@@ -112,7 +112,7 @@ class NewTeamListVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let teamInfo: Team = self.listNewTeams[indexPath.row] as Team
         cell.imgAvata.image = UIImage(named: "\(teamInfo.iconId ?? 1)")
         cell.name.text = teamInfo.name
-        cell.level.text = "\(teamInfo.level ?? 1) Cấp"
+        cell.level.text = "\(teamInfo.teamLevel ?? 1) Cấp"
         return cell
     }
     

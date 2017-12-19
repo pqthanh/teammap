@@ -10,10 +10,18 @@ import UIKit
 
 class SelectTeamVC: UIViewController {
 
+    var isFirstLoad: Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if isFirstLoad == true {
+            self.title = "Khởi Đầu"
+        }
+        else {
+            self.title = "Tham Gia Nhóm"
+        }
     }
 
     @IBAction func backAction() {

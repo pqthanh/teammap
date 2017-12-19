@@ -1247,10 +1247,10 @@
                                 <rect key="frame" x="0.0" y="341" width="375" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUc-1m-eGt">
-                                        <rect key="frame" x="0.0" y="49.5" width="375" height="1"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="375" height="0.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="OAn-s0-dRs"/>
+                                            <constraint firstAttribute="height" constant="0.5" id="OAn-s0-dRs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>

@@ -158,7 +158,8 @@ class UpdatePViewController: UIViewController, UINavigationControllerDelegate, U
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PushKhoiDau" {
-            let _: SelectTeamVC = segue.destination as! SelectTeamVC
+            let selectTeam: SelectTeamVC = segue.destination as! SelectTeamVC
+            selectTeam.isFirstLoad = true
         }
     }
 
