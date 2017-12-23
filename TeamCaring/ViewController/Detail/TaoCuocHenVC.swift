@@ -8,13 +8,19 @@
 
 import UIKit
 
-class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate {
+class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var viewMota: UIView!
+    @IBOutlet weak var lbTxtholder: UILabel!
+    @IBOutlet weak var txtMota: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tfThoigianhen: UITextField!
     @IBOutlet weak var tfTypeEvent: UITextField!
     @IBOutlet weak var btnCalendar: UIButton!
+    @IBOutlet weak var tfTeam: UITextField!
+    
+    var selectedTeamIndex: IndexPath?
+    var selectedTeam: Team?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +106,14 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate {
         let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "SelectTeamMemVCId") as! SelectTeamMemVC
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.unknown
+        if self.selectedTeamIndex != nil {
+            popoverContent.indexSelected = self.selectedTeamIndex! as IndexPath
+        }
+        popoverContent.selectedBlock =  { (selectedTeam, selectedIndex) -> Void in
+            self.tfTeam.text = selectedTeam.name
+            self.selectedTeam = selectedTeam
+            self.selectedTeamIndex = selectedIndex as IndexPath
+        }
         let popover = popoverContent.popoverPresentationController
         popoverContent.preferredContentSize = CGSize(width: self.view.frame.size.width, height: 200)
         popover?.delegate = self
@@ -109,15 +123,25 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate {
     }
     
     @IBAction func selectMemberAction(_ sender: AnyObject) {
-        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "SelectTeamMemVCId") as! SelectTeamMemVC
-        popoverContent.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.unknown
-        let popover = popoverContent.popoverPresentationController
-        popoverContent.preferredContentSize = CGSize(width: self.view.frame.size.width, height: 200)
-        popover?.delegate = self
-        popover?.sourceView = sender as? UIView
-        popover?.sourceRect = sender.bounds
-        self.present(popoverContent, animated: false, completion: nil)
+        if self.selectedTeam != nil {
+            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "SelectTeamMemVCId") as! SelectTeamMemVC
+            popoverContent.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.unknown
+            let popover = popoverContent.popoverPresentationController
+            popoverContent.preferredContentSize = CGSize(width: self.view.frame.size.width, height: 200)
+            popover?.delegate = self
+            popover?.sourceView = sender as? UIView
+            popover?.sourceRect = sender.bounds
+            self.present(popoverContent, animated: false, completion: nil)
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        if textView == self.txtMota {
+            self.lbTxtholder.text = newText.count > 0 ? "" : "VD: Giới thiệu về cuộc hẹn"
+        }
+        return true
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
