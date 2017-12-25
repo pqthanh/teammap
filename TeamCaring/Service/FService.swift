@@ -320,4 +320,27 @@ class FService: NSObject {
             }
         })
     }
+    
+    func createAppointment (description: String, name: String, repeatType: String, teamId: Int, time: String, userId: Int, completion: @escaping (_ code: Int?) -> ()) -> () {
+        let params = ["description": description, "name": name, "repeatType": repeatType, "teamId": teamId, "time": time, "userId": userId] as [String : Any]
+        requestHttpCode(url: Router.createAppointment, method: .post, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
+    
+    func getAppointment (fromDate: String, toDate: String, completion: @escaping (_ result: [Event]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.getAppointments.path.appending("?fromDate=\(fromDate)&toDate=\(toDate)")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestWithHeader(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [[String: Any]] {
+                let listItems = Mapper<Event>().mapArray(JSONObject: result)
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
 }

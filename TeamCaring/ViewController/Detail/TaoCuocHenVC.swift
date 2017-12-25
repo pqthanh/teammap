@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, UITextViewDelegate {
 
@@ -14,6 +15,7 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
     @IBOutlet weak var lbTxtholder: UILabel!
     @IBOutlet weak var txtMota: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var tfNameEvent: UITextField!
     @IBOutlet weak var tfThoigianhen: UITextField!
     @IBOutlet weak var tfTypeEvent: UITextField!
     @IBOutlet weak var btnCalendar: UIButton!
@@ -28,6 +30,7 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         self.viewMota.layer.cornerRadius = 4.0
         self.viewMota.layer.borderWidth = 1.0
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
@@ -50,6 +53,46 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
     func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInset
+    }
+    
+    func formatDate(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
+        let date = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let output = dateFormatter.string(from: date!)
+        return output
+    }
+    
+    @IBAction func createAction() {
+        self.view.endEditing(true)
+        if tfNameEvent.text == "" || txtMota.text == "" || tfThoigianhen.text == "" || tfTypeEvent.text == "" || tfTeam.text == "" || tfMember.text == "" {
+            let alert = UIAlertController(title: "Vui lòng điền tất cả thông tin!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        SVProgressHUD.show()
+        var typeEvent = "no_repeat"
+        if tfTypeEvent.text == "1 Tuần" {
+            typeEvent = "one_week"
+        }
+        else if tfTypeEvent.text == "2 Tuần" {
+            typeEvent = "two_week"
+        }
+        else if tfTypeEvent.text == "1 Tháng" {
+            typeEvent = "one_month"
+        }
+        FService.sharedInstance.createAppointment(description: txtMota.text, name: tfNameEvent.text!, repeatType: typeEvent, teamId: (selectedTeam?.id)!, time: self.formatDate(dateString: tfThoigianhen.text!), userId: (selectedMember?.userId)!) { (code) in
+            if code == 201 {
+                let alert = UIAlertController(title: "Tạo cuộc hẹn thành công!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            SVProgressHUD.dismiss()
+        }
     }
     
     @IBAction func backAction() {

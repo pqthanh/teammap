@@ -60,6 +60,7 @@
 		D38CEA251FD7047200F8C367 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38CEA241FD7047200F8C367 /* Team.swift */; };
 		D390D8491FE18F81008DAC53 /* JoinedTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = D390D8481FE18F81008DAC53 /* JoinedTeam.swift */; };
 		D399C4B61FDA439C007E1E28 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399C4B51FDA439C007E1E28 /* Notification.swift */; };
+		D39AA6F91FF0EFAD0006AC5C /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39AA6F81FF0EFAD0006AC5C /* Event.swift */; };
 		D3A4CE141FE4DC2800468F39 /* SData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A4CE131FE4DC2800468F39 /* SData.swift */; };
 		D3ADF8251FD858C5000FEE64 /* Leader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADF8241FD858C5000FEE64 /* Leader.swift */; };
 		D3ADF8271FD8593C000FEE64 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADF8261FD8593C000FEE64 /* Member.swift */; };
@@ -130,6 +131,7 @@
 		D38CEA241FD7047200F8C367 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		D390D8481FE18F81008DAC53 /* JoinedTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedTeam.swift; sourceTree = "<group>"; };
 		D399C4B51FDA439C007E1E28 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D39AA6F81FF0EFAD0006AC5C /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		D3A4CE131FE4DC2800468F39 /* SData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SData.swift; sourceTree = "<group>"; };
 		D3ADF8241FD858C5000FEE64 /* Leader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leader.swift; sourceTree = "<group>"; };
 		D3ADF8261FD8593C000FEE64 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				D3ADF8261FD8593C000FEE64 /* Member.swift */,
 				D399C4B51FDA439C007E1E28 /* Notification.swift */,
 				D390D8481FE18F81008DAC53 /* JoinedTeam.swift */,
+				D39AA6F81FF0EFAD0006AC5C /* Event.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				D367DEB21FCDCAC5008A33CB /* SelectTeamVC.swift in Sources */,
 				D38CEA251FD7047200F8C367 /* Team.swift in Sources */,
 				D3ADF8251FD858C5000FEE64 /* Leader.swift in Sources */,
+				D39AA6F91FF0EFAD0006AC5C /* Event.swift in Sources */,
 				D390D8491FE18F81008DAC53 /* JoinedTeam.swift in Sources */,
 				D3865AC01FBF11E800AF18C5 /* ListViewController.swift in Sources */,
 				D32F9EBF1FD3ECAC0048D747 /* TaoCuocHenVC.swift in Sources */,

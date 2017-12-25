@@ -3265,7 +3265,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="updateAction:" destination="Yxg-rJ-4j9" eventType="touchUpInside" id="dhn-xz-n3x"/>
+                                                    <action selector="createAction" destination="9Xh-YH-Vxe" eventType="touchUpInside" id="mI1-WF-3BH"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -3422,6 +3422,7 @@
                         <outlet property="lbTxtholder" destination="XZO-Zz-hv1" id="9Zc-2h-EsD"/>
                         <outlet property="scrollView" destination="sXQ-FJ-Qkc" id="vDD-8R-Dct"/>
                         <outlet property="tfMember" destination="enA-hn-EBe" id="3jD-KU-0f8"/>
+                        <outlet property="tfNameEvent" destination="KUH-PC-Aka" id="evW-K5-xXX"/>
                         <outlet property="tfTeam" destination="4SZ-Bg-KFm" id="KYD-od-lTs"/>
                         <outlet property="tfThoigianhen" destination="nyR-jR-3b8" id="JIg-zh-0OQ"/>
                         <outlet property="tfTypeEvent" destination="CXr-JU-U8x" id="ws3-jF-q8x"/>
@@ -3441,7 +3442,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TPJ-xl-D7i">
+                            <datePicker clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TPJ-xl-D7i">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                                 <date key="date" timeIntervalSinceReferenceDate="534148920.89751202">
                                     <!--2017-12-05 06:42:00 +0000-->

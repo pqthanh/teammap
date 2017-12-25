@@ -32,6 +32,8 @@ public enum Router: URLConvertible {
     case listNotification
     case acceptJoinTeam
     case updateLevelMem
+    case createAppointment
+    case getAppointments
     
     //MARK: request method
     /*
@@ -85,6 +87,10 @@ public enum Router: URLConvertible {
             return "/join-team/response"
         case .updateLevelMem:
             return "/update-level/member"
+        case .createAppointment:
+            return "/create-appointment"
+        case .getAppointments:
+            return "/my-appointments"
         }
     }
     

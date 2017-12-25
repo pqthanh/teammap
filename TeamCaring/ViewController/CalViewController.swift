@@ -26,12 +26,59 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         
         calendar.delegate = self
         calendar.dataSource = self
-        self.adEventsToCalendar()
+        //self.adEventsToCalendar()
         
         self.calendar.tableView.tableFooterView = UIView()
         self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
+        
+        let date = Date()
+        let cal = Calendar.current
+        let year = cal.component(.year, from: date)
+        let month = cal.component(.month, from: date)
+        print(month)
+        FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
+            if listEvents != nil {
+                
+                var listCategories = [String: [Event]]()
+                listCategories = listEvents!.group { ($0.time?.components(separatedBy: " ")[0])! }
+                
+                for key in listCategories.keys {
+                    let values = listCategories[key]
+                    var events = [CalendarEvent]()
+                    for item in values! {
+                        let date = self.stringToDate(strDate: item.time ?? "")
+                        let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
+                        events.append(event)
+                    }
+                    let date = "\(key) 00:00:00"
+                    self.data[self.stringToDate(strDate: date)] = events
+                }
+            }
+        }
     }
-
+    
+    func getImage(url: String) -> UIImage? {
+        var result: UIImage?
+        let group = DispatchGroup()
+        group.enter()
+        _ = UIImage.image(fromURL: url, placeholder: UIImage(), shouldCacheImage: true) { (image) in
+            result = image
+            group.leave()
+        }
+        group.wait()
+        return result
+    }
+    
+    func stringToDate(strDate: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from:strDate)!
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        let finalDate = calendar.date(from:components)
+        return finalDate!
+    }
+    
     func setTo830AM(date: Date, hour: Int, min: Int) -> Date {
         let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         var components = calendar.components(([.day, .month, .year]), from: date)
@@ -94,7 +141,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
     
     // Called after the selected date changes.
     func calendarView(_ calendarView: CalendarView, willSelect date: Date) {
-        
+        print(date)
     }
     
     // A row was selected in the events table. (Use this to push a details view or whatever.)
@@ -106,7 +153,18 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-
+public extension Sequence {
+    func group<U: Hashable>(by key: (Iterator.Element) -> U) -> [U:[Iterator.Element]] {
+        var categories: [U: [Iterator.Element]] = [:]
+        for element in self {
+            let key = key(element)
+            if case nil = categories[key]?.append(element) {
+                categories[key] = [element]
+            }
+        }
+        return categories
+    }
 }
 

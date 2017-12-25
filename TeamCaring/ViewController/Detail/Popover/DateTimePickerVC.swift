@@ -17,6 +17,14 @@ class DateTimePickerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        //let currentDate: NSDate = NSDate()
+        //self.datePicker.minimumDate = currentDate as Date
+        let gregorian: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let currentDate: NSDate = NSDate()
+        let components: NSDateComponents = NSDateComponents()
+        components.hour = +1
+        let minDate: NSDate = gregorian.date(byAdding: components as DateComponents, to: currentDate as Date, options: NSCalendar.Options(rawValue: 0))! as NSDate
+        self.datePicker.minimumDate = minDate as Date
     }
 
     @IBAction func datePickerAction(sender: AnyObject) {
