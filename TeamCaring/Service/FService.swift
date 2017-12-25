@@ -254,6 +254,23 @@ class FService: NSObject {
         })
     }
     
+    func searchMember (teamId: Int, query : String, page: Int, completion: @escaping (_ result: [Leader]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.searchMember.path.appending("\(teamId)?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let urlStr : NSString = path.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))! as NSString
+        let url = URL(string: urlStr as String)
+        
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Leader>().mapArray(JSONObject: result["result"])
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
+    
     func getMyTeams (page: Int, completion: @escaping (_ result: [Team]?, _ totalPage: Int?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.myTeam.path.appending("?page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")

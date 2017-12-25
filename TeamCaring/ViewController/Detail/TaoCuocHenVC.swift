@@ -18,9 +18,12 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
     @IBOutlet weak var tfTypeEvent: UITextField!
     @IBOutlet weak var btnCalendar: UIButton!
     @IBOutlet weak var tfTeam: UITextField!
+    @IBOutlet weak var tfMember: UITextField!
     
     var selectedTeamIndex: IndexPath?
     var selectedTeam: Team?
+    var selectedMember: Leader?
+    var selectedMemberIndex: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,6 +130,16 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
             let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "SelectTeamMemVCId") as! SelectTeamMemVC
             popoverContent.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             popoverContent.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.unknown
+            popoverContent.isMember = true
+            popoverContent.teamId = self.selectedTeam?.id ?? 0
+            if self.selectedMemberIndex != nil {
+                popoverContent.indexSelected = self.selectedMemberIndex! as IndexPath
+            }
+            popoverContent.selectedMemberBlock =  { (selectedMem, selectedIndex) -> Void in
+                self.tfMember.text = selectedMem.nickname
+                self.selectedMember = selectedMem
+                self.selectedMemberIndex = selectedIndex as IndexPath
+            }
             let popover = popoverContent.popoverPresentationController
             popoverContent.preferredContentSize = CGSize(width: self.view.frame.size.width, height: 200)
             popover?.delegate = self

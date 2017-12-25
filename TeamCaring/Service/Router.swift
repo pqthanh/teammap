@@ -26,6 +26,7 @@ public enum Router: URLConvertible {
     case myTeam
     case getMyProfile
     case searchLeader
+    case searchMember
     case joinTeam
     case detailTeam
     case listNotification
@@ -72,6 +73,8 @@ public enum Router: URLConvertible {
             return "/get-profile"
         case .searchLeader:
             return "/_search/leaders/"
+        case .searchMember:
+            return "/_search/members/"
         case .joinTeam:
             return "/join-team"
         case .detailTeam:
