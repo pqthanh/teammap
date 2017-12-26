@@ -39,6 +39,8 @@
 		61C51D911FC6A41A00BCDCC2 /* lato-semibolditalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D7F1FC6A41800BCDCC2 /* lato-semibolditalic.ttf */; };
 		61C51D921FC6A41A00BCDCC2 /* lato-italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61C51D801FC6A41900BCDCC2 /* lato-italic.ttf */; };
 		61C51D941FC6B54B00BCDCC2 /* UpdatePViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C51D931FC6B54B00BCDCC2 /* UpdatePViewController.swift */; };
+		61D5D2431FF2062A003A14BD /* ChiTietCuocHenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D5D2421FF2062A003A14BD /* ChiTietCuocHenVC.swift */; };
+		61D5D2451FF206AF003A14BD /* ChiTietCuocHenVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D5D2441FF206AF003A14BD /* ChiTietCuocHenVCell.swift */; };
 		61E14A491FD6586400D3A6F7 /* DanhSachHensVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */; };
 		61E14A4B1FD6785E00D3A6F7 /* DateTimePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E14A4A1FD6785E00D3A6F7 /* DateTimePickerVC.swift */; };
 		61E6FC161FCFF9E500E6FA7F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E6FC151FCFF9E500E6FA7F /* ListTableViewCell.swift */; };
@@ -105,6 +107,8 @@
 		61C51D7F1FC6A41800BCDCC2 /* lato-semibolditalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-semibolditalic.ttf"; sourceTree = "<group>"; };
 		61C51D801FC6A41900BCDCC2 /* lato-italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lato-italic.ttf"; sourceTree = "<group>"; };
 		61C51D931FC6B54B00BCDCC2 /* UpdatePViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePViewController.swift; sourceTree = "<group>"; };
+		61D5D2421FF2062A003A14BD /* ChiTietCuocHenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiTietCuocHenVC.swift; sourceTree = "<group>"; };
+		61D5D2441FF206AF003A14BD /* ChiTietCuocHenVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiTietCuocHenVCell.swift; sourceTree = "<group>"; };
 		61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanhSachHensVC.swift; sourceTree = "<group>"; };
 		61E14A4A1FD6785E00D3A6F7 /* DateTimePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimePickerVC.swift; sourceTree = "<group>"; };
 		61E6FC151FCFF9E500E6FA7F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
@@ -248,6 +252,7 @@
 				613EA81C1FD5249700334ADB /* MemberListCViewCell.swift */,
 				61FAE2431FD698FC0066E76B /* SelectTeamMemCell.swift */,
 				613D602D1FE3AFBA001557B4 /* AlertTableViewCell.swift */,
+				61D5D2441FF206AF003A14BD /* ChiTietCuocHenVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				D32F9EBE1FD3ECAC0048D747 /* TaoCuocHenVC.swift */,
 				61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */,
 				61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */,
+				61D5D2421FF2062A003A14BD /* ChiTietCuocHenVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -437,7 +443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5F9D0182F8CE8C92EDA5CB48 /* [CP] Copy Pods Resources */ = {
@@ -537,6 +543,7 @@
 				D3BE5BB01FC3254700D54964 /* AlertViewController.swift in Sources */,
 				61FAE2441FD698FC0066E76B /* SelectTeamMemCell.swift in Sources */,
 				D399C4B61FDA439C007E1E28 /* Notification.swift in Sources */,
+				61D5D2431FF2062A003A14BD /* ChiTietCuocHenVC.swift in Sources */,
 				613D602C1FE3993C001557B4 /* MainTabViewController.swift in Sources */,
 				D3442BDC1FD308BB00392463 /* InfoViewController.swift in Sources */,
 				D384C8081FC08C8F0008EB60 /* User.swift in Sources */,
@@ -548,6 +555,7 @@
 				D39AA6F91FF0EFAD0006AC5C /* Event.swift in Sources */,
 				D390D8491FE18F81008DAC53 /* JoinedTeam.swift in Sources */,
 				D3865AC01FBF11E800AF18C5 /* ListViewController.swift in Sources */,
+				61D5D2451FF206AF003A14BD /* ChiTietCuocHenVCell.swift in Sources */,
 				D32F9EBF1FD3ECAC0048D747 /* TaoCuocHenVC.swift in Sources */,
 				619F1BDC1FD006680082C948 /* SearchLeaderVC.swift in Sources */,
 				619F1BDE1FD017FA0082C948 /* DetailTeamVC.swift in Sources */,

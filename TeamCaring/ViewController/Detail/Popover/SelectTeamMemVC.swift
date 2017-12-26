@@ -16,6 +16,7 @@ class SelectTeamMemVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var lbTitle: UILabel!
     
     let cellReuseIdentifier = "SelectTeamMemCellId"
     var listMyTeams = [Team]()
@@ -40,6 +41,7 @@ class SelectTeamMemVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         self.mainView.addGestureRecognizer(tap)
         
         if isMember {
+            lbTitle.text = "Chọn thành viên"
             FService.sharedInstance.searchMember(teamId: self.teamId, query: "*", page: 0) { (listResults) in
                 if listResults != nil {
                     if listResults?.count == 10 {
@@ -56,6 +58,7 @@ class SelectTeamMemVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             }
         }
         else {
+            lbTitle.text = "Chọn nhóm"
             FService.sharedInstance.searchMyTeam(query: "*", page: 0, completion: { (listResults) in
                 if listResults != nil {
                     if listResults?.count == 10 {

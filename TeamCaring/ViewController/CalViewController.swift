@@ -18,6 +18,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
     let calendar = CalendarViewController()
     var data : [Date:[CalendarEvent]] = [:]
     var currentMonth: Int = 0
+    var listEvent = [Event]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,8 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         currentMonth = month
         FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
             if listEvents != nil {
-                
+                self.listEvent.removeAll()
+                self.listEvent = listEvents!
                 var listCategories = [String: [Event]]()
                 listCategories = listEvents!.group { ($0.time?.components(separatedBy: " ")[0])! }
                 
@@ -56,6 +58,11 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                 self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.calendar.tableView.reloadData()
     }
     
     func getImage(url: String) -> UIImage? {
@@ -118,6 +125,23 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChiTietCuocHen" {
+            let infoEv: CalendarEvent = sender as! CalendarEvent
+            
+            var selectedValue: Event?
+            for match in self.listEvent {
+                if match.name == infoEv.title && self.stringToDate(strDate: match.time!) == infoEv.date {
+                    selectedValue = match
+                    break
+                }
+            }
+            
+            let detail: ChiTietCuocHenVC = segue.destination as! ChiTietCuocHenVC
+            detail.currentEvent = selectedValue
+        }
+    }
+    
     //  MARK: - CalendarDataSource
     
     /**
@@ -174,7 +198,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
     
     // A row was selected in the events table. (Use this to push a details view or whatever.)
     func calendarView(_ calendarView: CalendarView, didSelect event: CalendarEvent) {
-        
+        self.performSegue(withIdentifier: "ChiTietCuocHen", sender: event)
     }
     
     override func didReceiveMemoryWarning() {
