@@ -20,8 +20,11 @@ class Event: NSObject, Mappable {
     var time: String?
     var userId: Int?
     var imageUrl: String?
+    var team: String?
+    var member: String?
+    var notes: [Note]?
     
-    init(id : Int, eDescription : String, name: String, repeatType: String, teamId: Int, time: String, userId: Int, imageUrl: String) {
+    init(id : Int, eDescription : String, name: String, repeatType: String, teamId: Int, time: String, userId: Int, imageUrl: String, team: String, member: String, notes:[Note]) {
         self.id             = id
         self.eDescription   = eDescription
         self.repeatType     = repeatType
@@ -30,6 +33,9 @@ class Event: NSObject, Mappable {
         self.userId         = userId
         self.name           = name
         self.imageUrl       = imageUrl
+        self.team           = team
+        self.member         = member
+        self.notes          = notes
     }
     
     required init?(map: Map){
@@ -42,6 +48,9 @@ class Event: NSObject, Mappable {
         userId <- map["userId"]
         name <- map["name"]
         imageUrl <- map["imageUrl"]
+        team <- map["team"]
+        member <- map["member"]
+        notes <- map["notes"]
     }
     
     func mapping(map: Map) {
@@ -53,5 +62,8 @@ class Event: NSObject, Mappable {
         userId <- map["userId"]
         name <- map["name"]
         imageUrl <- map["imageUrl"]
+        team <- map["team"]
+        member <- map["member"]
+        notes <- map["notes"]
     }
 }

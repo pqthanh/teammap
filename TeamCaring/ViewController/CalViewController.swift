@@ -81,10 +81,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = dateFormatter.date(from:strDate)!
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: date)
-        let finalDate = calendar.date(from:components)
-        return finalDate!
+        return date
     }
     
     func setTo830AM(date: Date, hour: Int, min: Int) -> Date {

@@ -25,7 +25,7 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     let cellReuseIdentifier = "CellId"
     var currentEvent: Event?
-    var listNotes = [String]()
+    var listNotes = [Note]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +38,36 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.viewMota.layer.borderWidth = 1.0
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         self.lbTxtholder.text = ""
-        
         self.tfNameEvent.text = self.currentEvent?.name
         self.txtMota.text = self.currentEvent?.eDescription
+        self.tfThoigianhen.text = self.formatDate(dateString: (self.currentEvent?.time)!)
+        if self.currentEvent?.repeatType == "one_week" {
+            self.tfTypeEvent.text = "1 Tuần"
+        }
+        else if self.currentEvent?.repeatType == "two_week" {
+            self.tfTypeEvent.text = "2 Tuần"
+        }
+        else if self.currentEvent?.repeatType == "one_month" {
+            self.tfTypeEvent.text = "1 Tháng"
+        }
+        self.tfTeam.text = self.currentEvent?.team
+        self.tfMember.text = self.currentEvent?.member
         
+        self.listNotes = (self.currentEvent?.notes)!
         if self.listNotes.count == 0 {
             self.heightTable.constant = CGFloat(50 * (self.listNotes.count + 1))
         }
     }
-
+    
+    func formatDate(dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: dateString)
+        dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
+        let output = dateFormatter.string(from: date!)
+        return output
+    }
+    
     @IBAction func backAction() {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
@@ -77,7 +98,17 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.view.endEditing(true)
+        if indexPath.row == self.listNotes.count {
+            self.performSegue(withIdentifier: "ChiTietGhiChu", sender: self.currentEvent?.id)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChiTietGhiChu" {
+            let detail: ChiTietGhiChuVC = segue.destination as! ChiTietGhiChuVC
+            detail.eventId = sender as! Int
+        }
     }
     
     override func didReceiveMemoryWarning() {

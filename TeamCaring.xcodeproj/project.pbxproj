@@ -72,6 +72,8 @@
 		D3CF64961FD0582E00E410DE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CF64941FD0582D00E410DE /* Router.swift */; };
 		D3DE9C631FCEFC4500607C9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3865AC81FBF11E800AF18C5 /* LaunchScreen.storyboard */; };
 		D3E8DA1F1FCE278200ADB0E1 /* ChonIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8DA1E1FCE278200ADB0E1 /* ChonIconViewController.swift */; };
+		D3F022621FF2ADBA0042C7B1 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F022611FF2ADBA0042C7B1 /* Note.swift */; };
+		D3F022641FF2B0970042C7B1 /* ChiTietGhiChuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F022631FF2B0970042C7B1 /* ChiTietGhiChuVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +146,8 @@
 		D3CF64931FD0582D00E410DE /* FService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FService.swift; sourceTree = "<group>"; };
 		D3CF64941FD0582D00E410DE /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D3E8DA1E1FCE278200ADB0E1 /* ChonIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChonIconViewController.swift; sourceTree = "<group>"; };
+		D3F022611FF2ADBA0042C7B1 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		D3F022631FF2B0970042C7B1 /* ChiTietGhiChuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiTietGhiChuVC.swift; sourceTree = "<group>"; };
 		FBF29A3D690156BCDFF82606 /* Pods-TeamCaring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamCaring.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamCaring/Pods-TeamCaring.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,6 +243,7 @@
 				D399C4B51FDA439C007E1E28 /* Notification.swift */,
 				D390D8481FE18F81008DAC53 /* JoinedTeam.swift */,
 				D39AA6F81FF0EFAD0006AC5C /* Event.swift */,
+				D3F022611FF2ADBA0042C7B1 /* Note.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 				61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */,
 				61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */,
 				61D5D2421FF2062A003A14BD /* ChiTietCuocHenVC.swift */,
+				D3F022631FF2B0970042C7B1 /* ChiTietGhiChuVC.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -549,12 +555,14 @@
 				D384C8081FC08C8F0008EB60 /* User.swift in Sources */,
 				D37EE8381FBF2E33007A0008 /* LoginViewController.swift in Sources */,
 				613D602E1FE3AFBA001557B4 /* AlertTableViewCell.swift in Sources */,
+				D3F022621FF2ADBA0042C7B1 /* Note.swift in Sources */,
 				D367DEB21FCDCAC5008A33CB /* SelectTeamVC.swift in Sources */,
 				D38CEA251FD7047200F8C367 /* Team.swift in Sources */,
 				D3ADF8251FD858C5000FEE64 /* Leader.swift in Sources */,
 				D39AA6F91FF0EFAD0006AC5C /* Event.swift in Sources */,
 				D390D8491FE18F81008DAC53 /* JoinedTeam.swift in Sources */,
 				D3865AC01FBF11E800AF18C5 /* ListViewController.swift in Sources */,
+				D3F022641FF2B0970042C7B1 /* ChiTietGhiChuVC.swift in Sources */,
 				61D5D2451FF206AF003A14BD /* ChiTietCuocHenVCell.swift in Sources */,
 				D32F9EBF1FD3ECAC0048D747 /* TaoCuocHenVC.swift in Sources */,
 				619F1BDC1FD006680082C948 /* SearchLeaderVC.swift in Sources */,

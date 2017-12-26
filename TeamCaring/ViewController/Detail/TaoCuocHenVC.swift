@@ -85,12 +85,18 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
         }
         FService.sharedInstance.createAppointment(description: txtMota.text, name: tfNameEvent.text!, repeatType: typeEvent, teamId: (selectedTeam?.id)!, time: self.formatDate(dateString: tfThoigianhen.text!), userId: (selectedMember?.userId)!) { (code) in
             if code == 201 {
-                let alert = UIAlertController(title: "Tạo cuộc hẹn thành công!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Gửi yêu cầu hẹn thành công", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
                     self.navigationController?.popViewController(animated: true)
                 }))
                 self.present(alert, animated: true, completion: nil)
             }
+            else {
+                let alert = UIAlertController(title: "Gửi yêu hẹn thất bại, vui lòng thử lại", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
             SVProgressHUD.dismiss()
         }
     }
