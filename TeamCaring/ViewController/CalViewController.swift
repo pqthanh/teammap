@@ -17,6 +17,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
     @IBOutlet weak var mainView: UIView!
     let calendar = CalendarViewController()
     var data : [Date:[CalendarEvent]] = [:]
+    var currentMonth: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,6 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         calendar.delegate = self
         calendar.dataSource = self
         //self.adEventsToCalendar()
-        
         self.calendar.tableView.tableFooterView = UIView()
         self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
         
@@ -35,7 +35,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         let cal = Calendar.current
         let year = cal.component(.year, from: date)
         let month = cal.component(.month, from: date)
-        print(month)
+        currentMonth = month
         FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
             if listEvents != nil {
                 
@@ -53,6 +53,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                     let date = "\(key) 00:00:00"
                     self.data[self.stringToDate(strDate: date)] = events
                 }
+                self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
             }
         }
     }
@@ -141,7 +142,34 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
     
     // Called after the selected date changes.
     func calendarView(_ calendarView: CalendarView, willSelect date: Date) {
-        print(date)
+   
+        let cal = Calendar.current
+        let year = cal.component(.year, from: date)
+        let month = cal.component(.month, from: date)
+        if currentMonth != month {
+            currentMonth = month
+            FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
+                if listEvents != nil {
+                    
+                    var listCategories = [String: [Event]]()
+                    listCategories = listEvents!.group { ($0.time?.components(separatedBy: " ")[0])! }
+                    
+                    for key in listCategories.keys {
+                        let values = listCategories[key]
+                        var events = [CalendarEvent]()
+                        for item in values! {
+                            let date = self.stringToDate(strDate: item.time ?? "")
+                            let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
+                            events.append(event)
+                        }
+                        let date = "\(key) 00:00:00"
+                        self.data[self.stringToDate(strDate: date)] = events
+                    }
+                    self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
+                }
+            }
+        }
+        
     }
     
     // A row was selected in the events table. (Use this to push a details view or whatever.)
