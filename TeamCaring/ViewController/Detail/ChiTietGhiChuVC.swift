@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ChiTietGhiChuVC: UIViewController {
 
@@ -16,10 +17,12 @@ class ChiTietGhiChuVC: UIViewController {
     @IBOutlet weak var txtSeparate: UITextView!
     
     var eventId: Int = 0
+    var currentNote: Note?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         self.txtGeneral.layer.cornerRadius = 4.0
         self.txtGeneral.layer.borderWidth = 1.0
         self.txtGeneral.layer.borderColor = UIColor(hexString: "#dadada").cgColor
@@ -33,6 +36,12 @@ class ChiTietGhiChuVC: UIViewController {
         self.txtSeparate.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         
         self.hideKeyboardWhenTappedAround()
+        
+        if self.currentNote != nil {
+            self.txtGeneral.text = self.currentNote?.general
+            self.txtReminder.text = self.currentNote?.reminder
+            self.txtSeparate.text = self.currentNote?.separate
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -59,7 +68,41 @@ class ChiTietGhiChuVC: UIViewController {
     
     @IBAction func createAction() {
         self.view.endEditing(true)
-        //self.navigationController?.popViewController(animated: true)
+        SVProgressHUD.show()
+        if self.currentNote != nil {
+            FService.sharedInstance.updateNote(id: (self.currentNote?.id)!, appointmentId: (self.currentNote?.appointmentId)!, general: txtGeneral.text, reminder: txtReminder.text, separate: txtSeparate.text) { (code) in
+                if code == 201 {
+                    let alert = UIAlertController(title: "Cập nhật ghi chú thành công", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else {
+                    let alert = UIAlertController(title: "Cập nhật ghi chú thất bại, vui lòng thử lại!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                SVProgressHUD.dismiss()
+            }
+        }
+        else {
+            FService.sharedInstance.createNote(appointmentId: self.eventId, general: txtGeneral.text, reminder: txtReminder.text, separate: txtSeparate.text) { (code) in
+                if code == 201 {
+                    let alert = UIAlertController(title: "Tạo ghi chú thành công", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else {
+                    let alert = UIAlertController(title: "Tạo ghi chú thất bại, vui lòng thử lại!", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                SVProgressHUD.dismiss()
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

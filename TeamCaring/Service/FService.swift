@@ -343,4 +343,18 @@ class FService: NSObject {
             }
         })
     }
+    
+    func createNote (appointmentId: Int, general: String, reminder: String, separate: String, completion: @escaping (_ code: Int?) -> ()) -> () {
+        let params = ["appointmentId": appointmentId, "general": general, "reminder": reminder, "separate": separate] as [String : Any]
+        requestHttpCode(url: Router.createNote, method: .post, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
+    
+    func updateNote (id: Int, appointmentId: Int, general: String, reminder: String, separate: String, completion: @escaping (_ code: Int?) -> ()) -> () {
+        let params = ["id": id, "appointmentId": appointmentId, "general": general, "reminder": reminder, "separate": separate] as [String : Any]
+        requestHttpCode(url: Router.updateNote, method: .put, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
 }

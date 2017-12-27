@@ -31,7 +31,10 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         //self.adEventsToCalendar()
         self.calendar.tableView.tableFooterView = UIView()
         self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let date = Date()
         let cal = Calendar.current
         let year = cal.component(.year, from: date)
@@ -40,6 +43,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
             if listEvents != nil {
                 self.listEvent.removeAll()
+                self.data.removeAll()
                 self.listEvent = listEvents!
                 var listCategories = [String: [Event]]()
                 listCategories = listEvents!.group { ($0.time?.components(separatedBy: " ")[0])! }
@@ -58,10 +62,6 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                 self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.calendar.tableView.reloadData()
     }
     
@@ -171,7 +171,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
             currentMonth = month
             FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
                 if listEvents != nil {
-                    
+                    self.listEvent += listEvents!
                     var listCategories = [String: [Event]]()
                     listCategories = listEvents!.group { ($0.time?.components(separatedBy: " ")[0])! }
                     

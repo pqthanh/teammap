@@ -94,7 +94,7 @@ class TTThanhVienVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func cuochenAction() {
-        self.performSegue(withIdentifier: "PushNhungCuocHen", sender: nil)
+        self.performSegue(withIdentifier: "PushNhungCuocHen", sender: self.detailInfo)
     }
     
     @IBAction func updateAction() {

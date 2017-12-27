@@ -74,6 +74,8 @@
 		D3E8DA1F1FCE278200ADB0E1 /* ChonIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8DA1E1FCE278200ADB0E1 /* ChonIconViewController.swift */; };
 		D3F022621FF2ADBA0042C7B1 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F022611FF2ADBA0042C7B1 /* Note.swift */; };
 		D3F022641FF2B0970042C7B1 /* ChiTietGhiChuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F022631FF2B0970042C7B1 /* ChiTietGhiChuVC.swift */; };
+		D3FE00D91FF3D4E90063C2CA /* DetailCuocHenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FE00D81FF3D4E90063C2CA /* DetailCuocHenVC.swift */; };
+		D3FE00DB1FF3D7630063C2CA /* CuocHenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FE00DA1FF3D7630063C2CA /* CuocHenTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +150,8 @@
 		D3E8DA1E1FCE278200ADB0E1 /* ChonIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChonIconViewController.swift; sourceTree = "<group>"; };
 		D3F022611FF2ADBA0042C7B1 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		D3F022631FF2B0970042C7B1 /* ChiTietGhiChuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChiTietGhiChuVC.swift; sourceTree = "<group>"; };
+		D3FE00D81FF3D4E90063C2CA /* DetailCuocHenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCuocHenVC.swift; sourceTree = "<group>"; };
+		D3FE00DA1FF3D7630063C2CA /* CuocHenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuocHenTableViewCell.swift; sourceTree = "<group>"; };
 		FBF29A3D690156BCDFF82606 /* Pods-TeamCaring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamCaring.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamCaring/Pods-TeamCaring.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -258,6 +262,7 @@
 				61FAE2431FD698FC0066E76B /* SelectTeamMemCell.swift */,
 				613D602D1FE3AFBA001557B4 /* AlertTableViewCell.swift */,
 				61D5D2441FF206AF003A14BD /* ChiTietCuocHenVCell.swift */,
+				D3FE00DA1FF3D7630063C2CA /* CuocHenTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				D32F9EBE1FD3ECAC0048D747 /* TaoCuocHenVC.swift */,
 				61B68E811FD5011F00957A92 /* TTThanhVienVC.swift */,
 				61E14A481FD6586400D3A6F7 /* DanhSachHensVC.swift */,
+				D3FE00D81FF3D4E90063C2CA /* DetailCuocHenVC.swift */,
 				61D5D2421FF2062A003A14BD /* ChiTietCuocHenVC.swift */,
 				D3F022631FF2B0970042C7B1 /* ChiTietGhiChuVC.swift */,
 			);
@@ -533,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3865AC21FBF11E800AF18C5 /* CalViewController.swift in Sources */,
+				D3FE00DB1FF3D7630063C2CA /* CuocHenTableViewCell.swift in Sources */,
 				D3865ABE1FBF11E800AF18C5 /* AppDelegate.swift in Sources */,
 				D37EE8361FBF2E24007A0008 /* ProfileViewController.swift in Sources */,
 				61C2B91E1FD8046F0090A32D /* NewTeamListVC.swift in Sources */,
@@ -541,6 +548,7 @@
 				614987A01FD118DB00EFE953 /* FBToken.swift in Sources */,
 				613EA81D1FD5249700334ADB /* MemberListCViewCell.swift in Sources */,
 				61C2EE241FD69609007062E9 /* SelectTeamMemVC.swift in Sources */,
+				D3FE00D91FF3D4E90063C2CA /* DetailCuocHenVC.swift in Sources */,
 				61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */,
 				D3ADF8271FD8593C000FEE64 /* Member.swift in Sources */,
 				D37EE83A1FBF2E3F007A0008 /* RegisterViewController.swift in Sources */,

@@ -38,22 +38,26 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.viewMota.layer.borderWidth = 1.0
         self.viewMota.layer.borderColor = UIColor(hexString: "#dadada").cgColor
         self.lbTxtholder.text = ""
-        self.tfNameEvent.text = self.currentEvent?.name
-        self.txtMota.text = self.currentEvent?.eDescription
-        self.tfThoigianhen.text = self.formatDate(dateString: (self.currentEvent?.time)!)
-        if self.currentEvent?.repeatType == "one_week" {
-            self.tfTypeEvent.text = "1 Tuần"
-        }
-        else if self.currentEvent?.repeatType == "two_week" {
-            self.tfTypeEvent.text = "2 Tuần"
-        }
-        else if self.currentEvent?.repeatType == "one_month" {
-            self.tfTypeEvent.text = "1 Tháng"
-        }
-        self.tfTeam.text = self.currentEvent?.team
-        self.tfMember.text = self.currentEvent?.member
         
-        self.listNotes = (self.currentEvent?.notes)!
+        if self.currentEvent != nil {
+            self.tfNameEvent.text = self.currentEvent?.name
+            self.txtMota.text = self.currentEvent?.eDescription
+            self.tfThoigianhen.text = self.formatDate(dateString: (self.currentEvent?.time)!)
+            if self.currentEvent?.repeatType == "one_week" {
+                self.tfTypeEvent.text = "1 Tuần"
+            }
+            else if self.currentEvent?.repeatType == "two_week" {
+                self.tfTypeEvent.text = "2 Tuần"
+            }
+            else if self.currentEvent?.repeatType == "one_month" {
+                self.tfTypeEvent.text = "1 Tháng"
+            }
+            self.tfTeam.text = self.currentEvent?.team
+            self.tfMember.text = self.currentEvent?.member
+            
+            self.listNotes = (self.currentEvent?.notes)!
+        }
+        
         if self.listNotes.count == 0 {
             self.heightTable.constant = CGFloat(50 * (self.listNotes.count + 1))
         }
@@ -101,13 +105,22 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if indexPath.row == self.listNotes.count {
             self.performSegue(withIdentifier: "ChiTietGhiChu", sender: self.currentEvent?.id)
         }
+        else {
+            let info = self.listNotes[indexPath.row]
+            self.performSegue(withIdentifier: "ChiTietGhiChu", sender: info)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ChiTietGhiChu" {
             let detail: ChiTietGhiChuVC = segue.destination as! ChiTietGhiChuVC
-            detail.eventId = sender as! Int
+            if let object = sender as? Int {
+                detail.eventId = object
+            }
+            else {
+                detail.currentNote = sender as? Note
+            }
         }
     }
     
