@@ -68,6 +68,7 @@
 		D3ADF8271FD8593C000FEE64 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ADF8261FD8593C000FEE64 /* Member.swift */; };
 		D3BE5BB01FC3254700D54964 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE5BAF1FC3254700D54964 /* AlertViewController.swift */; };
 		D3C47C491FD43D2F009054E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3C47C481FD43D2F009054E6 /* GoogleService-Info.plist */; };
+		D3C4D6BC1FFA276500238BBB /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C4D6BB1FFA276500238BBB /* Appointment.swift */; };
 		D3CF64951FD0582E00E410DE /* FService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CF64931FD0582D00E410DE /* FService.swift */; };
 		D3CF64961FD0582E00E410DE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CF64941FD0582D00E410DE /* Router.swift */; };
 		D3DE9C631FCEFC4500607C9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3865AC81FBF11E800AF18C5 /* LaunchScreen.storyboard */; };
@@ -145,6 +146,7 @@
 		D3ADF8261FD8593C000FEE64 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		D3BE5BAF1FC3254700D54964 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		D3C47C481FD43D2F009054E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D3C4D6BB1FFA276500238BBB /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		D3CF64931FD0582D00E410DE /* FService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FService.swift; sourceTree = "<group>"; };
 		D3CF64941FD0582D00E410DE /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D3E8DA1E1FCE278200ADB0E1 /* ChonIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChonIconViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				D390D8481FE18F81008DAC53 /* JoinedTeam.swift */,
 				D39AA6F81FF0EFAD0006AC5C /* Event.swift */,
 				D3F022611FF2ADBA0042C7B1 /* Note.swift */,
+				D3C4D6BB1FFA276500238BBB /* Appointment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				61ABABD01FCFB00700D3AC23 /* CalTableViewCell.swift in Sources */,
 				614987A01FD118DB00EFE953 /* FBToken.swift in Sources */,
 				613EA81D1FD5249700334ADB /* MemberListCViewCell.swift in Sources */,
+				D3C4D6BC1FFA276500238BBB /* Appointment.swift in Sources */,
 				61C2EE241FD69609007062E9 /* SelectTeamMemVC.swift in Sources */,
 				D3FE00D91FF3D4E90063C2CA /* DetailCuocHenVC.swift in Sources */,
 				61B68E841FD50ADE00957A92 /* ListMemberTreeVC.swift in Sources */,

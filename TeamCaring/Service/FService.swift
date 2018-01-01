@@ -365,4 +365,20 @@ class FService: NSObject {
             completion(result)
         })
     }
+    
+    func getMemberAppointments (teamId: Int, memberId: Int, page: Int, completion: @escaping (_ result: [Appointment]?) -> ()) -> () {
+        
+        let path = Router.baseURLString.appending(Router.member_appointments.path.appending("?teamId=\(teamId)&memberId=\(memberId)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: path)
+        
+        requestAuthorized(url: url!, method: .get, params: nil, completion: { (result, error) in
+            if let result = result as? [String: Any] {
+                let listItems = Mapper<Appointment>().mapArray(JSONObject: result["result"])
+                completion(listItems)
+            }
+            else {
+                completion(nil)
+            }
+        })
+    }
 }

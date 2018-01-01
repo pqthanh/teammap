@@ -39,8 +39,9 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         let cal = Calendar.current
         let year = cal.component(.year, from: date)
         let month = cal.component(.month, from: date)
+        let strMonth = month > 9 ? "\(month)" : "0\(month)"
         currentMonth = month
-        FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
+        FService.sharedInstance.getAppointment(fromDate: "\(year)-\(strMonth)-01 00:00:00", toDate: "\(year)-\(strMonth)-31 00:00:00") { (listEvents) in
             if listEvents != nil {
                 self.listEvent.removeAll()
                 self.data.removeAll()

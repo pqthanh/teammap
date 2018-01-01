@@ -533,6 +533,7 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
             else {
                 detail.isEditLevel = false
             }
+            detail.teamId = self.teamId
             detail.detailInfo = userInfo
             detail.selectedBlock =  { (level) -> Void in
                 if self.currentLeader == userInfo {

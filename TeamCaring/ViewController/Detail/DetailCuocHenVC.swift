@@ -13,6 +13,7 @@ class DetailCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var tableView: UITableView!
     
     let cellReuseIdentifier = "CuocHenCell"
+    var listEvents = [Event]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,24 +29,34 @@ class DetailCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.listEvents.count
     }
     
     // create a cell for each table view row
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CuocHenTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! CuocHenTableViewCell!
+        let event = self.listEvents[indexPath.row]
+        cell.imgAvata.image = UIImage.image(fromURL: event.imageUrl ?? "", placeholder: UIImage(named: "ic_profile")!, shouldCacheImage: true) { (image) in
+            cell.imgAvata.image = nil
+            cell.imgAvata.image = image
+        }
+        cell.lbDetail.text = event.name
+        cell.lbDetail.text = self.formatDate(dateString: event.time ?? "")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.view.endEditing(true)
-        self.performSegue(withIdentifier: "ChiTietHen", sender: nil)
+        let event = self.listEvents[indexPath.row]
+        self.performSegue(withIdentifier: "ChiTietHen", sender: event)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ChiTietHen" {
-            let _: ChiTietCuocHenVC = segue.destination as! ChiTietCuocHenVC
+            let event: Event = sender as! Event
+            let detail: ChiTietCuocHenVC = segue.destination as! ChiTietCuocHenVC
+            detail.currentEvent = event
         }
     }
     

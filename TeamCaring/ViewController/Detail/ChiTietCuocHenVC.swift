@@ -63,15 +63,6 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    func formatDate(dateString: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = dateFormatter.date(from: dateString)
-        dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
-        let output = dateFormatter.string(from: date!)
-        return output
-    }
-    
     @IBAction func backAction() {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)

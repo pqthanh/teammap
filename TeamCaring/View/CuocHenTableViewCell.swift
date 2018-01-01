@@ -20,6 +20,7 @@ class CuocHenTableViewCell: UITableViewCell {
         // Initialization code
         lbStatus.layer.cornerRadius = 15
         lbStatus.layer.masksToBounds = true
+        imgAvata.layer.cornerRadius = 15
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

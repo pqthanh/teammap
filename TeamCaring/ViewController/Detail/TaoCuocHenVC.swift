@@ -55,7 +55,7 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
         scrollView.contentInset = contentInset
     }
     
-    func formatDate(dateString: String) -> String {
+    func formatServerDate(dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
         let date = dateFormatter.date(from: dateString)
@@ -83,7 +83,7 @@ class TaoCuocHenVC: UIViewController, UIPopoverPresentationControllerDelegate, U
         else if tfTypeEvent.text == "1 Tháng" {
             typeEvent = "one_month"
         }
-        FService.sharedInstance.createAppointment(description: txtMota.text, name: tfNameEvent.text!, repeatType: typeEvent, teamId: (selectedTeam?.id)!, time: self.formatDate(dateString: tfThoigianhen.text!), userId: (selectedMember?.userId)!) { (code) in
+        FService.sharedInstance.createAppointment(description: txtMota.text, name: tfNameEvent.text!, repeatType: typeEvent, teamId: (selectedTeam?.id)!, time: self.formatServerDate(dateString: tfThoigianhen.text!), userId: (selectedMember?.userId)!) { (code) in
             if code == 201 {
                 let alert = UIAlertController(title: "Gửi yêu cầu hẹn thành công", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in

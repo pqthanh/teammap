@@ -23,7 +23,7 @@ class TTThanhVienVC: UIViewController, UITextFieldDelegate {
     
     var detailInfo: Member?
     var isEditLevel: Bool?
-    
+    var teamId = 0
     var selectedBlock: ((Int) -> Void)? = nil
     
     override func viewDidLoad() {
@@ -119,7 +119,9 @@ class TTThanhVienVC: UIViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PushNhungCuocHen" {
-            let _:DanhSachHensVC = segue.destination as! DanhSachHensVC
+            let detail: DanhSachHensVC = segue.destination as! DanhSachHensVC
+            detail.teamId = self.teamId
+            detail.memberId = (self.detailInfo?.userId)!
         }
     }
     
