@@ -105,35 +105,57 @@ class AlertViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let dataInfo: Notification = self.items[editActionsForRowAt.row]
         let accept = UITableViewRowAction(style: .normal, title: "") { action, index in
             SVProgressHUD.show()
-            FService.sharedInstance.acceptJoinTeam(requestId: dataInfo.targetId!, response: "accept", completion: { (code) in
-                if code == 200 {
-                    self.items.remove(at: editActionsForRowAt.row)
-                    tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
-                }
-                SVProgressHUD.dismiss()
-            })
+            if dataInfo.type == 1 {
+                FService.sharedInstance.acceptJoinTeam(requestId: dataInfo.targetId!, response: "accept", completion: { (code) in
+                    if code == 200 {
+                        self.items.remove(at: editActionsForRowAt.row)
+                        tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+                    }
+                    SVProgressHUD.dismiss()
+                })
+            }
+            else if dataInfo.type == 3 {
+                FService.sharedInstance.acceptAppointment(requestId: dataInfo.targetId!, response: "accept", completion: { (code) in
+                    if code == 200 {
+                        self.items.remove(at: editActionsForRowAt.row)
+                        tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+                    }
+                    SVProgressHUD.dismiss()
+                })
+            }
         }
         accept.backgroundColor = UIColor(patternImage: UIImage(named: "icon-yes")!)
         
         let delete = UITableViewRowAction(style: .normal, title: "") { action, index in
             SVProgressHUD.show()
-            FService.sharedInstance.acceptJoinTeam(requestId: dataInfo.targetId!, response: "reject", completion: { (code) in
-                if code == 200 {
-                    self.items.remove(at: editActionsForRowAt.row)
-                    tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
-                }
-                SVProgressHUD.dismiss()
-            })
+            if dataInfo.type == 1 {
+                FService.sharedInstance.acceptJoinTeam(requestId: dataInfo.targetId!, response: "reject", completion: { (code) in
+                    if code == 200 {
+                        self.items.remove(at: editActionsForRowAt.row)
+                        tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+                    }
+                    SVProgressHUD.dismiss()
+                })
+            }
+            else if dataInfo.type == 3 {
+                FService.sharedInstance.acceptAppointment(requestId: dataInfo.targetId!, response: "reject", completion: { (code) in
+                    if code == 200 {
+                        self.items.remove(at: editActionsForRowAt.row)
+                        tableView.deleteRows(at: [editActionsForRowAt], with: .automatic)
+                    }
+                    SVProgressHUD.dismiss()
+                })
+            }
         }
         
-        let currentCell = tableView.cellForRow(at: editActionsForRowAt)
-        UIGraphicsBeginImageContext(CGSize(width: (currentCell?.frame.size.height)! - 10, height: (currentCell?.frame.size.height)!))
-        UIImage(named: "icon-no")?.draw(in: CGRect(x: 0, y: 0, width: (currentCell?.frame.size.height)! - 10, height: (currentCell?.frame.size.height)!))
-        let imageDelete = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        delete.backgroundColor = UIColor(patternImage: imageDelete!)
+//        let currentCell = tableView.cellForRow(at: editActionsForRowAt)
+//        UIGraphicsBeginImageContext(CGSize(width: (currentCell?.frame.size.height)! - 10, height: (currentCell?.frame.size.height)!))
+//        UIImage(named: "icon-no")?.draw(in: CGRect(x: 0, y: 0, width: (currentCell?.frame.size.height)! - 10, height: (currentCell?.frame.size.height)!))
+//        let imageDelete = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+        delete.backgroundColor = UIColor(patternImage: UIImage(named: "icon-no")!)
         
-        if dataInfo.type == 1 {
+        if dataInfo.type == 1 || dataInfo.type == 3 {
             return [delete, accept]
         }
         else {

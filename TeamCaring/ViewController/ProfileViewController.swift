@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate {
                 self.lbTxtholder.isHidden = true
             }
             self.tfTenNhom.text = userInfo.tenNhom
-            self.tfSoluong.text = "\(userInfo.soluong ?? 1)"
+            self.tfSoluong.text = userInfo.soluong != nil ? "\(userInfo.soluong)" : ""
         }
         
         if self.tfEmail.text == "" {

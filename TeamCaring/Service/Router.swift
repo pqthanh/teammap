@@ -36,6 +36,7 @@ public enum Router: URLConvertible {
     case getAppointments
     case createNote
     case updateNote
+    case appointment_response
     
     //MARK: request method
     /*
@@ -97,6 +98,8 @@ public enum Router: URLConvertible {
             return "/create-notes"
         case .updateNote:
             return "/update-notes"
+        case .appointment_response:
+            return "/create-appointment/response"
         }
     }
     

@@ -104,7 +104,7 @@ class SearchLeaderVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.imgAvata.image = nil
             cell.imgAvata.image = image
         }
-        cell.level.text = "Cấp \(itemValue.numberAppointments ?? 0)"
+        cell.level.text = "Cấp \(itemValue.joinedTeam?.level ?? 0)"
         cell.name.text = itemValue.nickname ?? ""
         return cell
     }

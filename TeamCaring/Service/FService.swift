@@ -186,6 +186,14 @@ class FService: NSObject {
         })
     }
     
+    func acceptAppointment (requestId: Int, response: String, completion: @escaping (_ code: Int?) -> ()) -> () {
+        
+        let params = ["requestId": requestId, "response": response] as [String : Any]
+        requestHttpCode(url: Router.appointment_response, method: .post, params: params, completion: { (result, error) in
+            completion(result)
+        })
+    }
+    
     func searchTeam (query : String, page: Int, completion: @escaping (_ result: [Team]?) -> ()) -> () {
         
         let path = Router.baseURLString.appending(Router.searchTeam.path.appending("?query=\(query)&page=\(page)&size=10")).replacingOccurrences(of: " ", with: "%20")

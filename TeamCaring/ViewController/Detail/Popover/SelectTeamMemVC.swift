@@ -119,13 +119,13 @@ class SelectTeamMemVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func selectedActionTeam() {
-        if isMember {
+        if isMember && self.listMembers.count > 0 {
             if let selectedMemberBlock = self.selectedMemberBlock {
                 let memInfo: Leader = self.listMembers[self.indexSelected.row] as Leader
                 selectedMemberBlock(memInfo, self.indexSelected)
             }
         }
-        else {
+        else if self.listMyTeams.count > 0 {
             if let selectedBlock = self.selectedBlock {
                 let teamInfo: Team = self.listMyTeams[self.indexSelected.row] as Team
                 selectedBlock(teamInfo, self.indexSelected)

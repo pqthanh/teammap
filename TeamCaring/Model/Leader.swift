@@ -23,8 +23,9 @@ class Leader: NSObject, Mappable {
     var pushToken: String?
     var userId: Int?
     var email: String?
+    var joinedTeam: JoinedTeam?
     
-    init(tdescription : String, extraGroupDescription : String, extraGroupName : String, extraGroupTotalMember : Int, userId : Int, id : Int, numberAppointments : Int, nickname : String, members : [Member], pushToken: String, fullName: String, imageUrl: String, email: String)
+    init(tdescription : String, extraGroupDescription : String, extraGroupName : String, extraGroupTotalMember : Int, userId : Int, id : Int, numberAppointments : Int, nickname : String, members : [Member], pushToken: String, fullName: String, imageUrl: String, email: String, joinedTeam: JoinedTeam)
     {
         self.pushToken                  = pushToken
         self.extraGroupDescription      = extraGroupDescription
@@ -38,6 +39,7 @@ class Leader: NSObject, Mappable {
         self.fullName                   = fullName
         self.imageUrl                   = imageUrl
         self.email                      = email
+        self.joinedTeam                 = joinedTeam
     }
     
     required init?(map: Map){
@@ -54,6 +56,7 @@ class Leader: NSObject, Mappable {
         fullName <- map["fullName"]
         imageUrl <- map["imageUrl"]
         email <- map["email"]
+        joinedTeam <- map["joinedTeam"]
     }
     
     func mapping(map: Map) {
@@ -69,5 +72,6 @@ class Leader: NSObject, Mappable {
         fullName <- map["fullName"]
         imageUrl <- map["imageUrl"]
         email <- map["email"]
+        joinedTeam <- map["joinedTeam"]
     }
 }
