@@ -59,7 +59,7 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         if self.listNotes.count == 0 {
-            self.heightTable.constant = CGFloat(50 * (self.listNotes.count + 1))
+            self.heightTable.constant = CGFloat(49 * (self.listNotes.count + 1))
         }
     }
     
@@ -84,9 +84,14 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.lbTitle.text = "Thêm Ghi Chú"
         }
         else {
+            let noteInfo = self.listNotes[indexPath.row]
             cell.wImgAvata.constant = 30
-            cell.imgAvata.image = UIImage(named: "smallAvt")
-            cell.lbTitle.text = "Tên Cuộc Hẹn"
+            cell.imgAvata.image = UIImage.image(fromURL: noteInfo.imageUrl ?? "", placeholder: UIImage(named: "smallAvt")!, shouldCacheImage: true) { (image) in
+                cell.imgAvata.image = nil
+                cell.imgAvata.image = image
+            }
+            cell.lbTitle.text = self.formatDate(dateString: noteInfo.time ?? "")
+            
         }
         return cell
     }

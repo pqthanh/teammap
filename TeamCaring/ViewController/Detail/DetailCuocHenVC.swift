@@ -40,7 +40,7 @@ class DetailCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             cell.imgAvata.image = nil
             cell.imgAvata.image = image
         }
-        cell.lbDetail.text = event.name
+        cell.lbTitle.text = event.name
         cell.lbDetail.text = self.formatDate(dateString: event.time ?? "")
         return cell
     }

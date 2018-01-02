@@ -39,6 +39,10 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var topTeamNd: NSLayoutConstraint!
     
+    @IBOutlet weak var viewNhomTuyChon: UIView!
+    @IBOutlet weak var heightNhomTuyChon: NSLayoutConstraint!
+    @IBOutlet weak var btnNhomTuyChon: UIButton!
+    
     var teamId = 0
     var teamInfo: Team?
     var memberList = [Member]()
@@ -417,6 +421,12 @@ class DetailTeamVC: UIViewController, UIPopoverPresentationControllerDelegate {
     
     @IBAction func backAction() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func hideShowAction(_ sender: AnyObject) {
+        self.btnNhomTuyChon.isSelected = !self.btnNhomTuyChon.isSelected
+        self.viewNhomTuyChon.isHidden = self.btnNhomTuyChon.isSelected
+        self.heightNhomTuyChon.constant = self.btnNhomTuyChon.isSelected ? 20 : 290
     }
     
     @IBAction func infoAction(_ sender: AnyObject) {

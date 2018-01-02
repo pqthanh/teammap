@@ -15,6 +15,7 @@ class ChiTietGhiChuVC: UIViewController {
     @IBOutlet weak var txtGeneral: UITextView!
     @IBOutlet weak var txtReminder: UITextView!
     @IBOutlet weak var txtSeparate: UITextView!
+    @IBOutlet weak var btnCreate: UIButton!
     
     var eventId: Int = 0
     var currentNote: Note?
@@ -41,6 +42,7 @@ class ChiTietGhiChuVC: UIViewController {
             self.txtGeneral.text = self.currentNote?.general
             self.txtReminder.text = self.currentNote?.reminder
             self.txtSeparate.text = self.currentNote?.separate
+            self.btnCreate.isHidden = true
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -74,7 +76,7 @@ class ChiTietGhiChuVC: UIViewController {
                 if code == 201 {
                     let alert = UIAlertController(title: "Cập nhật ghi chú thành công", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
-                        self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popToRootViewController(animated: true)
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }
@@ -91,7 +93,7 @@ class ChiTietGhiChuVC: UIViewController {
                 if code == 201 {
                     let alert = UIAlertController(title: "Tạo ghi chú thành công", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Tiếp tục", style: .default, handler: { action in
-                        self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popToRootViewController(animated: true)
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }

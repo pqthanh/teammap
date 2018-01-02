@@ -11,6 +11,7 @@ import MBCalendarKit
 import SVProgressHUD
 import UIScrollView_InfiniteScroll
 import ESPullToRefresh
+import EventKit
 
 class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewDelegate {
 
@@ -56,6 +57,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                         let date = self.stringToDate(strDate: item.time ?? "")
                         let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
                         events.append(event)
+                        self.addEventToDefaultCal(title: item.name!, date: date, content: item.eDescription!, type: item.repeatType!)
                     }
                     let date = "\(key) 00:00:00"
                     self.data[self.stringToDate(strDate: date)] = events
@@ -64,6 +66,49 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
             }
         }
         self.calendar.tableView.reloadData()
+    }
+    
+    func addEventToDefaultCal(title: String, date: Date, content: String, type: String) {
+        
+//        //NSArray *allCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
+//        let eventStore : EKEventStore = EKEventStore()
+//        let allCalendars = eventStore.calendars(for: EKEntityType.event)
+//
+//        //NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:[NSDate dateWithTimeIntervalSinceNow:-yearSeconds] endDate:[NSDate dateWithTimeIntervalSinceNow:yearSeconds] calendars:calendarsArray];
+//        //NSArray *eventsArray = [self.eventStore eventsMatchingPredicate:predicate];
+//
+//        let predicate: NSPredicate = eventStore.predicateForEvents(withStart: date, end: date, calendars: allCalendars)
+//        let eventsArray = eventStore.events(matching: predicate)
+//        if eventsArray.count ==  {
+//            <#code#>
+//        }
+        
+        let eventStore : EKEventStore = EKEventStore()
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if (granted) && (error == nil) {
+                
+                let event:EKEvent = EKEvent(eventStore: eventStore)
+                event.title = title
+                event.startDate = date
+                event.endDate = date
+                event.notes = content
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                event.addAlarm(EKAlarm(absoluteDate: event.startDate.addingTimeInterval(-3600)))
+                
+                //let recurrenceEnd: EKRecurrenceEnd = EKRecurrenceEnd(end: event.startDate)
+                let rule: EKRecurrenceRule = EKRecurrenceRule(recurrenceWith: (type == "one_month" ? EKRecurrenceFrequency.monthly : EKRecurrenceFrequency.weekly), interval: (type == "one_month" ? 1 : (type == "one_week" ? 1 : 2)), end: nil)
+                event.recurrenceRules = [rule]
+                
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                } catch let error as NSError {
+                    print("failed to save event with error : \(error)")
+                }
+            }
+            else{
+                print("failed to save event with error : \(error ?? "" as! Error) or access not granted")
+            }
+        }
     }
     
     func getImage(url: String) -> UIImage? {
@@ -103,24 +148,6 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return UIImagePNGRepresentation(newImage ?? UIImage())!
-    }
-    
-    func adEventsToCalendar() {
-        let title = "Lịch hẹn 1"
-        if let date : Date = NSDate(day: 21, month: 11, year: 2017) as Date?
-        {
-            let event : CalendarEvent = CalendarEvent(title: title, andDate: self.setTo830AM(date: date, hour: 8, min: 30), andInfo: nil, andImage: self.dataResizeImg(sourceImage: UIImage(named: "1")!))
-            self.data[date] = [event]
-        } 
-        
-        let title2 = "Lịch hẹn 1"
-        if let date2 : Date = NSDate(day: 29, month: 11, year: 2017) as Date?
-        {
-            let event2 : CalendarEvent = CalendarEvent(title: title2, andDate: self.setTo830AM(date: date2, hour: 8, min: 30), andInfo: nil, andImage: self.dataResizeImg(sourceImage: UIImage(named: "2")!))
-            let event3 : CalendarEvent = CalendarEvent(title: "Lịch hẹn 2", andDate: self.setTo830AM(date: date2, hour: 9, min: 45), andInfo: nil, andImage: self.dataResizeImg(sourceImage: UIImage(named: "12")!))
-            self.data[date2] = [event2, event3]
-        }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -183,6 +210,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                             let date = self.stringToDate(strDate: item.time ?? "")
                             let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
                             events.append(event)
+                            self.addEventToDefaultCal(title: item.name!, date: date, content: item.eDescription!, type: item.repeatType!)
                         }
                         let date = "\(key) 00:00:00"
                         self.data[self.stringToDate(strDate: date)] = events

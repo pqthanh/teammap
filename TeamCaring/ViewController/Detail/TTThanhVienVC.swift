@@ -38,7 +38,7 @@ class TTThanhVienVC: UIViewController, UITextFieldDelegate {
             self.imgAvata.image = image
         }
         self.tfCapDo.text = "\(detailInfo?.level?.level ?? 0)"
-        self.tfCuocHen.text = "0"
+        self.tfCuocHen.text = "\(detailInfo?.numberAppointments ?? 0)"
         self.tfHoTen.text = detailInfo?.fullName
         self.tfNickname.text = detailInfo?.nickname
         self.tfEmail.text = detailInfo?.email
