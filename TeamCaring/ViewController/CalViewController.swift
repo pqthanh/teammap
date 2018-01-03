@@ -49,7 +49,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                 self.listEvent = listEvents!
                 var listCategories = [String: [Event]]()
                 listCategories = listEvents!.group { ($0.time?.components(separatedBy: " ")[0])! }
-                
+
                 for key in listCategories.keys {
                     let values = listCategories[key]
                     var events = [CalendarEvent]()
@@ -65,44 +65,42 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                 self.calendar.calendarView.setLocale(NSLocale(localeIdentifier: "vi") as Locale, animated: true)
             }
         }
+        
         self.calendar.tableView.reloadData()
     }
-    
+
     func addEventToDefaultCal(title: String, date: Date, content: String, type: String) {
-        
-//        //NSArray *allCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
-//        let eventStore : EKEventStore = EKEventStore()
-//        let allCalendars = eventStore.calendars(for: EKEntityType.event)
-//
-//        //NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:[NSDate dateWithTimeIntervalSinceNow:-yearSeconds] endDate:[NSDate dateWithTimeIntervalSinceNow:yearSeconds] calendars:calendarsArray];
-//        //NSArray *eventsArray = [self.eventStore eventsMatchingPredicate:predicate];
-//
-//        let predicate: NSPredicate = eventStore.predicateForEvents(withStart: date, end: date, calendars: allCalendars)
-//        let eventsArray = eventStore.events(matching: predicate)
-//        if eventsArray.count ==  {
-//            <#code#>
-//        }
         
         let eventStore : EKEventStore = EKEventStore()
         eventStore.requestAccess(to: .event) { (granted, error) in
             if (granted) && (error == nil) {
                 
-                let event:EKEvent = EKEvent(eventStore: eventStore)
-                event.title = title
-                event.startDate = date
-                event.endDate = date
-                event.notes = content
-                event.calendar = eventStore.defaultCalendarForNewEvents
-                event.addAlarm(EKAlarm(absoluteDate: event.startDate.addingTimeInterval(-3600)))
-                
-                //let recurrenceEnd: EKRecurrenceEnd = EKRecurrenceEnd(end: event.startDate)
-                let rule: EKRecurrenceRule = EKRecurrenceRule(recurrenceWith: (type == "one_month" ? EKRecurrenceFrequency.monthly : EKRecurrenceFrequency.weekly), interval: (type == "one_month" ? 1 : (type == "one_week" ? 1 : 2)), end: nil)
-                event.recurrenceRules = [rule]
-                
-                do {
-                    try eventStore.save(event, span: .thisEvent)
-                } catch let error as NSError {
-                    print("failed to save event with error : \(error)")
+                let allCalendars = eventStore.calendars(for: EKEntityType.event)
+                for calendar:EKCalendar in allCalendars {
+                    
+                    if calendar.title == "Calendar" {
+                        let selectedCalendar = calendar
+                        let predicate = eventStore.predicateForEvents(withStart: date as Date, end: date.addingTimeInterval(3600) as Date, calendars: [selectedCalendar])
+                        let events = eventStore.events(matching: predicate) as [EKEvent]
+                        if events.count == 0 {
+                            let event:EKEvent = EKEvent(eventStore: eventStore)
+                            event.title = title
+                            event.startDate = date
+                            event.endDate = date
+                            event.notes = content
+                            event.calendar = eventStore.defaultCalendarForNewEvents
+                            event.addAlarm(EKAlarm(absoluteDate: event.startDate.addingTimeInterval(-3600)))
+                            
+                            let rule: EKRecurrenceRule = EKRecurrenceRule(recurrenceWith: (type == "one_month" ? EKRecurrenceFrequency.monthly : EKRecurrenceFrequency.weekly), interval: (type == "one_month" ? 1 : (type == "one_week" ? 1 : 2)), end: nil)
+                            event.recurrenceRules = [rule]
+                            
+                            do {
+                                try eventStore.save(event, span: .thisEvent)
+                            } catch let error as NSError {
+                                print("failed to save event with error : \(error)")
+                            }
+                        }
+                    }
                 }
             }
             else{

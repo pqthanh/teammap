@@ -30,8 +30,6 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.tableView.estimatedRowHeight = 44
-        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableFooterView = UIView()
         
         self.viewMota.layer.cornerRadius = 4.0
@@ -58,9 +56,7 @@ class ChiTietCuocHenVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.listNotes = (self.currentEvent?.notes)!
         }
         
-        if self.listNotes.count == 0 {
-            self.heightTable.constant = CGFloat(49 * (self.listNotes.count + 1))
-        }
+        self.heightTable.constant = CGFloat(49 * (self.listNotes.count + 1))
     }
     
     @IBAction func backAction() {
