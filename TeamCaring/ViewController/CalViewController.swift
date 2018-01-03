@@ -57,7 +57,7 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                         let date = self.stringToDate(strDate: item.time ?? "")
                         let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
                         events.append(event)
-                        self.addEventToDefaultCal(title: item.name!, date: date, content: item.eDescription!, type: item.repeatType!)
+                        self.addEventToDefaultCal(title: item.name ?? "", date: date, content: item.eDescription ?? "", type: item.repeatType ?? "one_month")
                     }
                     let date = "\(key) 00:00:00"
                     self.data[self.stringToDate(strDate: date)] = events
