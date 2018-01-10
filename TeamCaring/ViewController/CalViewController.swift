@@ -40,9 +40,9 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         let cal = Calendar.current
         let year = cal.component(.year, from: date)
         let month = cal.component(.month, from: date)
-        let strMonth = month > 9 ? "\(month)" : "0\(month)"
+        //let strMonth = month > 9 ? "\(month)" : "0\(month)"
         currentMonth = month
-        FService.sharedInstance.getAppointment(fromDate: "\(year)-\(strMonth)-01 00:00:00", toDate: "\(year)-\(strMonth)-31 00:00:00") { (listEvents) in
+        FService.sharedInstance.getAppointment(fromDate: "\(year)-01-01 00:00:00", toDate: "\(year)-12-31 00:00:00") { (listEvents) in
             if listEvents != nil {
                 self.listEvent.removeAll()
                 self.data.removeAll()
@@ -54,10 +54,13 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                     let values = listCategories[key]
                     var events = [CalendarEvent]()
                     for item in values! {
-                        let date = self.stringToDate(strDate: item.time ?? "")
-                        let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
-                        events.append(event)
-                        self.addEventToDefaultCal(title: item.name ?? "", date: date, content: item.eDescription ?? "", type: item.repeatType ?? "one_month")
+                        if item.status == 1 {
+                            let date = self.stringToDate(strDate: item.time ?? "")
+                            let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
+                            events.append(event)
+                            let title = (item.name ?? "") + " với " + (item.member ?? "")
+                            self.addEventToDefaultCal(title: title, date: date, content: item.eDescription ?? "", type: item.repeatType ?? "one_month")
+                        }
                     }
                     let date = "\(key) 00:00:00"
                     self.data[self.stringToDate(strDate: date)] = events
@@ -193,9 +196,10 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
         let cal = Calendar.current
         let year = cal.component(.year, from: date)
         let month = cal.component(.month, from: date)
+        let strMonth = month > 9 ? "\(month)" : "0\(month)"
         if currentMonth != month {
             currentMonth = month
-            FService.sharedInstance.getAppointment(fromDate: "\(year)-\(month)-01 00:00:00", toDate: "\(year)-\(month)-31 00:00:00") { (listEvents) in
+            FService.sharedInstance.getAppointment(fromDate: "\(year)-\(strMonth)-01 00:00:00", toDate: "\(year)-\(strMonth)-31 00:00:00") { (listEvents) in
                 if listEvents != nil {
                     self.listEvent += listEvents!
                     var listCategories = [String: [Event]]()
@@ -205,10 +209,12 @@ class CalViewController: UIViewController, CalendarViewDataSource, CalendarViewD
                         let values = listCategories[key]
                         var events = [CalendarEvent]()
                         for item in values! {
-                            let date = self.stringToDate(strDate: item.time ?? "")
-                            let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
-                            events.append(event)
-                            self.addEventToDefaultCal(title: item.name!, date: date, content: item.eDescription!, type: item.repeatType!)
+                            if item.status == 1 {
+                                let date = self.stringToDate(strDate: item.time ?? "")
+                                let event : CalendarEvent = CalendarEvent(title: item.name, andDate: date, andInfo: nil, andImageUrl: item.imageUrl!)
+                                events.append(event)
+                                self.addEventToDefaultCal(title: item.name!, date: date, content: item.eDescription!, type: item.repeatType!)
+                            }
                         }
                         let date = "\(key) 00:00:00"
                         self.data[self.stringToDate(strDate: date)] = events

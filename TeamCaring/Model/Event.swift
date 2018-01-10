@@ -23,8 +23,9 @@ class Event: NSObject, Mappable {
     var team: String?
     var member: String?
     var notes: [Note]?
+    var status: Int?
     
-    init(id : Int, eDescription : String, name: String, repeatType: String, teamId: Int, time: String, userId: Int, imageUrl: String, team: String, member: String, notes:[Note]) {
+    init(id : Int, eDescription : String, name: String, repeatType: String, teamId: Int, time: String, userId: Int, imageUrl: String, team: String, member: String, notes:[Note], status: Int) {
         self.id             = id
         self.eDescription   = eDescription
         self.repeatType     = repeatType
@@ -36,6 +37,7 @@ class Event: NSObject, Mappable {
         self.team           = team
         self.member         = member
         self.notes          = notes
+        self.status         = status
     }
     
     required init?(map: Map){
@@ -51,6 +53,7 @@ class Event: NSObject, Mappable {
         team <- map["team"]
         member <- map["member"]
         notes <- map["notes"]
+        status <- map["status"]
     }
     
     func mapping(map: Map) {
@@ -65,5 +68,6 @@ class Event: NSObject, Mappable {
         team <- map["team"]
         member <- map["member"]
         notes <- map["notes"]
+        status <- map["status"]
     }
 }

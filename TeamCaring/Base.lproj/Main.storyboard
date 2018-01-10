@@ -4464,6 +4464,7 @@
                         <outlet property="txtGeneral" destination="6Ia-5Q-asJ" id="Vx8-2e-GPW"/>
                         <outlet property="txtReminder" destination="LWM-Ph-qN3" id="mlU-CP-VhE"/>
                         <outlet property="txtSeparate" destination="Osq-hr-ijN" id="aKO-dY-YvZ"/>
+                        <outlet property="viewBtnCreate" destination="0Nf-Jz-YgY" id="Ugq-m1-bg8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IVj-uD-95a" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -15,6 +15,7 @@ class ChiTietGhiChuVC: UIViewController {
     @IBOutlet weak var txtGeneral: UITextView!
     @IBOutlet weak var txtReminder: UITextView!
     @IBOutlet weak var txtSeparate: UITextView!
+    @IBOutlet weak var viewBtnCreate: UIView!
     @IBOutlet weak var btnCreate: UIButton!
     
     var eventId: Int = 0
@@ -43,6 +44,7 @@ class ChiTietGhiChuVC: UIViewController {
             self.txtReminder.text = self.currentNote?.reminder
             self.txtSeparate.text = self.currentNote?.separate
             self.btnCreate.isHidden = true
+            self.viewBtnCreate.backgroundColor = UIColor.clear
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
