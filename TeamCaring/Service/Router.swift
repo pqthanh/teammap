@@ -12,7 +12,7 @@ import Alamofire
 
 public enum Router: URLConvertible {
     
-    static let baseURLString = "https://ttth-team-map.herokuapp.com/api"
+    static let baseURLString = "https://app.trituetoanhao.org:8443/teammap/api"
 
     //Store authenication token
     static var OAuthToken: String?
